@@ -1,4 +1,16 @@
-import pkg_resources
+import torch
+from SimpleSwerveRLEnv import env
+print(torch.cuda.is_available())
 
-for entry_point in pkg_resources.iter_entry_points('tensorboard_plugins'):
-    print(entry_point.dist)
+env=env()
+
+obs, info = env.reset()
+for i in range(100000000):
+    obs, reward, terminated, truncated, info = env.step((0,0))
+    print(reward)
+    env.render()
+    if truncated or terminated:
+        obs, info = env.reset()
+        print("Resetting")
+
+env.close()

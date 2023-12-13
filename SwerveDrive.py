@@ -121,5 +121,5 @@ class SwerveDrive(object):
         # main_robot.ApplyForce(force=(x, y), point=main_robot.__GetWorldCenter(), wake=True)
 
         angle_degrees = (self.Box2d_instance.angle / np.pi * 180)  # radians to degrees
-        #self.set_angle(angle_degrees % 360)
+        self.set_angle(angle_degrees % 360)
         # print((angle_degrees % 360))  # converts to 0 to 360

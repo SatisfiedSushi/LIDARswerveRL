@@ -312,9 +312,9 @@ class env(gym.Env):
         self.b2LIDARs = []
         self.distance_endpoints = []
         self.raycast_points = []
-        self.observation_space = Box(low=np.array([0.0, 0.0, 0.0, 0.0]), high=np.array([16.46, 8.23, 16.46, 8.23]), shape=(4,))
+        self.observation_space = Box(low=np.array([0.0, 0.0, 0.0, 0.0, 0.0]), high=np.array([16.46, 8.23, 360, 16.46, 8.23]), shape=(5,))
         # self.observation_space = MultiDiscrete(np.array([1, 1]), seed=42)
-        self.action_space = Box(low=np.array([-1.0, -1.0]), high=np.array([1.0, 1.0]), shape=(2,))
+        self.action_space = Box(low=np.array([-1.0, -1.0, -1.0]), high=np.array([1.0, 1.0, 1.0]), shape=(3,))
 
         self.W, self.A, self.S, self.D, self.LEFT, self.RIGHT = 0, 0, 0, 0, 0, 0
 
@@ -534,7 +534,7 @@ class env(gym.Env):
 
             for agent in self.agents
         }'''
-        obs = np.array([0, 0, 0, 0])
+        obs = np.array([0, 0, 0, 0, 0])
 
         self.reset_pygame()
         self.resetted = True
@@ -560,15 +560,17 @@ class env(gym.Env):
         STAGNATION_PENALTY = -0.2
         GOAL_ACHIEVEMENT_REWARD = 50.0
         OUT_OF_BOUNDS_PENALTY = -50.0
+        DIRECTION_REWARD = 0.2  # Reward for facing towards the goal
         MAX_DISTANCE = 18.34  # Maximum possible distance to the goal
 
         terminated = False
 
         # Calculate distance to the goal
-        current_distance = math.hypot(
+        goal_direction = (
             self.end_goal[0] - self.swerve_instances[0].get_box2d_instance().position.x,
             self.end_goal[1] - self.swerve_instances[0].get_box2d_instance().position.y
         )
+        current_distance = math.hypot(*goal_direction)
 
         # Initialize reward with time step penalty
         reward = TIME_STEP_PENALTY
@@ -580,6 +582,14 @@ class env(gym.Env):
         # Penalty for stagnation (not getting closer)
         if current_distance >= self.previous_distance:
             reward += STAGNATION_PENALTY
+
+        # Reward for facing towards the goal
+        # Assuming self.swerve_instances[0].angle represents the facing angle of the agent in radians
+        agent_direction = (math.cos(self.swerve_instances[0].get_angle()), math.sin(self.swerve_instances[0].get_angle()))
+        dot_product = sum(a * b for a, b in zip(goal_direction, agent_direction))
+        angle_difference = math.acos(dot_product / (math.hypot(*goal_direction) * math.hypot(*agent_direction)))
+        if angle_difference < math.pi / 4:  # within 45 degrees of the goal direction
+            reward += DIRECTION_REWARD
 
         # Check if the goal is reached
         if current_distance < 0.05:  # Goal threshold
@@ -665,8 +675,8 @@ class env(gym.Env):
         # swerve.set_angular_velocity(0)
         # swerve.set_velocity((self.D - self.A, self.W - self.S))
         # swerve.set_angular_velocity(self.LEFT - self.RIGHT)
-        swerve.set_velocity(actions)
-        swerve.set_angular_velocity(0)
+        swerve.set_velocity((actions[0], actions[1]))
+        swerve.set_angular_velocity(actions[2])
         swerve.update()
 
         # match self.is_close_to_terminal(swerve.get_box2d_instance(), self.red_spawned, self.blue_spawned):
@@ -746,6 +756,7 @@ class env(gym.Env):
         }'''
         obs = (self.swerve_instances[0].get_box2d_instance().position.x,
                self.swerve_instances[0].get_box2d_instance().position.y,
+               self.swerve_instances[0].get_angle(),
                self.end_goal[0],
                self.end_goal[1])
 
