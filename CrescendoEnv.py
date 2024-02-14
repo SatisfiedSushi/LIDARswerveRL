@@ -281,22 +281,16 @@ class env(gym.Env):
 
     def is_robot_aligned_with_ball(self, ball):
         robot = self.swerve_instances[0].get_box2d_instance()
-        robot_angle = robot.angle
-        robot_angle = math.degrees(robot_angle)
-        robot_angle = self.normalize_angle_degrees(robot_angle)
+        robot_angle = robot.angle % (2 * math.pi)
         ball_position = ball.position
         robot_position = robot.position
 
-        angle_to_ball = math.degrees(math.atan2(ball_position.y - robot_position.y, ball_position.x - robot_position.x))
-        angle_to_ball = self.normalize_angle_degrees(angle_to_ball)
+        angle_to_ball = math.atan2(ball_position.y - robot_position.y, ball_position.x - robot_position.x)
+        angle_difference = abs(robot_angle - angle_to_ball)
 
-        relative_angle = self.normalize_angle_degrees(angle_to_ball - robot_angle)
-
-        # print(f"Robot angle: {robot_angle}, Angle to ball: {angle_to_ball}, Relative angle: {relative_angle}")
-
-        # Assuming the intake side is at the front, check if the relative angle is within a certain threshold
-        threshold_angle = 100  # Example: 30 degrees
-        return abs(relative_angle) < threshold_angle
+        # Assuming the intake side is at the front, check if the angle to the ball is within a certain threshold
+        threshold_angle = math.pi / 6  # Example: 30 degrees
+        return angle_difference < threshold_angle
 
     def has_picked_up_ball(self, ball):
         robot = self.swerve_instances[0].get_box2d_instance()
@@ -308,15 +302,8 @@ class env(gym.Env):
         is_aligned = self.is_robot_aligned_with_ball(ball)
 
         # Define a threshold for how close the ball needs to be to consider it picked up
-        pickup_distance_threshold = 1.0  # Example: Increase the threshold to 1.0 units
+        pickup_distance_threshold = 0.5  # Example: 0.3 units
         return distance < pickup_distance_threshold and is_aligned
-
-    def normalize_angle_degrees(self, angle):
-        while angle < 0:
-            angle += 360
-        while angle >= 360:
-            angle -= 360
-        return angle
 
     def calculate_angle_to_ball(self, ball):
         if ball is None:
@@ -333,8 +320,6 @@ class env(gym.Env):
 
         # Adjust the angle based on the robot's current orientation
         robot_angle = robot.angle
-        robot_angle = math.degrees(robot_angle)
-        robot_angle = self.normalize_angle_degrees(robot_angle)
         angle_relative_to_robot = angle_to_ball - robot_angle
 
         # Normalize the angle to the range [-pi, pi]
@@ -392,7 +377,7 @@ class env(gym.Env):
         self.clock = None
         self.teleop_time = max_teleop_time  # 135 default
         self.CoordConverter = CoordConverter()
-        self.starting_balls = 1
+        self.starting_balls = 4
         self.balls = []
 
         # RL variables
@@ -403,9 +388,6 @@ class env(gym.Env):
         self.agent_ids = ["blue_1"]
         self.agents = copy(self.possible_agents)
         self.resetted = False
-
-        self.previous_angle_to_ball = 0
-
         self.number_of_rays = 400
         # the end ray positions
         self.end_rays = []
@@ -423,8 +405,7 @@ class env(gym.Env):
                 0,  # distance to ball
                 -np.pi,  # angle to ball
                 0,  # ball picked up indicator
-                0,  # game time remaining
-                np.zeros(self.number_of_rays) # LIDAR distances
+                0  # game time remaining
             ]),
             high=np.array([
                 np.inf, np.inf,  # robot position x, y
@@ -433,8 +414,7 @@ class env(gym.Env):
                 np.inf,  # distance to ball
                 np.pi,  # angle to ball
                 1,  # ball picked up indicator
-                max_teleop_time,  # game time remaining
-                np.full(self.number_of_rays, 1000)  # LIDAR distances
+                max_teleop_time  # game time remaining
             ])
         )
         # self.observation_space = MultiDiscrete(np.array([1, 1]), seed=42)
@@ -460,7 +440,6 @@ class env(gym.Env):
 
         self.timestep = None
         self.current_time = None
-        self.distances = None
         self.game_time = None
 
         self.scoreHolder = None
@@ -478,7 +457,6 @@ class env(gym.Env):
 
         # --- Box2d ---
         self.world = None
-        self.obstacles = None
         self.hub_points = None
         self.carpet = None
         self.carpet_fixture = None
@@ -520,8 +498,6 @@ class env(gym.Env):
     def reset(self, *, seed=None, options=None):
 
         # --- RL variables ---
-        self.distances = []
-        self.previous_angle_to_ball = 0
         self.agents = copy(self.possible_agents)
         self.timestep = 0
         self.scoreHolder = ScoreHolder()
@@ -573,22 +549,10 @@ class env(gym.Env):
             shapes=b2PolygonShape(box=(16.46, 1)),
         )'''
 
-        self.sample_object = self.world.CreateStaticBody(
+        '''self.sample_object = self.world.CreateStaticBody(
             position=(16.47/2, 8.23/2),
             shapes=b2PolygonShape(box=(1, 1)),
-        )
-
-        def create_obstacle(self, position, size):
-            obstacle = self.world.CreateStaticBody(
-                position=position,
-                shapes=b2PolygonShape(box=size),
-            )
-            return obstacle
-
-        self.obstacles = [
-            create_obstacle(self, (3, 3), (0.5, 0.5)),
-            create_obstacle(self, (10, 6), (0.5, 0.5))
-        ]
+        )'''
 
         # self.terminal_blue = self.world.CreateStaticBody(
         #     position=((0.247) / math.sqrt(2), (0.247) / math.sqrt(2)),
@@ -686,7 +650,6 @@ class env(gym.Env):
             0,
             0,
             0,
-            0,
             0
         ])
 
@@ -709,14 +672,12 @@ class env(gym.Env):
 
     def calculate_reward(self):
         # Constants for rewards and penalties
-        TIME_STEP_PENALTY = -0.05
+        TIME_STEP_PENALTY = -0.05 # -0.05
         PROGRESS_REWARD = 0.5
         ALIGNMENT_REWARD = 0.4
-        PICKUP_REWARD = 200.0
+        PICKUP_REWARD = 100.0
         OUT_OF_BOUNDS_PENALTY = -50.0
-        LIDAR_DISTANCE_THRESHOLD = 2.0  # Adjust this value as needed
-        LIDAR_REWARD_SCALING_FACTOR = 0.1
-        ANGLE_REWARD = 0.2  # New reward for reducing the angle to the ball
+        MAX_DISTANCE = 18.34  # Maximum possible distance to the goal
 
         terminated = False
         log_messages = []  # List to accumulate log messages
@@ -738,12 +699,6 @@ class env(gym.Env):
             reward += ALIGNMENT_REWARD
             log_messages.append(f"Alignment reward added: {ALIGNMENT_REWARD}")
 
-        # Reward for reducing the angle to the ball
-        angle_to_ball = self.calculate_angle_to_ball(closest_ball)
-        if angle_to_ball < self.previous_angle_to_ball:
-            reward += ANGLE_REWARD
-            log_messages.append(f"Angle reward added: {ANGLE_REWARD}")
-
         # Reward for picking up the ball
         if self.has_picked_up_ball(closest_ball):
             reward += PICKUP_REWARD
@@ -757,20 +712,8 @@ class env(gym.Env):
             terminated = True
             log_messages.append(f"Out of bounds penalty applied: {OUT_OF_BOUNDS_PENALTY}")
 
-            # Calculate the average LIDAR distance
-            average_lidar_distance = sum([distance ** 2 for distance in self.distances]) / len(self.distances)
-
-            # Add a reward or penalty based on the average LIDAR distance
-            if average_lidar_distance == 0 or average_lidar_distance > LIDAR_DISTANCE_THRESHOLD:
-                reward += LIDAR_REWARD_SCALING_FACTOR * average_lidar_distance
-                log_messages.append(f"LIDAR reward added: {LIDAR_REWARD_SCALING_FACTOR * average_lidar_distance}")
-            else:
-                reward -= LIDAR_REWARD_SCALING_FACTOR / average_lidar_distance
-                log_messages.append(f"LIDAR penalty applied: {LIDAR_REWARD_SCALING_FACTOR / average_lidar_distance}")
-
-        # Update previous distance and angle for the next calculation
+        # Update previous distance for the next calculation
         self.previous_distance_to_ball = distance_to_ball
-        self.previous_angle_to_ball = angle_to_ball
 
         # Print the consolidated log messages
         # for message in log_messages:
@@ -929,17 +872,6 @@ class env(gym.Env):
             for agent in self.agents
         }'''
 
-        # Cast LIDAR rays
-        self.distances, self.ray_end_positions, self.ray_angles, self.converted_endpos, self.raycast_points = self.LIDAR.cast_rays(
-            swerve.get_box2d_instance(),
-            swerve.get_box2d_instance().position,
-            swerve.get_angle(),
-            0.56,  # Assuming the robot length is 0.56
-            0.56,  # Assuming the robot width is 0.56
-            100,  # Number of rays
-            4  # LIDAR length
-        )
-
         # Find the closest ball at the beginning of each step
         closest_ball, distance_to_ball = self.find_closest_ball()
 
@@ -964,8 +896,7 @@ class env(gym.Env):
             distance_to_ball,
             angle_to_ball,
             int(self.has_picked_up_ball(closest_ball)),
-            self.game_time,
-            *self.distances
+            self.game_time
         ])
 
         info = {}
@@ -1013,13 +944,6 @@ class env(gym.Env):
         # for fixture in self.terminal_blue.fixtures:
         #     fixture.shape.draw(self.terminal_blue, fixture)
         #
-
-        # render sample object
-        for fixture in self.sample_object.fixtures:
-            fixture.shape.draw(self.sample_object, fixture)
-
-        swerve = self.swerve_instances[0]
-
         for ball in self.balls:
             # adjusted ball position where the robot is centered at (0, 0)
             for fixture in ball.fixtures:
@@ -1030,27 +954,6 @@ class env(gym.Env):
             swerve = self.swerve_instances[self.agents.index(agent)]
             for fixture in swerve.get_box2d_instance().fixtures:
                 fixture.shape.draw(swerve.get_box2d_instance(), fixture)
-
-        max_distance = 4  # The length of the LIDAR rays
-        distance_ratios = [distance / max_distance for distance in self.distances]
-
-        for obstacle in self.obstacles:
-            for fixture in obstacle.fixtures:
-                fixture.shape.draw(obstacle, fixture)
-
-        for end_position, distance_ratio in zip(self.ray_end_positions, distance_ratios):
-            # Interpolate between green and red based on the distance ratio
-            # Reverse the ratio for the red component to make it more red when closer
-            # Keep the green component high when the object is far and decrease it as the object gets closer
-            color = (int(255 * (distance_ratio)), int(255 * (1 - distance_ratio)), 0)
-            pygame.draw.line(
-                self.screen, color,
-                self.CoordConverter.box2d_to_pygame(swerve.get_box2d_instance().position),
-                self.CoordConverter.box2d_to_pygame(end_position)
-            )
-
-        # print cumulative distance
-        # print(f'cumulative distance: {sum([distance**2 for distance in self.distances])}')
 
         # pygame.draw.circle(self.screen, ('red'), self.CoordConverter.box2d_to_pygame(self.end_goal), 7)
 

@@ -282,7 +282,7 @@ class env(gym.Env):
     #                 force_direction=(np.pi / 4) + np.pi, team='Red', force=force)
     #             return 'Red'
 
-    def __init__(self, render_mode="human"):
+    def __init__(self, render_mode="human", max_teleop_time=5):
         super().__init__()
         # --- pygame setup ---
         # self.end_goal = ((random.randint(200, 1446) / 100), (random.randint(200, 623) / 100))
@@ -293,7 +293,7 @@ class env(gym.Env):
         self.SCREEN_WIDTH, self.SCREEN_HEIGHT = self.meters_to_pixels(16.46), self.meters_to_pixels(8.23)
         self.screen = None
         self.clock = None
-        self.teleop_time = 5  # 135 default
+        self.teleop_time = max_teleop_time  # 135 default
         self.CoordConverter = CoordConverter()
 
         # RL variables
@@ -597,7 +597,7 @@ class env(gym.Env):
 
         return reward, terminated
 
-    def step(self, actions):  # TODO: change action dictionary
+    def step(self, actions, testing_mode=False):  # TODO: change action dictionary
         '''if not actions:
             # self.agents = []
             return {}, {}, {}, {}, {}'''
@@ -663,10 +663,12 @@ class env(gym.Env):
         # swerve.set_angular_velocity(actions[agent][2])
         # swerve.set_velocity((0,0))
         # swerve.set_angular_velocity(0)
-        # swerve.set_velocity((self.D - self.A, self.W - self.S))
-        # swerve.set_angular_velocity(self.LEFT - self.RIGHT)
-        swerve.set_velocity(actions)
-        swerve.set_angular_velocity(0)
+        if testing_mode:
+            swerve.set_velocity((self.D - self.A, self.W - self.S))
+            swerve.set_angular_velocity(self.LEFT - self.RIGHT)
+        else:
+            swerve.set_velocity(actions)
+            swerve.set_angular_velocity(0)
         swerve.update()
 
         # match self.is_close_to_terminal(swerve.get_box2d_instance(), self.red_spawned, self.blue_spawned):
