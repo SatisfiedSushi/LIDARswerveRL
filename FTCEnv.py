@@ -19,273 +19,54 @@ from LIDAR import LIDAR
 from SwerveDrive import SwerveDrive
 from CoordConverter import CoordConverter
 
-import math
-import pygame
-
-import pygame
-import math
+import tkinter as tk
 
 
-class RaycastVisualizer:
-    def __init__(self, screen_width, screen_height, fov_angle=60, ray_count=100):
-        self.screen_width = screen_width
-        self.screen_height = screen_height
-        self.fov_angle = fov_angle
-        self.ray_count = ray_count
+class InfoDisplay:
+    def __init__(self, width=300, height=600, font_size=12):
+        # Initialize the main window
+        self.root = tk.Tk()
+        self.root.title("Info Display")
+        self.root.geometry(f"{width}x{height}")
 
-    def rotate_point(self, x, y, cx, cy, angle):
-        radians = math.radians(angle)
-        cos = math.cos(radians)
-        sin = math.sin(radians)
-        nx = cos * (x - cx) - sin * (y - cy) + cx
-        ny = sin * (x - cx) + cos * (y - cy) + cy
+        # Configure the font settings
+        self.font = ("Arial", font_size)
 
-        return nx, ny
+        # Create a frame to hold the information labels
+        self.frame = tk.Frame(self.root)
+        self.frame.pack(fill=tk.BOTH, expand=True)
 
-    def create_box(self, position, size, angle):
-        """Create a box with size and rotation in the RaycastVisualizer's coordinate system."""
-        print(f'box center: {position}')
-        print(f'box size: {size}')
-        cx, cy = position  # Box center in Pygame coordinates
-        # convert to Box2D coordinates
-        half_width, half_height = size / 2, size / 2
+        # List to hold the label widgets for displaying information
+        self.info_labels = []
 
-        # Define the corners before rotation
-        corners = [
-            (cx - half_width, cy - half_height),
-            (cx + half_width, cy - half_height),
-            (cx + half_width, cy + half_height),
-            (cx - half_width, cy + half_height)
-        ]
+    def add_info(self, info):
+        """
+        Adds a piece of information to be displayed.
+        :param info: A string in the format "name_of_information: value"
+        """
+        # Create a new label for the information and add it to the frame
+        label = tk.Label(self.frame, text=info, font=self.font, anchor="w", justify="left")
+        label.pack(fill=tk.X, padx=10, pady=2)
+        self.info_labels.append(label)
 
-        # Rotate corners around the center of the box using the angle
-        rotated_corners = [self.rotate_point(x, y, cx, cy, angle) for x, y in corners]
-        print(f'rotated corners: {rotated_corners}')
-        return rotated_corners
+    def clear_info(self):
+        """Clears all the information from the display."""
+        for label in self.info_labels:
+            label.destroy()
+        self.info_labels.clear()
 
+    def run(self):
+        """Starts the tkinter main loop."""
+        self.root.mainloop()
 
-    def create_circle(self, center, radius):
-        print(f'circle center: {center}')
-        """Create a circle with a given radius."""
-        # Simply return the center and radius, as a circle doesn't need rotation
-        cx, cy = center
-        return (cx, cy), radius  # Return center and radius, no rotation needed for circles
+    def update(self):
+        """Updates the tkinter window, useful for updating information dynamically."""
+        self.root.update_idletasks()
+        self.root.update()
 
-    def ray_intersects_segment(self, ray_origin, ray_direction, seg_start, seg_end):
-        """Check for intersections between a ray and line segments."""
-        ray_dx, ray_dy = ray_direction
-        seg_dx, seg_dy = seg_end[0] - seg_start[0], seg_end[1] - seg_start[1]
-
-        denominator = (-seg_dx * ray_dy + ray_dx * seg_dy)
-        if denominator == 0:
-            return None  # Parallel lines
-
-        t = (-ray_dy * (ray_origin[0] - seg_start[0]) + ray_dx * (ray_origin[1] - seg_start[1])) / denominator
-        u = (seg_dx * (ray_origin[1] - seg_start[1]) - seg_dy * (ray_origin[0] - seg_start[0])) / denominator
-
-        if 0 <= t <= 1 and u >= 0:
-            intersection_x = seg_start[0] + t * seg_dx
-            intersection_y = seg_start[1] + t * seg_dy
-            return (intersection_x, intersection_y), u  # Return intersection and distance along the ray
-        return None
-
-    def cast_rays(self, camera_pos, look_at_pos, boxes, circles, robot_angle, max_ray_distance=500):
-        """Raycasting from the robot's position, limiting the range of the rays."""
-        cam_angle = self.calculate_angle(camera_pos, look_at_pos)
-        half_fov = self.fov_angle / 2
-
-        # Define the rays by their angles
-        rays = []
-        for i in range(self.ray_count):
-            ray_angle = cam_angle - half_fov + i * (self.fov_angle / (self.ray_count - 1))
-            adjusted_ray_angle = ray_angle + robot_angle  # Adjust with robot's current angle
-            ray_direction = (math.cos(math.radians(adjusted_ray_angle)), math.sin(math.radians(adjusted_ray_angle)))
-            rays.append((adjusted_ray_angle, ray_direction))
-
-        ray_intersections = []
-        for ray_angle, ray_direction in rays:
-            closest_intersection = None
-            closest_distance = max_ray_distance  # Limit ray range
-            hit_object_id = None
-
-            # Check intersection with boxes
-            for object_id, box in enumerate(boxes):
-                for i in range(len(box)):
-                    seg_start = box[i]
-                    seg_end = box[(i + 1) % len(box)]
-                    intersection = self.ray_intersects_segment(camera_pos, ray_direction, seg_start, seg_end)
-                    if intersection:
-                        point, distance = intersection
-                        if distance < closest_distance:
-                            closest_distance = distance
-                            closest_intersection = point
-                            hit_object_id = object_id
-
-            # Check intersection with circles
-            for circle_id, (center, radius) in enumerate(circles):
-                intersection = self.ray_intersects_circle(camera_pos, ray_direction, center, radius)
-                if intersection:
-                    point, distance = intersection
-                    if distance < closest_distance:
-                        closest_distance = distance
-                        closest_intersection = point
-                        hit_object_id = circle_id + len(boxes)
-
-            ray_intersections.append((closest_intersection, closest_distance, hit_object_id))
-
-        return ray_intersections
-
-    def ray_intersects_circle(self, ray_origin, ray_direction, circle_center, circle_radius):
-        """Check for intersection between a ray and a circle."""
-        ox, oy = ray_origin
-        dx, dy = ray_direction
-        cx, cy = circle_center
-        r = circle_radius
-
-        # Vector from ray origin to circle center
-        oc_x = cx - ox
-        oc_y = cy - oy
-
-        # Project vector onto ray direction to get closest approach
-        t_closest = (oc_x * dx + oc_y * dy) / (dx * dx + dy * dy)
-        closest_x = ox + t_closest * dx
-        closest_y = oy + t_closest * dy
-
-        # Distance from closest approach to circle center
-        dist_to_center = math.hypot(closest_x - cx, closest_y - cy)
-
-        if dist_to_center > r:
-            return None  # No intersection
-
-        # Distance from closest approach to intersection point
-        t_offset = math.sqrt(r ** 2 - dist_to_center ** 2)
-
-        # Find intersection points along the ray
-        t1 = t_closest - t_offset
-        t2 = t_closest + t_offset
-
-        # We want the closest positive intersection along the ray
-        if t1 >= 0:
-            intersection_x = ox + t1 * dx
-            intersection_y = oy + t1 * dy
-            return (intersection_x, intersection_y), t1
-        elif t2 >= 0:
-            intersection_x = ox + t2 * dx
-            intersection_y = oy + t2 * dy
-            return (intersection_x, intersection_y), t2
-        else:
-            return None
-
-
-    def calculate_angle(self, start_pos, end_pos):
-        """Calculate the angle in degrees between two points, with proper conversion for coordinate systems."""
-        dx = end_pos[0] - start_pos[0]
-        dy = end_pos[1] - start_pos[1]  # No need to invert the y-axis for angle calculation
-        angle = math.degrees(math.atan2(dy, dx))
-
-        # Adjust the angle based on coordinate system differences
-        # Pygame's angles increase clockwise, so we invert the angle to match Box2D
-        angle = -angle  # This corrects the inversion
-
-        return angle
-
-    def draw_2d_perspective(self, screen, boxes, circles, camera_pos, look_at_pos, robot_angle, agent_id=None):
-        """Draw the 2D perspective with raycasting and FOV visualization, skipping the agent itself."""
-        # Draw boxes
-        for box in boxes:
-            pygame.draw.polygon(screen, (0, 0, 0), box, 2)
-
-        # Draw camera and look-at point
-        pygame.draw.circle(screen, (255, 0, 0), camera_pos, 5)
-        pygame.draw.circle(screen, (0, 255, 0), look_at_pos, 5)
-
-        # Draw FOV lines
-        cam_angle = self.calculate_angle(camera_pos, look_at_pos)
-        half_fov = self.fov_angle / 2
-        fov_left_angle = cam_angle - half_fov
-        fov_right_angle = cam_angle + half_fov
-        fov_length = 500
-
-        left_x = camera_pos[0] + fov_length * math.cos(math.radians(fov_left_angle))
-        left_y = camera_pos[1] + fov_length * math.sin(math.radians(fov_left_angle))
-        right_x = camera_pos[0] + fov_length * math.cos(math.radians(fov_right_angle))
-        right_y = camera_pos[1] + fov_length * math.sin(math.radians(fov_right_angle))
-
-        pygame.draw.line(screen, (128, 128, 128), camera_pos, (left_x, left_y), 1)
-        pygame.draw.line(screen, (128, 128, 128), camera_pos, (right_x, right_y), 1)
-
-        # Draw rays
-        ray_intersections = self.cast_rays(camera_pos, look_at_pos, boxes, circles, robot_angle)
-        for intersection, _, _ in ray_intersections:
-            if intersection:
-                pygame.draw.line(screen, (255, 0, 0), camera_pos, intersection, 1)
-
-        return ray_intersections
-
-    def print_1d_perspective(self, ray_intersections):
-        """Print the 1D perspective with angles."""
-        object_perspective = {}
-        prev_object_id = None
-        start_angle = None
-
-        half_fov = self.fov_angle / 2
-
-        for i, (_, _, object_id) in enumerate(ray_intersections):
-            # Normalize the ray_angle from [-half_fov, half_fov] to [-1, 1]
-            ray_angle = (-half_fov + i * (self.fov_angle / (self.ray_count - 1))) / half_fov
-
-            if object_id != prev_object_id:
-                if prev_object_id is not None:
-                    # Store the previous object with its start and end angles
-                    object_name = f"obj{prev_object_id + 1}"
-                    object_perspective[object_name] = (start_angle, ray_angle)
-                start_angle = ray_angle  # New object's start angle
-
-            prev_object_id = object_id
-
-        if prev_object_id is not None:
-            # Store the last object
-            object_name = f"obj{prev_object_id + 1}"
-            object_perspective[object_name] = (start_angle, ray_angle)
-
-        # print(object_perspective)
-
-    def draw_1d_perspective_with_gaps(self, screen, ray_intersections):
-        """Draw the 1D perspective with gap detection."""
-        # Draw origin at camera in 1D space (camera's 1D projection)
-        pygame.draw.circle(screen, (255, 0, 0), (300, 100), 5)
-
-        # Scale factor for distance normalization
-        max_distance = max([distance for _, distance, _ in ray_intersections if distance != float('inf')])
-        if max_distance == 0:
-            max_distance = 1  # Prevent division by zero
-
-        # Plot each intersection along the x-axis of the 1D canvas based on angular position
-        half_canvas_width = 300
-        half_fov = self.fov_angle / 2
-        prev_x = None
-        gap_threshold = 10  # Define a gap threshold for detecting significant distance changes
-        prev_object_id = None  # Track the previous object that the ray hit
-
-        for i, (_, distance, object_id) in enumerate(ray_intersections):
-            if distance != float('inf'):
-                # Calculate the angular position relative to the center of the FOV
-                ray_angle = (-half_fov + i * (self.fov_angle / (self.ray_count - 1)))  # Angular position
-                normalized_angle = ray_angle / self.fov_angle  # Normalize angle to [-0.5, 0.5]
-
-                # Project based on angular position, centering around the canvas
-                proj_x = 300 + normalized_angle * half_canvas_width
-
-                if prev_x is not None:
-                    if abs(distance - prev_distance) < gap_threshold and object_id == prev_object_id:
-                        # Connect the previous point to the current point if no gap is detected
-                        pygame.draw.line(screen, (0, 0, 255), (prev_x, 100), (proj_x, 100), 1)
-
-                prev_x = proj_x
-                prev_distance = distance
-                prev_object_id = object_id  # Update the last object hit
-
-
+    def close(self):
+        """Closes the tkinter window."""
+        self.root.destroy()
 
 class ScoreHolder:
     def __init__(self):
@@ -394,23 +175,15 @@ class env(gym.Env):
 
     def pygame_to_box2d(self, pos_pygame):
         x, y = pos_pygame
-        x_box2d = x / self.PPM
-        y_box2d = (self.SCREEN_HEIGHT - y) / self.PPM  # Invert y-coordinate
-
-        # Debugging output
-        print(f"Pygame -> Box2D: ({x}, {y}) -> ({x_box2d}, {y_box2d})")
-
+        x_box2d = x
+        y_box2d = -y  # Invert the y-coordinate to match PyBox2D's upward y-axis
         return x_box2d, y_box2d
 
-    def box2d_to_pygame(self, position_box2d):
-        x_box2d, y_box2d = position_box2d
-        x_pygame = x_box2d * self.PPM
-        y_pygame = self.SCREEN_HEIGHT - (y_box2d * self.PPM)  # Y-axis flip for Pygame
-
-        # Debugging output
-        print(f"Box2D -> Pygame: ({x_box2d}, {y_box2d}) -> ({x_pygame}, {y_pygame})")
-
-        return (x_pygame, y_pygame)
+    def box2d_to_pygame(self, pos_box2d):
+        x, y = pos_box2d
+        x_pygame = x
+        y_pygame = -y  # Invert the y-coordinate to match Pygame's downward y-axis
+        return x_pygame, y_pygame
 
     def meters_to_pixels(self, meters):
         return int(meters * self.PPM)
@@ -554,36 +327,121 @@ class env(gym.Env):
 
     def is_robot_aligned_with_ball(self, ball):
         robot = self.swerve_instances[0].get_box2d_instance()
-        robot_angle = robot.angle
-        robot_angle = math.degrees(robot_angle)
-        robot_angle = self.normalize_angle_degrees(robot_angle)
-        ball_position = ball.position
+        robot_angle = math.radians(robot.angle)  # Convert to radians for trigonometric calculations
         robot_position = robot.position
 
-        angle_to_ball = math.degrees(math.atan2(ball_position.y - robot_position.y, ball_position.x - robot_position.x)) + 30
-        angle_to_ball = self.normalize_angle_degrees(angle_to_ball)
+        # Outer class variables for the robot's hitbox dimensions and offsets
+        length = self.robot_length  # Length of the hitbox (adjustable)
+        width = self.robot_width  # Width of the hitbox (adjustable)
+        intake_offset_x = self.intake_offset_x  # X offset of the hitbox from robot center (adjustable)
+        intake_offset_y = self.intake_offset_y  # Y offset of the hitbox from robot center (adjustable)
 
-        relative_angle = self.normalize_angle_degrees(angle_to_ball - robot_angle)
+        # Transform the robot's hitbox corners based on its angle and offsets
+        hitbox_corners = self.get_robot_hitbox_corners(robot_position, robot_angle, length, width, intake_offset_x,
+                                                       intake_offset_y)
 
-        # print(f"Robot angle: {robot_angle}, Angle to ball: {angle_to_ball}, Relative angle: {relative_angle}")
+        # Ball's position
+        ball_position = ball.position
 
-        # Assuming the intake side is at the front, check if the relative angle is within a certain threshold
-        threshold_angle = 70  # Example: 30 degrees
-        return abs(relative_angle) < threshold_angle
+        # Debug prints
+        self.info_display.add_info(f"Robot Position: {robot_position}, Robot Angle (deg): {math.degrees(robot_angle)}")
+        self.info_display.add_info(f"Hitbox Corners: {hitbox_corners}")
+        self.info_display.add_info(f"Ball Position: {ball_position}")
+
+        # Check if the ball is within the rectangular hitbox
+        is_aligned = self.is_point_in_rect(ball_position, hitbox_corners)
+        self.info_display.add_info(f"Is Ball Aligned: {is_aligned}")
+        return is_aligned
 
     def has_picked_up_ball(self, ball):
         robot = self.swerve_instances[0].get_box2d_instance()
-        ball_position = ball.position
         robot_position = robot.position
 
-        # Check if the ball is close enough to the robot's intake side
-        distance = math.hypot(ball_position.x - robot_position.x, ball_position.y - robot_position.y)
-        is_aligned = self.is_robot_aligned_with_ball(ball)
+        # Outer class variables for the robot's hitbox dimensions and offsets
+        length = self.robot_length  # Length of the hitbox (adjustable)
+        width = self.robot_width  # Width of the hitbox (adjustable)
+        intake_offset_x = self.intake_offset_x  # X offset of the hitbox from robot center (adjustable)
+        intake_offset_y = self.intake_offset_y  # Y offset of the hitbox from robot center (adjustable)
 
-        # Define a threshold for how close the ball needs to be to consider it picked up
-        pickup_distance_threshold = 0.8  # Example: Increase the threshold to 1.0 units
-        # return distance < pickup_distance_threshold and is_aligned
-        return False
+        # Transform the robot's hitbox corners based on its angle and offsets
+        hitbox_corners = self.get_robot_hitbox_corners(robot_position, robot.angle, length, width, intake_offset_x,
+                                                       intake_offset_y)
+
+        # Ball's position
+        ball_position = ball.position
+
+        # Debug prints
+        self.info_display.add_info(f"Checking Ball Pickup...")
+        self.info_display.add_info(f"Robot Position: {robot_position}, Robot Angle (deg): {math.degrees(robot.angle)}")
+        self.info_display.add_info(f"Hitbox Corners: {hitbox_corners}")
+        self.info_display.add_info(f"Ball Position: {ball_position}")
+
+        # Check if the ball is inside the hitbox
+        is_in_hitbox = self.is_point_in_rect(ball_position, hitbox_corners)
+        self.info_display.add_info(f"Is Ball Inside Hitbox: {is_in_hitbox}")
+
+        # Return if the ball is aligned and inside the hitbox
+        return is_in_hitbox
+
+    def get_robot_hitbox_corners(self, position, angle, length, width, offset_x, offset_y):
+        """
+        Calculate the four corners of the robot's hitbox, given the position, angle, length, width, and offsets.
+        """
+        # Calculate the half-lengths for convenience
+        half_length = length / 2
+        half_width = width / 2
+
+        # Define the corners of the rectangle in the robot's local coordinate space
+        corners = [
+            (-half_length + offset_x, -half_width + offset_y),  # Bottom-left corner
+            (half_length + offset_x, -half_width + offset_y),  # Bottom-right corner
+            (half_length + offset_x, half_width + offset_y),  # Top-right corner
+            (-half_length + offset_x, half_width + offset_y)  # Top-left corner
+        ]
+
+        # Apply rotation and translation to the corners
+        transformed_corners = []
+        for corner in corners:
+            # Rotate the corner using the robot's angle
+            rotated_x = corner[0] * math.cos(angle) - corner[1] * math.sin(angle)
+            rotated_y = corner[0] * math.sin(angle) + corner[1] * math.cos(angle)
+
+            # Translate the corner to the robot's position
+            transformed_x = rotated_x + position.x
+            transformed_y = rotated_y + position.y
+
+            transformed_corners.append((transformed_x, transformed_y))
+
+        # Debug prints
+        self.info_display.add_info(f"Original Corners: {corners}")
+        self.info_display.add_info(f"Transformed Corners: {transformed_corners}")
+
+        return transformed_corners
+
+    def is_point_in_rect(self, point, rect_corners):
+        """
+        Check if a point is inside a rectangle defined by its four corners.
+        We'll use a cross-product method to check if the point lies within the polygon formed by the rectangle.
+        """
+
+        def sign(p1, p2, p3):
+            return (p1[0] - p3[0]) * (p2[1] - p3[1]) - (p2[0] - p3[0]) * (p1[1] - p3[1])
+
+        # Unpack the rectangle corners
+        p1, p2, p3, p4 = rect_corners
+
+        # Check if the point lies inside the quadrilateral using the sign of the cross products
+        b1 = sign(point, p1, p2) < 0.0
+        b2 = sign(point, p2, p3) < 0.0
+        b3 = sign(point, p3, p4) < 0.0
+        b4 = sign(point, p4, p1) < 0.0
+
+        # Debug prints
+        self.info_display.add_info(f'Point: {point}')
+        self.info_display.add_info(f"Rectangle Corners: {p1}, {p2}, {p3}, {p4}")
+        self.info_display.add_info(f"Signs: {b1}, {b2}, {b3}, {b4}")
+
+        return ((b1 == b2) and (b2 == b3) and (b3 == b4))
 
     def normalize_angle_degrees(self, angle):
         while angle < 0:
@@ -627,44 +485,13 @@ class env(gym.Env):
                                                            "isFlaggedForDelete": False,
                                                            "Team": team})
 
-        new_robot.CreatePolygonFixture(box=(0.56 / 2, 0.56 / 2), density=30, friction=0.01)
+        new_robot.CreatePolygonFixture(box=(self.robot_length / 2, self.robot_width / 2), density=30, friction=0.01)
         friction_joint_def = b2FrictionJointDef(localAnchorA=(0, 0), localAnchorB=(0, 0), bodyA=new_robot,
                                                 bodyB=self.carpet,
                                                 maxForce=10, maxTorque=10)
         self.world.CreateJoint(friction_joint_def)
 
         self.robots.append(new_robot)
-
-    def get_middle_line_distances(self):
-        """
-        Simulate getting distance values for each pixel along the middle horizontal line in the environment.
-        Gradual changes in distances to simulate smoother transitions.
-        """
-        middle_y = self.SCREEN_HEIGHT // 2
-        distances = []
-        last_distance = random.uniform(5, 10)  # Start with a base distance
-
-        for x in range(self.SCREEN_WIDTH):
-            # Smaller, more controlled gradual changes for smoother transitions
-            change = random.uniform(-0.05, 0.05)
-            simulated_distance = max(1, min(10, last_distance + change))  # Ensure values stay within a reasonable range
-            distances.append(simulated_distance)
-            last_distance = simulated_distance
-
-        return distances
-
-    def get_camera_position(self, robot_position, robot_angle, camera_offset):
-        """Get the camera position with an adjustable offset relative to the robot."""
-        x_offset, y_offset = camera_offset
-
-        # Rotate the offset based on the robot's angle
-        offset_x_rotated = x_offset * math.cos(robot_angle) - y_offset * math.sin(robot_angle)
-        offset_y_rotated = x_offset * math.sin(robot_angle) + y_offset * math.cos(robot_angle)
-
-        camera_x = robot_position[0] + offset_x_rotated
-        camera_y = robot_position[1] + offset_y_rotated
-
-        return camera_x, camera_y
 
     # def is_close_to_terminal(self, robot, red_spawned, blue_spawned):
     #     distance = 2.5
@@ -684,10 +511,9 @@ class env(gym.Env):
     #                 force_direction=(np.pi / 4) + np.pi, team='Red', force=force)
     #             return 'Red'
 
-    def __init__(self, render_mode="human", max_teleop_time=5):
+    def __init__(self, render_mode="human", max_teleop_time=135):
+        self.info_display = InfoDisplay()
         super().__init__()
-
-
         self.LIDAR_active = False
         # --- pygame setup ---
         # self.end_goal = ((random.randint(200, 1446) / 100), (random.randint(200, 623) / 100))
@@ -703,6 +529,10 @@ class env(gym.Env):
         self.starting_balls = 1
         self.balls = []
 
+        self.robot_length = 0.4572  # meters
+        self.robot_width = 0.4572  # meters
+        self.intake_offset_x = 0.0
+        self.intake_offset_y = 0.3
 
         # RL variables
         self.render_mode = render_mode
@@ -712,7 +542,6 @@ class env(gym.Env):
         self.agent_ids = ["blue_1"]
         self.agents = copy(self.possible_agents)
         self.resetted = False
-        self.raycast_visualizer = RaycastVisualizer(self.SCREEN_WIDTH, self.SCREEN_HEIGHT, fov_angle=60, ray_count=100)
 
         self.previous_angle_to_ball = 0
 
@@ -807,22 +636,14 @@ class env(gym.Env):
         }
 
         def my_draw_polygon(polygon, body, fixture):
-            # Convert each vertex from Box2D to Pygame coordinates
-            vertices = [body.GetWorldPoint(v) for v in polygon.vertices]  # Properly transform each vertex to world coordinates
-
-            vertices = [self.box2d_to_pygame(v) for v in vertices]
-
-            # Debugging output for translated vertices
-            print(f'Translated Vertices: {vertices}')
-
-            if body.userData is not None and 'Team' in body.userData:
-                # Use different colors based on the 'Team' key if it exists
-                color = (128, 128, 128, 255) if body.userData['Team'] == 'Blue' else (255, 0, 0, 255)
+            vertices = [(body.transform * v) * self.PPM for v in polygon.vertices]
+            vertices = [(v[0], self.SCREEN_HEIGHT - v[1]) for v in vertices]
+            if body.userData is not None:
+                pygame.draw.polygon(self.screen,
+                                    (128, 128, 128, 255) if body.userData['Team'] == 'Blue' else (255, 0, 0, 255),
+                                    vertices)
             else:
-                # Default color for bodies without 'Team' key
-                color = (255, 255, 255, 255)
-
-            pygame.draw.polygon(self.screen, color, vertices)
+                pygame.draw.polygon(self.screen, self.colors[body.type], vertices)
 
         b2PolygonShape.draw = my_draw_polygon
 
@@ -836,38 +657,6 @@ class env(gym.Env):
             #       and it will not convert from float.
 
         b2CircleShape.draw = my_draw_circle
-
-    def create_obstacle(self, position, size, angle=0):
-        """
-        Create a rectangular static obstacle with no friction, given a position, size (width, height), and rotation angle.
-        """
-        x, y = position
-        print(f"Creating obstacle at position ({x}, {y}) with size {size} and angle {angle} degrees")
-
-        # Create the obstacle in the Box2D world as a static body
-        obstacle = self.world.CreateStaticBody(
-            position=(x, y),
-            angle=math.radians(angle),
-            userData={"obstacle": True, "isFlaggedForDelete": False}  # Optional: user data can be added as needed
-        )
-
-        # Create a rectangular fixture for the obstacle
-        obstacle.CreatePolygonFixture(
-            box=(size[0] / 2, size[1] / 2),  # Define the box using half the width and height
-            density=0,  # Static objects should have zero density
-            friction=0  # No friction for the static obstacle
-        )
-
-        return obstacle
-
-    def rotate_point(self, x, y, cx, cy, angle):
-        """Rotate a point (x, y) around a center point (cx, cy) by a given angle (in degrees)."""
-        radians = math.radians(angle)
-        cos = math.cos(radians)
-        sin = math.sin(radians)
-        nx = cos * (x - cx) - sin * (y - cy) + cx
-        ny = sin * (x - cx) + cos * (y - cy) + cy
-        return nx, ny
 
     def reset(self, *, seed=None, options=None):
 
@@ -925,25 +714,23 @@ class env(gym.Env):
             shapes=b2PolygonShape(box=(16.46, 1)),
         )'''
 
-
-
         if self.LIDAR_active:
             self.sample_object = self.world.CreateStaticBody(
                 position=(16.47/2, 8.23/2),
                 shapes=b2PolygonShape(box=(1, 1)),
             )
 
-
+            def create_obstacle(self, position, size):
+                obstacle = self.world.CreateStaticBody(
+                    position=position,
+                    shapes=b2PolygonShape(box=size),
+                )
+                return obstacle
 
             self.obstacles = [
-                self.create_obstacle((4, 3), (0.5, 0.5)),
-                self.create_obstacle((8, 4), (0.5, 0.5))
+                create_obstacle(self, (3, 3), (0.5, 0.5)),
+                create_obstacle(self, (10, 6), (0.5, 0.5))
             ]
-
-        self.obstacles = [
-            self.create_obstacle((4, 3), (0.5, 0.5)),
-            self.create_obstacle((6, 2), (1, 1))
-        ]
 
         # self.terminal_blue = self.world.CreateStaticBody(
         #     position=((0.247) / math.sqrt(2), (0.247) / math.sqrt(2)),
@@ -1284,8 +1071,8 @@ class env(gym.Env):
                 swerve.get_box2d_instance(),
                 swerve.get_box2d_instance().position,
                 swerve.get_angle(),
-                0.56,  # Assuming the robot length is 0.56
-                0.56,  # Assuming the robot width is 0.56
+                self.robot_length,  # Assuming the robot length is 0.56
+                self.robot_width,  # Assuming the robot width is 0.56
                 100,  # Number of rays
                 4  # LIDAR length
             )
@@ -1314,66 +1101,6 @@ class env(gym.Env):
                     average_lidar_distance = 0  # Handle case where all distances are 0
             else:
                 average_lidar_distance = 0  # Handle case where self.distances is empty
-
-        # Convert Box2D objects into visualizer-friendly boxes
-        boxes = []
-        # Example obstacle rendering
-        for obstacle in self.obstacles:
-            # Retrieve the position and angle of the obstacle from Box2D
-            position_box2d = obstacle.position  # Box2D position (center of the obstacle)
-            angle = obstacle.angle  # Box2D angle
-
-            # Get the vertices from the obstacle's fixture
-            vertices_box2d = [obstacle.transform * v for v in obstacle.fixtures[0].shape.vertices]
-
-            # Rotate the vertices based on the obstacle's angle and calculate their positions
-            rotated_vertices_box2d = [
-                self.raycast_visualizer.rotate_point(v[0], v[1], position_box2d[0], position_box2d[1],
-                                                     math.degrees(angle))
-                for v in vertices_box2d
-            ]
-
-            # Calculate the min and max x and y values from the rotated vertices
-            min_x = min(v[0] for v in rotated_vertices_box2d)
-            max_x = max(v[0] for v in rotated_vertices_box2d)
-            min_y = min(v[1] for v in rotated_vertices_box2d)
-            max_y = max(v[1] for v in rotated_vertices_box2d)
-
-            # Calculate the dynamic width and height based on the difference between the min/max x and y values
-            dynamic_width = max_x - min_x
-            dynamic_height = max_y - min_y
-
-            # Convert the center of the bounding box from Box2D to Pygame space (center of the obstacle)
-            position_pygame = self.CoordConverter.box2d_to_pygame(((min_x + max_x) / 2, (min_y + max_y) / 2))
-
-            # Convert the rotated vertices to Pygame space for rendering
-            vertices_pygame = [self.CoordConverter.box2d_to_pygame(v) for v in rotated_vertices_box2d]
-
-            # Log or print for debugging purposes
-            print(f"Dynamic size for obstacle: Width={dynamic_width}, Height={dynamic_height}")
-            print(f"Rotated Vertices (Pygame coordinates): {vertices_pygame}")
-
-            # Add the transformed Pygame vertices to the list for rendering
-            boxes.append(vertices_pygame)
-
-        # Include other Box2D objects like balls and robots...
-
-        # Get camera and look_at position for the agent's view
-        camera_position = self.CoordConverter.box2d_to_pygame(self.swerve_instances[0].get_box2d_instance().position)
-        look_at_position = (
-        camera_position[0] + math.cos(robot.angle) * 100, camera_position[1] + math.sin(robot.angle) * 100)
-
-        # Cast rays and draw visualization
-        robot_angle = robot.angle  # Assuming you already have the robot angle calculated
-        # Assuming you have a list of circles, possibly for balls or other round objects in your simulation.
-        circles = []  # If there are no circles to pass, you can use an empty list.
-
-        # Updated call
-        ray_intersections = self.raycast_visualizer.cast_rays(camera_position, look_at_position, boxes, circles,
-                                                              robot_angle)
-
-        self.raycast_visualizer.draw_2d_perspective(self.screen, boxes, [], camera_position, look_at_position, robot_angle)
-
 
         obs = np.array([
             robot.position.x,
@@ -1404,6 +1131,9 @@ class env(gym.Env):
             self.agents = []
             print("quit")
             #pygame.quit()
+
+        self.info_display.run()
+        print("running")
 
         return obs, rewards, terminated, truncated, info
 
@@ -1445,7 +1175,6 @@ class env(gym.Env):
             # adjusted ball position where the robot is centered at (0, 0)
             for fixture in ball.fixtures:
                 fixture.shape.draw(ball, fixture)
-            print(f'box2d ball position from actual fixture: {ball.position}')
         # render LIDAR rays
 
         for agent in self.agents:
@@ -1456,60 +1185,10 @@ class env(gym.Env):
         max_distance = 4  # The length of the LIDAR rays
         distance_ratios = [distance / max_distance for distance in self.distances]
 
-        for obstacle in self.obstacles:
-            for fixture in obstacle.fixtures:
-                fixture.shape.draw(obstacle, fixture)
-            print(f'box2d obstacle position from actual fixture: {obstacle.position}')
-
-        # for obstacle in self.obstacles:
-        #     position_box2d = obstacle.position
-        #     position_pygame = self.box2d_to_pygame(position_box2d)
-        #
-        #     # Debugging output
-        #     print(f"Obstacle Position Box2D: {position_box2d} -> Pygame: {position_pygame}")
-        #
-        #     size = obstacle.fixtures[0].shape.radius * self.PPM  # Assuming a circular obstacle
-        #     pygame.draw.circle(self.screen, (255, 0, 0), position_pygame, int(size))
-
-
-
-        # Inside your render method:
-
-
-        robot = self.swerve_instances[0].get_box2d_instance()
-        robot_pos = robot.position
-        robot_angle = robot.angle
-
-
-        # Use the DepthVisualizer to display the Limelight's middle line with object widths
-
-        FOV_angle = 30  # Half of the 60-degree FOV
-        FOV_length = 4  # The length of the FOV lines
-
-        # Calculate the FOV line endpoints
-        left_line_angle = robot_angle + math.radians(FOV_angle)
-        right_line_angle = robot_angle - math.radians(FOV_angle)
-
-        # Left line
-        left_line_end = (
-            robot_pos.x + FOV_length * math.cos(left_line_angle),
-            robot_pos.y + FOV_length * math.sin(left_line_angle)
-        )
-        pygame.draw.line(self.screen, (0, 255, 0),
-                         self.CoordConverter.box2d_to_pygame(robot_pos),
-                         self.CoordConverter.box2d_to_pygame(left_line_end), 2)
-
-        # Right line
-        right_line_end = (
-            robot_pos.x + FOV_length * math.cos(right_line_angle),
-            robot_pos.y + FOV_length * math.sin(right_line_angle)
-        )
-        pygame.draw.line(self.screen, (0, 255, 0),
-                         self.CoordConverter.box2d_to_pygame(robot_pos),
-                         self.CoordConverter.box2d_to_pygame(right_line_end), 2)
-
         if self.LIDAR_active:
-
+            for obstacle in self.obstacles:
+                for fixture in obstacle.fixtures:
+                    fixture.shape.draw(obstacle, fixture)
 
             for end_position, distance_ratio in zip(self.ray_end_positions, distance_ratios):
                 # Interpolate between green and red based on the distance ratio
@@ -1522,116 +1201,14 @@ class env(gym.Env):
                     self.CoordConverter.box2d_to_pygame(end_position)
                 )
 
-        # Draw raycasts and FOV
-        camera_pos = self.box2d_to_pygame(self.swerve_instances[0].get_box2d_instance().position)
-        look_at_pos = (camera_pos[0] + math.cos(self.swerve_instances[0].get_box2d_instance().angle) * 100,
-                       camera_pos[1] + math.sin(self.swerve_instances[0].get_box2d_instance().angle) * 100)
-        robot_angle = self.swerve_instances[0].get_box2d_instance().angle
-
-        # Convert Box2D objects into visualizer-friendly boxes
-        boxes = []
-        circles = []
-
-        # Add obstacles as boxes
-        for obstacle in self.obstacles:
-            # Retrieve the position and angle of the obstacle from Box2D
-            position_box2d = obstacle.position  # Box2D position (center of the obstacle)
-            angle = obstacle.angle  # Box2D angle
-
-            # Get the vertices from the obstacle's fixture
-            vertices_box2d = [obstacle.transform * v for v in obstacle.fixtures[0].shape.vertices]
-
-            # Rotate the vertices based on the obstacle's angle and calculate their positions
-            rotated_vertices_box2d = [
-                self.raycast_visualizer.rotate_point(v[0], v[1], position_box2d[0], position_box2d[1],
-                                                     math.degrees(angle))
-                for v in vertices_box2d
-            ]
-
-            # Calculate the min and max x and y values from the rotated vertices
-            min_x = min(v[0] for v in rotated_vertices_box2d)
-            max_x = max(v[0] for v in rotated_vertices_box2d)
-            min_y = min(v[1] for v in rotated_vertices_box2d)
-            max_y = max(v[1] for v in rotated_vertices_box2d)
-
-            # Calculate the dynamic width and height based on the difference between the min/max x and y values
-            dynamic_width = max_x - min_x
-            dynamic_height = max_y - min_y
-
-            # Convert the center of the bounding box from Box2D to Pygame space (center of the obstacle)
-            position_pygame = self.CoordConverter.box2d_to_pygame(((min_x + max_x) / 2, (min_y + max_y) / 2))
-
-            # Convert the rotated vertices to Pygame space for rendering
-            vertices_pygame = [self.CoordConverter.box2d_to_pygame(v) for v in rotated_vertices_box2d]
-
-            # Log or print for debugging purposes
-            print(f"Dynamic size for obstacle: Width={dynamic_width}, Height={dynamic_height}")
-            print(f"Rotated Vertices (Pygame coordinates): {vertices_pygame}")
-
-            # Add the transformed Pygame vertices to the list for rendering
-            boxes.append(vertices_pygame)
-
-        # Debug: Draw bounding boxes for obstacles
-        for obstacle in self.obstacles:
-            for fixture in obstacle.fixtures:
-                if isinstance(fixture.shape, b2PolygonShape):
-                    # Get the vertices of the polygon and draw them
-                    vertices = [(obstacle.transform * v) * self.PPM for v in fixture.shape.vertices]
-                    vertices = [(v[0], self.SCREEN_HEIGHT - v[1]) for v in vertices]  # Adjust coordinates for pygame
-                    pygame.draw.polygon(self.screen, (0, 255, 0), vertices, 2)  # Draw obstacle hitbox in green
-
-        # Convert balls to circles
-        for ball in self.balls:
-            print(f'box2d ball position: {ball.position}')
-            position = self.CoordConverter.box2d_to_pygame(ball.position)
-            radius = ball.fixtures[0].shape.radius * self.PPM
-            circle = self.raycast_visualizer.create_circle(position, radius)
-            circles.append(circle)
-
-        for box in boxes:
-            print(f"Drawing box with corners: {box}")
-            pygame.draw.polygon(self.screen, (0, 255, 0), box, 2)
-
-        for idx, agent in enumerate(self.robots):
-            if agent == self.swerve_instances[0].get_box2d_instance():
-                continue  # Skip adding the agent's own bounding box for raycasting
-
-            position = self.CoordConverter.box2d_to_pygame(agent.position)
-            angle = math.degrees(agent.angle)
-            size = 0.56 * self.PPM  # Assuming robot size
-            box = self.raycast_visualizer.create_box(position, size, angle)
-            boxes.append(box)
-        # Draw the perspective and raycasts, skipping the agent's own box
-        ray_intersections = self.raycast_visualizer.draw_2d_perspective(
-            self.screen, boxes, circles, camera_pos, look_at_pos, robot_angle
-        )
-
-        camera_offset = (0.25, 0)  # (x_offset, y_offset)
-        camera_x, camera_y = self.get_camera_position(self.swerve_instances[0].get_box2d_instance().position,
-                                                      robot_angle, camera_offset)
-        camera_position = self.CoordConverter.box2d_to_pygame((camera_x, camera_y))
-
-        # Set the look_at_position to be in the robot's forward direction
-        look_at_position = (
-            camera_position[0] + math.cos(robot_angle) * 100,  # Use robot_angle to point forward
-            camera_position[1] + math.sin(robot_angle) * 100
-        )
-
-        # Draw 2D perspective using the RaycastVisualizer
-        ray_intersections = self.raycast_visualizer.cast_rays(camera_position, look_at_position, boxes, circles, robot_angle)
-
-
-        # Optionally, print the 1D perspective from raycasting results
-        self.raycast_visualizer.print_1d_perspective(ray_intersections)
-
-        # Debug: Draw raycast hit points on obstacles
-        for intersection, _, _ in ray_intersections:
-            if intersection:
-                pygame.draw.circle(self.screen, (255, 0, 0), intersection, 3)  # Draw red dot at intersection point
+            # Get the robot's position and angle
+        robot = self.swerve_instances[0].get_box2d_instance()
+        robot_pos = robot.position
+        robot_angle = robot.angle
 
         # Define the distance of the FOV from the robot and its angle
-        FOV_distance = 0.8  # This is the pickup_distance_threshold used in has_picked_up_ball function
-        FOV_angle = 70  # This is the threshold_angle used in is_robot_aligned_with_ball function
+        FOV_distance = 90  # This is the pickup_distance_threshold used in has_picked_up_ball function
+        FOV_angle = 80  # This is the threshold_angle used in is_robot_aligned_with_ball function
 
         # Calculate the start and end points of the inner and outer lines of the FOV
         inner_line_start = robot_pos
@@ -1649,14 +1226,8 @@ class env(gym.Env):
         outer_line_end = self.CoordConverter.box2d_to_pygame(outer_line_end)
 
         # Draw the inner and outer lines of the FOV
-        pygame.draw.line(self.screen, (255, 0, 0), inner_line_start, inner_line_end)
-        pygame.draw.line(self.screen, (255, 0, 0), outer_line_start, outer_line_end)
-
-        pygame.draw.circle(self.screen, (0, 0, 255), camera_position, 5)  # Blue dot for the camera position
-
-        for intersection, _, _ in ray_intersections:
-            if intersection:
-                pygame.draw.circle(self.screen, (255, 0, 0), intersection, 3)  # Draw red dot at intersection point
+        pygame.draw.line(self.screen, (0, 200, 0), inner_line_start, inner_line_end)
+        pygame.draw.line(self.screen, (0, 200, 0), outer_line_start, outer_line_end)
 
         # print cumulative distance
         # print(f'cumulative distance: {sum([distance**2 for distance in self.distances])}')
@@ -1675,3 +1246,28 @@ class env(gym.Env):
 
         pygame.display.flip()
         self.clock.tick(self.TARGET_FPS)
+
+if __name__ == "__main__":
+    # Initialize the environment
+    # info_display = InfoDisplay()
+    env = env(render_mode="human")
+    obs, info = env.reset()
+
+    running = True
+    while running:
+        # Handle events
+
+        # Step the environment using the built-in testing mode
+        obs, reward, done, truncated, info = env.step((0,0), testing_mode=True)
+        # info_display.run()
+        env.render()
+
+        # Render the environment
+
+
+        # Check if the game should end
+        if done or truncated:
+            print("Game over!")
+            running = False
+
+    env.close()

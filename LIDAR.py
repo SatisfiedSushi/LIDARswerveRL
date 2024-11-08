@@ -8,7 +8,7 @@ class LIDAR:
         self.world = world
 
     def cast_rays(self, b2_robot, robot_position, robot_angle, robot_length, robot_width, number_of_rays, lidar_length):
-        number_of_rays = 100
+        number_of_rays = 400
         lidar_length = 4
         # invert the robot angle
         robot_angle = -robot_angle

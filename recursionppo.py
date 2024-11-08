@@ -1,23 +1,20 @@
 import os
 import numpy as np
 import torch
-import gymnasium as gym
 from stable_baselines3.common.noise import NormalActionNoise
-from stable_baselines3 import DDPG, SAC
+from stable_baselines3.common.evaluation import evaluate_policy
+from sb3_contrib import RecurrentPPO
 from SimpleSwerveRLEnvIntake import env  # Assuming this is your custom environment
 
-from stable_baselines3.common.evaluation import evaluate_policy
-
 # Configuration parameters
-USE_SAC = True  # Set to False to use DDPG
 LEARNING_RATE = 1e-3
 BATCH_SIZE = 256
-ACTION_NOISE_STD_DEV = 1 # 0.2
 
 # Check if CUDA is available
 print(torch.cuda.is_available())
 
-models_dir = "models/SAC" if USE_SAC else "models/DDPG"
+
+models_dir = "models/RecurrentPPO"
 logdir = "logs"
 
 # Create directories if they don't exist
@@ -26,18 +23,10 @@ os.makedirs(logdir, exist_ok=True)
 
 # Initialize environment
 environment = env()
-n_actions = environment.action_space.shape[-1]
-
-# Define action noise for DDPG
-action_noise = NormalActionNoise(mean=np.zeros(n_actions), sigma=ACTION_NOISE_STD_DEV * np.ones(n_actions))
 
 # Select and configure model
-if USE_SAC:
-    model = SAC("MlpPolicy", environment, batch_size=BATCH_SIZE, learning_rate=LEARNING_RATE,
-                device="cuda", tensorboard_log=logdir, verbose=1)
-else:
-    model = DDPG("MlpPolicy", environment, action_noise=action_noise, batch_size=BATCH_SIZE,
-                 learning_rate=LEARNING_RATE, device="cuda", tensorboard_log=logdir, verbose=1)
+model = RecurrentPPO("MlpLstmPolicy", environment, batch_size=BATCH_SIZE, learning_rate=LEARNING_RATE,
+                     device="cuda", tensorboard_log=logdir, verbose=1)
 
 seasons = 3
 time_steps = 1000000
@@ -49,12 +38,15 @@ for season in range(seasons):
 
 # Testing the model
 obs, info = environment.reset()
+lstm_states = None
+episode_starts = np.ones((1,), dtype=bool)
 
 for _ in range(100000000):
-    action, _states = model.predict(obs, deterministic=True)
+    action, lstm_states = model.predict(obs, state=lstm_states, episode_start=episode_starts, deterministic=True)
     obs, reward, terminated, truncated, info = environment.step(action)
     environment.render()
-    if truncated or terminated:
+    episode_starts = np.array([terminated or truncated])
+    if terminated or truncated:
         obs, info = environment.reset()
         # Overwrite the console line to keep the output clean and only show the most recent reset
         print("\rResetting... Last Reward: {:.2f}".format(reward), end='', flush=True)
