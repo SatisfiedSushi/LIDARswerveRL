@@ -1,3 +1,5 @@
+# slam_module.py
+
 import struct
 import time
 from multiprocessing import shared_memory
@@ -8,20 +10,23 @@ import logging
 
 class EKF_SLAM:
     def __init__(self):
-        # State vector: [x, y, theta]
+        # Initialize state vector, covariance, landmarks, etc.
         self.mu = np.zeros(3)
-        # Covariance matrix
         self.Sigma = np.eye(3) * 0.1
-        # Map features: landmark_id -> (x, y)
         self.landmarks = {}
         self.next_landmark_id = 0
-        # Motion noise covariance
         self.R = np.diag([0.1, 0.1, np.deg2rad(5)])**2
-        # Observation noise covariance
         self.Q = np.diag([0.2, np.deg2rad(5)])**2
-        # Initialize logging
+
+        # Initialize logger for EKF_SLAM
         self.logger = logging.getLogger('EKF_SLAM')
         self.logger.setLevel(logging.DEBUG)
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        if not self.logger.handlers:
+            self.logger.addHandler(handler)
 
     def predict(self, control, dt=0.1):
         v, w = control
@@ -70,10 +75,7 @@ class EKF_SLAM:
         self.Sigma = G @ self.Sigma @ G.T + R_expanded
 
         # Logging
-        # self.logger.debug(f"State vector size (mu): {len(self.mu)}")
-        # self.logger.debug(f"Covariance matrix size (Sigma): {self.Sigma.shape}")
-        # self.logger.debug(f"Jacobian G shape: {G.shape}")
-        # self.logger.debug(f"Process noise covariance R_expanded shape: {R_expanded.shape}")
+        # self.logger.debug(f"After predict - mu: {self.mu}, Sigma: {self.Sigma}")
 
     def update(self, observations):
         """
@@ -153,8 +155,7 @@ class EKF_SLAM:
 
                 # Logging
                 # self.logger.debug(f"Updated landmark ID {associated_id} at position {self.landmarks[associated_id]}")
-                # self.logger.debug(f"State vector after update (mu): {self.mu}")
-                # self.logger.debug(f"Covariance matrix after update (Sigma): {self.Sigma.shape}")
+                # self.logger.debug(f"After update - mu: {self.mu}, Sigma: {self.Sigma}")
 
     def associate_landmark(self, landmark_pos, threshold=0.5):
         """
@@ -178,7 +179,7 @@ class EKF_SLAM:
     @staticmethod
     def normalize_angle(angle):
         # Keep angle between -pi and pi
-        return (angle + np.pi) % (2 * np.pi) - np.pi
+        return (angle + math.pi) % (2 * math.pi) - math.pi
 
 class SLAMModule:
     def __init__(self, lock, shm_input_name='my_shared_memory', shm_input_size=16060, shm_output_name='slam_output',
@@ -189,45 +190,55 @@ class SLAMModule:
         self.shm_output_name = shm_output_name
         self.shm_output_size = shm_output_size
 
+        # Initialize Logger
+        self.logger = logging.getLogger('SLAMModule')
+        self.logger.setLevel(logging.DEBUG)
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(logging.DEBUG)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        if not self.logger.handlers:
+            self.logger.addHandler(handler)
+
+        self.logger.info("Initializing SLAMModule...")
+
         # Implement a retry mechanism to wait for 'my_shared_memory' to be available
         while True:
             try:
                 self.shm_input = shared_memory.SharedMemory(name=self.shm_input_name)
-                logging.info(f"SLAM Module connected to input shared memory: {self.shm_input.name}")
+                self.logger.info(f"SLAM Module connected to input shared memory: {self.shm_input.name}")
                 break
             except FileNotFoundError:
-                logging.warning(f"SLAM Module: Input shared memory {self.shm_input_name} not found. Retrying in 0.5 seconds...")
+                self.logger.warning(f"SLAM Module: Input shared memory '{self.shm_input_name}' not found. Retrying in 0.5 seconds...")
                 time.sleep(0.5)
 
         # Create or connect to 'slam_output' shared memory
         try:
             self.shm_output = shared_memory.SharedMemory(name=self.shm_output_name)
-            logging.info(f"SLAM Module connected to existing output shared memory: {self.shm_output.name}")
+            self.logger.info(f"SLAM Module connected to existing output shared memory: {self.shm_output.name}")
         except FileNotFoundError:
             # Create 'slam_output' shared memory
             self.shm_output = shared_memory.SharedMemory(create=True, size=self.shm_output_size,
                                                          name=self.shm_output_name)
-            logging.info(f"SLAM Module created output shared memory: {self.shm_output.name}")
+            self.logger.info(f"SLAM Module created output shared memory: {self.shm_output.name}")
 
         self.slam = EKF_SLAM()
         self.prev_pose = None
-
 
     def read_from_shared_memory(self):
         with self.lock:
             buffer = self.shm_input.buf[:self.shm_input_size]
             offset = 0
             try:
-
                 # Unpack robot position and orientation
                 robot_x, robot_y = struct.unpack_from('ff', buffer, offset)
                 offset += struct.calcsize('ff')
-                robot_theta, = struct.unpack_from('f', buffer, offset)
+                robot_theta_deg, = struct.unpack_from('f', buffer, offset)
+                robot_theta_rad = math.radians(robot_theta_deg)
                 offset += struct.calcsize('f')
                 # Unpack timestamp
                 timestamp, = struct.unpack_from('f', buffer, offset)
-                print(f"SLAM Module: Read data with timestamp {timestamp}")
-
+                # self.logger.debug(f"SLAM Module: Read data with timestamp {timestamp}")
                 offset += struct.calcsize('f')
                 # Unpack number of cameras
                 num_cameras, = struct.unpack_from('i', buffer, offset)
@@ -257,10 +268,15 @@ class SLAMModule:
                         # Ray Angle (already in radians)
                         ray_angle, = struct.unpack_from('f', buffer, offset)
                         offset += struct.calcsize('f')
+                        # Handle infinite intersections
+                        if inter_x == float('inf') and inter_y == float('inf'):
+                            intersection = None
+                        else:
+                            intersection = (inter_x, inter_y)
                         rays.append({
-                            'intersection': (inter_x, inter_y),
+                            'intersection': intersection,
                             'distance': distance,
-                            'object_id': object_id,
+                            'object_id': object_id if object_id != -1 else None,
                             'ray_angle': ray_angle
                         })
                     cameras.append({
@@ -268,12 +284,12 @@ class SLAMModule:
                         'look_at_pos': (look_x, look_y),
                         'rays': rays
                     })
-                return (robot_x, robot_y, robot_theta), timestamp, cameras
+                return (robot_x, robot_y, robot_theta_rad), timestamp, cameras
             except struct.error as e:
-                print(f"SLAM Module: Struct unpacking error: {e}")
+                self.logger.error(f"SLAM Module: Struct unpacking error: {e}")
                 return None, None, None
             except Exception as e:
-                print(f"SLAM Module: Error reading shared memory: {e}")
+                self.logger.error(f"SLAM Module: Error reading shared memory: {e}")
                 return None, None, None
 
     def write_to_shared_memory_output(self, pose, timestamp, map_points):
@@ -293,21 +309,23 @@ class SLAMModule:
             with self.lock:
                 shm_view = memoryview(self.shm_output.buf)
                 shm_view[:len(buffer)] = buffer
+            # self.logger.debug(f"Writing SLAM Pose: {pose}, Landmarks Count: {len(map_points)}")
         except struct.error as e:
-            print(f"SLAM Module: Struct packing error: {e}")
+            self.logger.error(f"SLAM Module: Struct packing error: {e}")
         except Exception as e:
-            print(f"SLAM Module: Error writing to shared memory: {e}")
+            self.logger.error(f"SLAM Module: Error writing to shared memory: {e}")
 
     def run(self):
         try:
             while True:
                 pose, timestamp, cameras = self.read_from_shared_memory()
-                # if pose is None:
-                #     time.sleep(0.1)
-                #     continue
+                if pose is None:
+                    time.sleep(0.1)
+                    continue
                 robot_x, robot_y, robot_theta_rad = pose
+                current_time = timestamp  # Assuming timestamp is in seconds
                 # Compute control inputs based on pose changes
-                control = self.compute_control(pose)
+                control = self.compute_control(pose, current_time)
                 # Run SLAM predict and update
                 self.slam.predict(control)
                 observations = []
@@ -325,31 +343,39 @@ class SLAMModule:
                 # Get SLAM results
                 slam_pose = self.slam.get_pose()
                 slam_map = self.slam.get_map()
+                # Logging
+                # self.logger.debug(f"SLAM Estimated Pose: {slam_pose}, Landmarks Count: {len(slam_map)}")
                 # Write SLAM results to output shared memory
                 self.write_to_shared_memory_output(slam_pose, timestamp, slam_map)
-                # Sleep to match data rate
+
+                # Sleep to match data rate (optional: implement if needed)
         except KeyboardInterrupt:
-            print("SLAM Module interrupted.")
+            self.logger.info("SLAM Module interrupted.")
         finally:
             self.shm_input.close()
             self.shm_output.close()
-            print("SLAM Module ended.")
+            self.logger.info("SLAM Module ended.")
 
-    def compute_control(self, current_pose):
+    def compute_control(self, current_pose, current_time):
         robot_x, robot_y, robot_theta_rad = current_pose
         if self.prev_pose is None:
             self.prev_pose = current_pose
+            self.prev_time = current_time
             return (0.0, 0.0)
         else:
             prev_x, prev_y, prev_theta_rad = self.prev_pose
+            dt = current_time - self.prev_time
+            if dt <= 0:
+                dt = 1e-3  # Prevent division by zero
             dx = robot_x - prev_x
             dy = robot_y - prev_y
             dtheta = self.normalize_angle(robot_theta_rad - prev_theta_rad)
             self.prev_pose = current_pose
+            self.prev_time = current_time
             # Convert pose change to control inputs
-            dt = 0.1  # assuming dt=0.1
             v = math.sqrt(dx**2 + dy**2) / dt
             w = dtheta / dt
+            # self.logger.debug(f"Computed Control - v: {v}, w: {w}, dt: {dt}")
             return (v, w)
 
     @staticmethod

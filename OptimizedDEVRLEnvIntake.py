@@ -38,6 +38,7 @@ from CoordConverter import CoordConverter
 from visualization import visualization_main
 
 
+
 class DepthEstimator:
     def __init__(self, screen_width, screen_height, fov_angle=120, ray_count=100):
         self.screen_width = screen_width
@@ -147,7 +148,13 @@ class DepthEstimator:
                         closest_distance = distance
                         closest_intersection = point
                         hit_object_id = circle_id + len(boxes)
-            ray_intersections.append((closest_intersection, closest_distance, hit_object_id, ray_angle))
+            # Append as dictionary instead of tuple
+            ray_intersections.append({
+                'intersection': closest_intersection,
+                'distance': closest_distance,
+                'object_id': hit_object_id,
+                'ray_angle': ray_angle
+            })
         return ray_intersections, cam_angle
 
     def visualize(self, screen, boxes, circles, camera_pos, look_at_pos, ray_intersections, coord_converter):
@@ -175,11 +182,15 @@ class DepthEstimator:
         pygame.draw.line(screen, (128, 128, 128), camera_pos_pygame, left_pygame, 1)
         pygame.draw.line(screen, (128, 128, 128), camera_pos_pygame, right_pygame, 1)
         # Draw ray intersections
-        for intersection, _, _, _ in ray_intersections:
-            if intersection:
+        for ray in ray_intersections:
+            intersection = ray["intersection"]
+            if intersection and isinstance(intersection, tuple) and len(intersection) == 2:
                 intersection_pygame = coord_converter.box2d_to_pygame(intersection)
                 pygame.draw.line(screen, (255, 0, 0), camera_pos_pygame, intersection_pygame, 1)
                 pygame.draw.circle(screen, (255, 0, 0), (int(intersection_pygame[0]), int(intersection_pygame[1])), 3)
+            else:
+                # Handle cases where intersection is None or malformed
+                continue
 
     def run_depth_estimation(self, camera_positions, look_at_positions, boxes, circles):
         all_ray_intersections = []
@@ -195,23 +206,24 @@ class DepthEstimator:
         prev_object_id = None
         start_angle = None
 
-        for i, (_, _, object_id, _) in enumerate(ray_intersections):
+        for i, ray in enumerate(ray_intersections):
+            object_id = ray["object_id"]
             # Normalize the ray_angle from [-half_fov, half_fov] to [-1, 1]
-            ray_angle = (-half_fov + i * (self.fov_angle / (self.ray_count - 1))) / half_fov
+            ray_angle_normalized = (-half_fov + i * (self.fov_angle / (self.ray_count - 1))) / half_fov
 
             if object_id != prev_object_id:
                 if prev_object_id is not None:
                     # Store the previous object with its start and end angles
                     object_name = f"obj{prev_object_id + 1}"
-                    object_perspective[object_name] = (start_angle, ray_angle)
-                start_angle = ray_angle  # New object's start angle
+                    object_perspective[object_name] = (start_angle, ray_angle_normalized)
+                start_angle = ray_angle_normalized  # New object's start angle
 
             prev_object_id = object_id
 
         if prev_object_id is not None:
             # Store the last object
             object_name = f"obj{prev_object_id + 1}"
-            object_perspective[object_name] = (start_angle, ray_angle)
+            object_perspective[object_name] = (start_angle, ray_angle_normalized)
 
         return object_perspective
 
@@ -274,11 +286,11 @@ class env(gym.Env):
             self.lock = manager.Lock()
         else:
             self.lock = lock
-        self.PPM = 100.0
+        self.PPM = 100.0  # Ensure PPM is 100.0
         self.TARGET_FPS = 60
         self.TIME_STEP = 1.0 / self.TARGET_FPS
-        self.SCREEN_WIDTH = int(16.46 * self.PPM)
-        self.SCREEN_HEIGHT = int(8.23 * self.PPM)
+        self.SCREEN_WIDTH = int(16.46 * self.PPM)  # 1646 pixels
+        self.SCREEN_HEIGHT = int(8.23 * self.PPM)  # 823 pixels
         self.screen = None
         self.clock = None
         self.teleop_time = max_teleop_time
@@ -357,15 +369,15 @@ class env(gym.Env):
         num_cameras = 2
         num_rays = 200
         total_size = (
-            12 +  # robot_position (x, y, orientation)
-            8 +   # timestamp (double precision)
-            4 +   # number_of_cameras
-            num_cameras * (
-                8 +  # camera_pos
-                8 +  # look_at_pos
-                4 +  # number_of_rays
-                num_rays * 24  # per ray data: 24 bytes per ray
-            )
+                12 +  # robot_position (x, y, orientation)
+                4 +  # timestamp (float)
+                4 +  # number_of_cameras
+                num_cameras * (
+                        8 +  # camera_pos (x, y)
+                        8 +  # look_at_pos (x, y)
+                        4 +  # number_of_rays
+                        num_rays * 24  # per ray data: 24 bytes per ray
+                )
         )
         return total_size
 
@@ -656,7 +668,11 @@ class env(gym.Env):
 
         for camera_pos, look_at_pos, ray_intersections, cam_angle in self.depth_estimations:
             rays = []
-            for intersection, distance, object_id, ray_angle in ray_intersections:
+            for ray in ray_intersections:
+                intersection = ray["intersection"]
+                distance = ray["distance"]
+                object_id = ray["object_id"]
+                ray_angle = ray["ray_angle"]
                 rays.append({
                     'intersection': intersection,
                     'distance': distance,
@@ -696,52 +712,51 @@ class env(gym.Env):
         return obs, rewards, terminated, truncated, info
 
     def serialize_and_write_shared_memory(self, depth_data):
-        with self.lock:
-            try:
-                logging.debug(f"Depth data written to shared memory at time {depth_data['timestamp']}")
+        try:
+            logging.debug(f"Depth data written to shared memory at time {depth_data['timestamp']}")
 
-                buffer = bytearray()
+            buffer = bytearray()
 
-                # Robot Position (x, y)
-                buffer += struct.pack('ff', depth_data["robot_position"]["x"], depth_data["robot_position"]["y"])
+            # Robot Position (x, y)
+            buffer += struct.pack('ff', depth_data["robot_position"]["x"], depth_data["robot_position"]["y"])
 
-                # Robot Orientation (in radians)
-                buffer += struct.pack('f', math.radians(depth_data["robot_orientation"]))
+            # Robot Orientation (in radians)
+            buffer += struct.pack('f', math.radians(depth_data["robot_orientation"]))
 
-                # Timestamp
-                buffer += struct.pack('f', depth_data["timestamp"])
+            # Timestamp
+            buffer += struct.pack('f', depth_data["timestamp"])
 
-                # Number of Cameras
-                num_cameras = len(depth_data["depth_estimates"])
-                buffer += struct.pack('i', num_cameras)
+            # Number of Cameras
+            num_cameras = len(depth_data["depth_estimates"])
+            buffer += struct.pack('i', num_cameras)
 
-                for cam in depth_data["depth_estimates"]:
-                    # Camera Position
-                    buffer += struct.pack('ff', cam["camera_pos"][0], cam["camera_pos"][1])
-                    # Look At Position
-                    buffer += struct.pack('ff', cam["look_at_pos"][0], cam["look_at_pos"][1])
-                    # Number of Rays
-                    num_rays = len(cam["rays"])
-                    buffer += struct.pack('i', num_rays)
-                    for ray in cam["rays"]:
-                        # Intersection x, y
-                        inter_x, inter_y = ray["intersection"] if ray["intersection"] else (float('inf'), float('inf'))
-                        buffer += struct.pack('ff', inter_x, inter_y)
-                        # Distance
-                        buffer += struct.pack('f', ray["distance"])
-                        # Object ID
-                        buffer += struct.pack('i', ray["object_id"] if ray["object_id"] is not None else -1)
-                        # Ray Angle (in radians)
-                        buffer += struct.pack('f', math.radians(ray["ray_angle"]))
+            for cam in depth_data["depth_estimates"]:
+                # Camera Position
+                buffer += struct.pack('ff', cam["camera_pos"][0], cam["camera_pos"][1])
+                # Look At Position
+                buffer += struct.pack('ff', cam["look_at_pos"][0], cam["look_at_pos"][1])
+                # Number of Rays
+                num_rays = len(cam["rays"])
+                buffer += struct.pack('i', num_rays)
+                for ray in cam["rays"]:
+                    # Intersection x, y
+                    inter_x, inter_y = ray["intersection"] if ray["intersection"] else (float('inf'), float('inf'))
+                    buffer += struct.pack('ff', inter_x, inter_y)
+                    # Distance
+                    buffer += struct.pack('f', ray["distance"])
+                    # Object ID
+                    buffer += struct.pack('i', ray["object_id"] if ray["object_id"] is not None else -1)
+                    # Ray Angle (in radians)
+                    buffer += struct.pack('f', ray["ray_angle"])
 
-                # Write to shared memory
-                shm_view = memoryview(self.shm.buf)
-                shm_view[:len(buffer)] = buffer
-                logging.debug("Depth data written to shared memory.")
-            except struct.error as e:
-                logging.error(f"Struct packing error: {e}")
-            except Exception as e:
-                logging.error(f"Error writing to shared memory: {e}")
+            # Write to shared memory
+            shm_view = memoryview(self.shm.buf)
+            shm_view[:len(buffer)] = buffer
+            logging.debug("Depth data written to shared memory.")
+        except struct.error as e:
+            logging.error(f"Struct packing error: {e}")
+        except Exception as e:
+            logging.error(f"Error writing to shared memory: {e}")
 
     def calculate_reward(self):
         TIME_STEP_PENALTY = -0.05
