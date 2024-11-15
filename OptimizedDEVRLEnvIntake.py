@@ -1,4 +1,4 @@
-# env.py
+# OptimizedDEVRLEnvIntake.py
 
 import json
 import struct
@@ -17,6 +17,7 @@ import logging
 import numpy as np
 import pygame
 import gymnasium as gym
+import torch
 from gymnasium.spaces import Box
 
 from Box2D import (
@@ -302,9 +303,15 @@ class env(gym.Env):
         self.agent_ids = ["blue_1"]
         self.agents = copy(self.possible_agents)
         self.resetted = False
-        self.depth_estimator = DepthEstimator(self.SCREEN_WIDTH, self.SCREEN_HEIGHT, fov_angle=120, ray_count=200)
+        self.total_number_of_rays  = 400 # Total rays across all cameras
+        self.depth_estimator = DepthEstimator(
+            self.SCREEN_WIDTH,
+            self.SCREEN_HEIGHT,
+            fov_angle=120,
+            ray_count=self.total_number_of_rays  // 2  # Rays per camera
+        )
         self.previous_angle_to_ball = 0
-        self.number_of_rays = 400
+
         self.end_rays = []
         self.ray_distances = []
         self.ray_angles = []
@@ -336,6 +343,16 @@ class env(gym.Env):
         self.depth_estimator_circles = []
         self.depth_estimations = []
 
+        self.num_random_robots = 3  # Set the number of random robots
+        self.random_robots = []
+        self.random_swerve_instances = []
+        self.random_robot_update_interval = 0.5  # Interval to change velocity (between 0.3 - 2 seconds)
+        self.last_update_times = [0] * self.num_random_robots  # Track update times per robot
+        self.create_random_robots = True  # Set to False to disable random robots
+        self.random_robot_square_path = True
+        self.random_robot_square_last_direction = 'right'
+        self.random_robot_square_next_directions_list = ['right', 'down', 'left', 'up']
+
         # Initialize Shared Memory
         self.shm_size = self.calculate_shared_memory_size()
         try:
@@ -365,18 +382,17 @@ class env(gym.Env):
         b2CircleShape.draw = my_draw_circle
 
     def calculate_shared_memory_size(self):
-        # Calculate the size based on the maximum expected data
         num_cameras = 2
-        num_rays = 200
+        rays_per_camera = self.total_number_of_rays // 2
         total_size = (
                 12 +  # robot_position (x, y, orientation)
-                4 +  # timestamp (float)
-                4 +  # number_of_cameras
+                4 +   # timestamp (float)
+                4 +   # number_of_cameras
                 num_cameras * (
-                        8 +  # camera_pos (x, y)
-                        8 +  # look_at_pos (x, y)
-                        4 +  # number_of_rays
-                        num_rays * 24  # per ray data: 24 bytes per ray
+                        8 +   # camera_pos (x, y)
+                        8 +   # look_at_pos (x, y)
+                        4 +   # number_of_rays
+                        rays_per_camera * 24  # per ray data
                 )
         )
         return total_size
@@ -396,7 +412,13 @@ class env(gym.Env):
         self.last_1sec_game_time = 0
         self.world = b2World(gravity=(0, 0), doSleep=True, contactListener=MyContactListener(self.scoreHolder))
         self.LIDAR = LIDAR(self.world)
-        self.number_of_rays = 100
+        self.number_of_rays = 400
+        self.depth_estimator = DepthEstimator(
+            self.SCREEN_WIDTH,
+            self.SCREEN_HEIGHT,
+            fov_angle=120,
+            ray_count=self.total_number_of_rays // 2  # Rays per camera
+        )
         self.ray_angles = []
         self.b2LIDARs = []
         self.distance_endpoints = []
@@ -405,6 +427,12 @@ class env(gym.Env):
         self.obstacles = [self.create_obstacle((4, 3), (0.5, 0.5)), self.create_obstacle((6, 2), (1, 1))]
         # Create walls
         self.walls = []
+
+        self.random_robots = []
+        self.random_swerve_instances = []
+
+        self.random_robot_square_last_direction = 'right'
+
         world_width = 16.46
         world_height = 8.23
         wall_thickness = 0.1  # 10 cm walls
@@ -453,6 +481,30 @@ class env(gym.Env):
         self.scoreHolder.set_swerves(swerves=self.swerve_instances)
         for i in range(self.starting_balls):
             self.create_random_ball()
+
+        self.num_random_robots = 3  # Set the number of random robots
+        self.random_robots = []
+        self.random_swerve_instances = []
+        self.last_update_times = [0] * self.num_random_robots  # Track last update times per robot
+
+        # Spawn random robots in random locations around the main robot area
+        for _ in range(self.num_random_robots):
+            rand_position = (
+                ball_circle_center[0] + random.uniform(-2, 2),
+                ball_circle_center[1] + random.uniform(-2, 2)
+            )
+            # Create the robot (appended automatically to self.robots) and add to our tracking list
+            self.create_new_robot(position=rand_position, angle=random.uniform(0, 2 * math.pi), team="Red")
+            random_robot = self.robots[-1]  # Get the last created robot
+
+            # Create and store a SwerveDrive instance for each random robot
+            swerve_instance = SwerveDrive(
+                random_robot, random_robot.userData['Team'], 0, (1, 1), 1,
+                velocity_factor=self.velocity_factor, angular_velocity_factor=self.angular_velocity_factor
+            )
+            self.random_swerve_instances.append(swerve_instance)
+            self.random_robots.append(random_robot)
+
         obs = np.zeros(self.observation_space.shape)
         self.reset_pygame()
         self.resetted = True
@@ -562,6 +614,46 @@ class env(gym.Env):
         camera_y = robot_position[1] + offset_y_rotated
         return camera_x, camera_y
 
+    def get_env_info(self):
+        """
+        Returns the environment information required by OkayPlan.
+        """
+        env_info = {}
+
+        # Start point (robot's current position)
+        robot = self.swerve_instances[0].get_box2d_instance()
+        env_info['start_point'] = (robot.position.x, robot.position.y)
+
+        # Target point (e.g., position of the closest ball)
+        closest_ball, distance_to_ball = self.find_closest_ball()
+        if closest_ball is not None:
+            env_info['target_point'] = (closest_ball.position.x, closest_ball.position.y)
+        else:
+            # Default or previous target point if no balls are present
+            env_info['target_point'] = (robot.position.x, robot.position.y)
+
+        # Distance to target
+        env_info['d2target'] = distance_to_ball
+
+        # Obstacles (convert boxes and circles to the required format)
+        obs_segments = []
+        for box in self.depth_estimator_boxes:
+            for i in range(len(box)):
+                seg_start = box[i]
+                seg_end = box[(i + 1) % len(box)]
+                obs_segments.append([list(seg_start), list(seg_end)])
+        # Convert to tensor of shape (M, 2, 2)
+        env_info['Obs_Segments'] = torch.tensor(obs_segments, dtype=torch.float32)
+
+        # Predicted obstacle segments (you may need to implement prediction)
+        env_info['Flat_pdct_segments'] = torch.tensor([], dtype=torch.float32)
+
+        # Arrive and Collide (you can define conditions based on your environment)
+        env_info['Arrive'] = self.has_picked_up_ball(closest_ball)
+        env_info['Collide'] = False  # You can set this based on collision detection
+
+        return env_info
+
     def step(self, actions, testing_mode=False):
         self.game_time = self.teleop_time - (time.time() - self.current_time)
         events = pygame.event.get()
@@ -597,6 +689,51 @@ class env(gym.Env):
                 if event.key == pygame.K_RIGHT:
                     self.RIGHT = 0
         swerve = self.swerve_instances[0]
+
+        if self.create_random_robots:
+            # Update random robots' movements at specified intervals
+            for i, swerve_instance in enumerate(self.random_swerve_instances):
+                current_time = time.time()
+                if current_time - self.last_update_times[i] >= random.uniform(0.5, 0.5):
+                    # Set random linear and angular velocities
+                    if self.random_robot_square_path:
+                        # based on last direction, set the next direction base on self.random_robot_square_next_directions_list
+                        if self.random_robot_square_last_direction == 'right':
+                            random_x_velocity = 0
+                            random_y_velocity = -0.1
+                            random_angular_velocity = 0
+                            self.random_robot_square_last_direction = 'down'
+                        elif self.random_robot_square_last_direction == 'down':
+                            random_x_velocity = -0.1
+                            random_y_velocity = 0
+                            random_angular_velocity = 0
+                            self.random_robot_square_last_direction = 'left'
+                        elif self.random_robot_square_last_direction == 'left':
+                            random_x_velocity = 0
+                            random_y_velocity = 0.1
+                            random_angular_velocity = 0
+                            self.random_robot_square_last_direction = 'up'
+                        else:
+                            random_x_velocity = 0.1
+                            random_y_velocity = 0
+                            random_angular_velocity = 0
+                            self.random_robot_square_last_direction = 'right'
+                    else:
+                        random_x_velocity = random.uniform(-0.1, 0.1)
+                        random_y_velocity = random.uniform(-0.1, 0.1)
+                        random_angular_velocity = random.uniform(-0.1, 0.1)
+
+                    # Update swerve instance velocity and angular velocity
+                    swerve_instance.set_velocity(
+                        (random_x_velocity * self.velocity_factor, random_y_velocity * self.velocity_factor))
+                    swerve_instance.set_angular_velocity(random_angular_velocity * self.angular_velocity_factor)
+
+                    # Update last update time
+                    self.last_update_times[i] = current_time
+
+                # Apply swerve updates
+                swerve_instance.update()
+
         if testing_mode:
             swerve.set_velocity((self.D - self.A, self.W - self.S))
             swerve.set_angular_velocity(self.LEFT - self.RIGHT)
@@ -641,6 +778,12 @@ class env(gym.Env):
         for wall in self.walls:
             vertices_box2d = [wall.transform * v for v in wall.fixtures[0].shape.vertices]
             boxes.append(vertices_box2d)
+
+        # Include random robots
+        for random_robot in self.random_robots:
+            robot_vertices = [random_robot.transform * v for v in random_robot.fixtures[0].shape.vertices]
+            boxes.append(robot_vertices)
+
         circles = []
         for ball in self.balls:
             position = (ball.position.x, ball.position.y)
@@ -713,13 +856,12 @@ class env(gym.Env):
 
     def serialize_and_write_shared_memory(self, depth_data):
         try:
-            logging.debug(f"Depth data written to shared memory at time {depth_data['timestamp']}")
+            # logging.debug(f"Depth data written to shared memory at time {depth_data['timestamp']}")
 
             buffer = bytearray()
 
             # Robot Position (x, y)
             buffer += struct.pack('ff', depth_data["robot_position"]["x"], depth_data["robot_position"]["y"])
-
             # Robot Orientation (in radians)
             buffer += struct.pack('f', math.radians(depth_data["robot_orientation"]))
 
@@ -752,7 +894,7 @@ class env(gym.Env):
             # Write to shared memory
             shm_view = memoryview(self.shm.buf)
             shm_view[:len(buffer)] = buffer
-            logging.debug("Depth data written to shared memory.")
+            # logging.debug("Depth data written to shared memory.")
         except struct.error as e:
             logging.error(f"Struct packing error: {e}")
         except Exception as e:
@@ -809,6 +951,12 @@ class env(gym.Env):
             swerve = self.swerve_instances[self.agents.index(agent)]
             for fixture in swerve.get_box2d_instance().fixtures:
                 fixture.shape.draw(swerve.get_box2d_instance(), fixture)
+        # Render random robots
+        if self.create_random_robots:
+            for swerve_instance in self.random_swerve_instances:
+                for fixture in swerve_instance.get_box2d_instance().fixtures:
+                    fixture.shape.draw(swerve_instance.get_box2d_instance(), fixture)
+
         # Draw walls
         for wall in self.walls:
             for fixture in wall.fixtures:
@@ -822,48 +970,6 @@ class env(gym.Env):
 
         pygame.display.flip()
         self.clock.tick(self.TARGET_FPS)
-
-    def serialize_and_write_shared_memory(self, depth_data):
-        try:
-            buffer = bytearray()
-
-            # Robot Position
-            buffer += struct.pack('ff', depth_data["robot_position"]["x"], depth_data["robot_position"]["y"])
-            # Robot Orientation
-            buffer += struct.pack('f', depth_data["robot_orientation"])
-            # Timestamp
-            buffer += struct.pack('f', depth_data["timestamp"])
-            # Number of Cameras
-            num_cameras = len(depth_data["depth_estimates"])
-            buffer += struct.pack('i', num_cameras)
-
-            for cam in depth_data["depth_estimates"]:
-                # Camera Position
-                buffer += struct.pack('ff', cam["camera_pos"][0], cam["camera_pos"][1])
-                # Look At Position
-                buffer += struct.pack('ff', cam["look_at_pos"][0], cam["look_at_pos"][1])
-                # Number of Rays
-                num_rays = len(cam["rays"])
-                buffer += struct.pack('i', num_rays)
-                for ray in cam["rays"]:
-                    # Intersection x, y
-                    inter_x, inter_y = ray["intersection"] if ray["intersection"] else (float('inf'), float('inf'))
-                    buffer += struct.pack('ff', inter_x, inter_y)
-                    # Distance
-                    buffer += struct.pack('f', ray["distance"])
-                    # Object ID
-                    buffer += struct.pack('i', ray["object_id"] if ray["object_id"] is not None else -1)
-                    # Ray Angle
-                    buffer += struct.pack('f', ray["ray_angle"])
-
-            # Write to shared memory
-            shm_view = memoryview(self.shm.buf)
-            shm_view[:len(buffer)] = buffer
-            logging.debug("Depth data written to shared memory.")
-        except struct.error as e:
-            logging.error(f"Struct packing error: {e}")
-        except Exception as e:
-            logging.error(f"Error writing to shared memory: {e}")
 
     def run_depth_estimation(self, camera_positions, look_at_positions, boxes, circles):
         all_ray_intersections = []

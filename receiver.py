@@ -1,190 +1,146 @@
+# receiver.py
+
 import logging
 import tkinter as tk
-import math
 import struct
-import time
+import math
 from multiprocessing import shared_memory
 import sys
 
-class SharedMemoryVisualization:
-    def __init__(self, parent, shm_output_name='slam_output', shm_output_size=16060, scale=200, canvas_width=1000, canvas_height=500):
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+class RobotPositionVisualization:
+    def __init__(self, parent, shm_name, shm_size, title, canvas_width=824, canvas_height=412, world_width=16.46,
+                 world_height=8.23):
         """
-        Initializes the visualization with modified scale and initial robot centering.
+        Initializes a visualization window for either the actual or SLAM position.
+
+        Parameters:
+        - shm_name: Name of the shared memory segment to read data from.
+        - title: Title of the visualization (e.g., "Actual Position" or "SLAM Position").
         """
-        self.parent = parent
-        self.shm_output_name = shm_output_name
-        self.shm_output_size = shm_output_size
-        self.scale = scale  # Increased to 200 for closer zoom
+        self.shm_name = shm_name
+        self.shm_size = shm_size
+        self.world_width = world_width
+        self.world_height = world_height
         self.canvas_width = canvas_width
         self.canvas_height = canvas_height
-        self.origin_x = self.canvas_width // 2
-        self.origin_y = self.canvas_height // 2
-
-        # Set up world center for environment
-        self.world_center_x = 8.23
-        self.world_center_y = 4.115
+        self.scale_x = canvas_width / world_width
+        self.scale_y = canvas_height / world_height
 
         # Logger setup
-        self.logger = logging.getLogger('SharedMemoryVisualization')
-        self.logger.setLevel(logging.DEBUG)
+        self.logger = logging.getLogger(title)
         handler = logging.StreamHandler(sys.stdout)
         handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-        if not self.logger.handlers:
-            self.logger.addHandler(handler)
+        self.logger.addHandler(handler)
 
-        # Initialize Canvas
-        self.canvas = tk.Canvas(parent, width=self.canvas_width, height=self.canvas_height, bg='white')
+        # Tkinter canvas setup
+        self.canvas = tk.Canvas(parent, width=canvas_width, height=canvas_height, bg='white')
         self.canvas.pack()
 
-        # Draw Grid
-        self.draw_grid()
+        # Robot representation
+        self.robot_radius = 10
+        self.robot = self.canvas.create_oval(0, 0, 0, 0, fill='blue')
+        self.orientation_line = self.canvas.create_line(0, 0, 0, 0, fill='red', width=2)
 
-        # Initialize robot representation
-        self.robot_radius = 6  # Smaller radius for centered look
-        self.robot = self.canvas.create_oval(
-            self.origin_x - self.robot_radius,
-            self.origin_y - self.robot_radius,
-            self.origin_x + self.robot_radius,
-            self.origin_y + self.robot_radius,
-            fill='blue'
-        )
-        self.orientation_line = self.canvas.create_line(
-            self.origin_x, self.origin_y,
-            self.origin_x, self.origin_y - 20,
-            fill='red', width=2
-        )
-
-        # Map graphics storage and timestamp
-        self.map_graphics = []
-        self.timestamp_label = tk.Label(parent, text="Timestamp: N/A")
-        self.timestamp_label.pack(pady=5)
+        # Position and orientation display
+        self.position_label = tk.Label(parent, text="Position: (x, y), Orientation: θ°")
+        self.position_label.pack()
 
         # Connect to shared memory
         try:
-            self.shm_output = shared_memory.SharedMemory(name=self.shm_output_name)
-            self.logger.info(f"Connected to shared memory: {self.shm_output.name}")
+            self.shm = shared_memory.SharedMemory(name=self.shm_name)
+            self.logger.info(f"Connected to shared memory: {self.shm_name}")
         except FileNotFoundError:
-            self.logger.error(f"Shared memory '{self.shm_output_name}' not found.")
-            self.shm_output = None
+            self.logger.error(f"Shared memory '{self.shm_name}' not found.")
+            self.shm = None
 
         # Start update loop
         self.update_visualization()
-
-    def draw_grid(self):
-        grid_spacing = 1 * self.scale  # 1 meter grid with the new scale
-        for x in range(0, self.canvas_width, grid_spacing):
-            self.canvas.create_line(x, 0, x, self.canvas_height, fill='lightgray')
-        for y in range(0, self.canvas_height, grid_spacing):
-            self.canvas.create_line(0, y, self.canvas_width, y, fill='lightgray')
 
     def world_to_canvas(self, x, y):
         """
         Convert world coordinates to canvas coordinates.
         """
-        canvas_x = self.origin_x + (x - self.world_center_x) * self.scale
-        canvas_y = self.origin_y - (y - self.world_center_y) * self.scale
-        return (canvas_x, canvas_y)
+        canvas_x = (x / self.world_width) * self.canvas_width
+        canvas_y = self.canvas_height - ((y / self.world_height) * self.canvas_height)
+        return canvas_x, canvas_y
 
     def update_visualization(self):
+        """
+        Reads data from shared memory and updates the robot's position on the canvas.
+        """
         try:
-            if self.shm_output:
-                slam_pose, slam_map, slam_timestamp = self.read_slam_output()
+            if self.shm:
+                buffer = self.shm.buf[:self.shm_size]
+                robot_x, robot_y, robot_theta_deg = struct.unpack_from('fff', buffer, 0)
 
-                if slam_pose and slam_map is not None:
-                    canvas_x, canvas_y = self.world_to_canvas(slam_pose[0], slam_pose[1])
+                # Convert to canvas coordinates
+                canvas_x, canvas_y = self.world_to_canvas(robot_x, robot_y)
 
-                    # Update robot position
-                    self.canvas.coords(
-                        self.robot,
-                        canvas_x - self.robot_radius,
-                        canvas_y - self.robot_radius,
-                        canvas_x + self.robot_radius,
-                        canvas_y + self.robot_radius
-                    )
-                    orientation_rad = math.radians(slam_pose[2])
-                    line_length = 20
-                    end_x = canvas_x + line_length * math.cos(orientation_rad)
-                    end_y = canvas_y - line_length * math.sin(orientation_rad)
-                    self.canvas.coords(self.orientation_line, canvas_x, canvas_y, end_x, end_y)
+                # Update robot position
+                self.canvas.coords(
+                    self.robot,
+                    canvas_x - self.robot_radius,
+                    canvas_y - self.robot_radius,
+                    canvas_x + self.robot_radius,
+                    canvas_y + self.robot_radius
+                )
 
-                    # Update timestamp
-                    formatted_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(slam_timestamp))
-                    self.timestamp_label.config(text=f"Timestamp: {formatted_time}")
+                # Update orientation line
+                orientation_rad = math.radians(robot_theta_deg)
+                end_x = canvas_x + 20 * math.cos(orientation_rad)
+                end_y = canvas_y - 20 * math.sin(orientation_rad)
+                self.canvas.coords(self.orientation_line, canvas_x, canvas_y, end_x, end_y)
 
-                    # Update SLAM map
-                    self.update_map(slam_map)
-                else:
-                    self.logger.warning("Invalid SLAM data received.")
+                # Update position and orientation label
+                self.position_label.config(
+                    text=f"Position: ({robot_x:.2f}, {robot_y:.2f}), Orientation: {robot_theta_deg:.2f}°")
+
+                # self.logger.debug(f"Position: ({robot_x}, {robot_y}), Orientation: {robot_theta_deg} degrees")
+
         except Exception as e:
             self.logger.error(f"Exception in update_visualization: {e}")
         finally:
-            self.parent.after(100, self.update_visualization)
-
-    def read_slam_output(self):
-        try:
-            buffer = self.shm_output.buf[:self.shm_output_size]
-            offset = 0
-            robot_x, robot_y, robot_theta_deg = struct.unpack_from('fff', buffer, offset)
-            offset += struct.calcsize('fff')
-            timestamp, = struct.unpack_from('f', buffer, offset)
-            offset += struct.calcsize('f')
-            num_landmarks, = struct.unpack_from('i', buffer, offset)
-            offset += struct.calcsize('i')
-
-            landmarks = []
-            for _ in range(num_landmarks):
-                lx, ly = struct.unpack_from('ff', buffer, offset)
-                offset += struct.calcsize('ff')
-                landmarks.append((lx, ly))
-
-            return (robot_x, robot_y, robot_theta_deg), landmarks, timestamp
-        except struct.error as e:
-            self.logger.error(f"Struct unpacking error: {e}")
-            return None, None, None
-
-    def update_map(self, landmarks):
-        for item in self.map_graphics:
-            self.canvas.delete(item)
-        self.map_graphics = []
-        for lx, ly in landmarks:
-            canvas_x, canvas_y = self.world_to_canvas(lx, ly)
-            if 0 <= canvas_x <= self.canvas_width and 0 <= canvas_y <= self.canvas_height:
-                point = self.canvas.create_oval(
-                    canvas_x - 1, canvas_y - 1,  # Smaller landmarks
-                    canvas_x + 1, canvas_y + 1,
-                    fill='green'
-                )
-                self.map_graphics.append(point)
+            # Schedule next update
+            self.canvas.after(100, self.update_visualization)
 
     def close(self):
-        if self.shm_output:
-            self.shm_output.close()
-            self.logger.info("Shared memory closed.")
+        """
+        Close the shared memory connection.
+        """
+        if self.shm:
+            self.shm.close()
+            self.logger.info(f"Closed shared memory for {self.shm_name}")
 
-def visualization_main(shm_output_name='slam_output', shm_output_size=16060):
+
+def visualization_main(env_shm_name='my_shared_memory', slam_shm_name='slam_output', shm_size=16060):
     root = tk.Tk()
-    root.title("SLAM Visualization")
+    root.title("Robot Position Visualization")
 
-    app = SharedMemoryVisualization(
-        parent=root,
-        shm_output_name=shm_output_name,
-        shm_output_size=shm_output_size
-    )
+    # Create two frames for the two visuals
+    env_frame = tk.Frame(root)
+    env_frame.pack(side=tk.LEFT)
+    slam_frame = tk.Frame(root)
+    slam_frame.pack(side=tk.RIGHT)
+
+    # Instantiate two visualizations: one for actual and one for SLAM-estimated positions
+    env_visualization = RobotPositionVisualization(env_frame, shm_name=env_shm_name, shm_size=shm_size,
+                                                   title="Actual Position")
+    slam_visualization = RobotPositionVisualization(slam_frame, shm_name=slam_shm_name, shm_size=shm_size,
+                                                    title="SLAM Position")
+
     try:
         root.mainloop()
     except KeyboardInterrupt:
         logging.info("Visualization interrupted.")
     finally:
-        app.close()
+        env_visualization.close()
+        slam_visualization.close()
         root.destroy()
-        logging.info("Visualization terminated.")
+        logging.info("Visualization ended.")
+
 
 if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(description='SLAM Visualization Receiver.')
-    parser.add_argument('--shm_output_name', type=str, default='slam_output', help='Name of output shared memory.')
-    parser.add_argument('--shm_output_size', type=int, default=16060, help='Size of output shared memory in bytes.')
-    args = parser.parse_args()
-
-    visualization_main(shm_output_name=args.shm_output_name, shm_output_size=args.shm_output_size)
+    visualization_main()

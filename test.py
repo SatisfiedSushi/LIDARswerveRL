@@ -33,7 +33,7 @@ def run_slam_module(lock, shm_input_name, shm_input_size, shm_output_name, shm_o
     slam_module.run()
 
 def run_visualization(shm_output_name, shm_output_size):
-    visualization_main(shm_output_name=shm_output_name, shm_output_size=shm_output_size)
+    visualization_main(env_shm_name='my_shared_memory', slam_shm_name=shm_output_name, shm_size=16060)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -65,6 +65,7 @@ if __name__ == "__main__":
     time.sleep(1)
 
     # Start the Visualization process
+    print("Starting visualization process")
     visualization_process = Process(target=run_visualization, args=("slam_output", shm_output_size))
     visualization_process.start()
 

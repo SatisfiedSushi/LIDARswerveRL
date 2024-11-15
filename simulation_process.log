@@ -1,0 +1,5 @@
+2024-11-15 00:28:34,597 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
+2024-11-15 00:28:34,744 - ERROR - An unexpected error occurred in simulation process: [WinError 2] The system cannot find the file specified
+2024-11-15 00:28:34,789 - INFO - Shared memory closed and unlinked.
+2024-11-15 00:28:34,789 - INFO - Simulation process terminated gracefully.
+2024-11-15 00:32:06,593 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
