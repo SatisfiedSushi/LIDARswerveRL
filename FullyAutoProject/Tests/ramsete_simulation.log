@@ -1,0 +1,798 @@
+2024-11-16 11:05:23,684 - DEBUG - Initialized Environment with pose: (x=0.0, y=0.0, theta=0.00°)
+2024-11-16 11:05:23,684 - DEBUG - Initialized RamseteController with beta=2.0, zeta=0.7
+2024-11-16 11:05:23,684 - INFO - Initialized Environment and Ramsete Controller.
+2024-11-16 11:05:23,684 - DEBUG - Straight Line - Point 0: (x=0.00, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.00s
+2024-11-16 11:05:23,684 - DEBUG - Straight Line - Point 1: (x=0.05, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.05s
+2024-11-16 11:05:23,684 - DEBUG - Straight Line - Point 2: (x=0.10, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.10s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 3: (x=0.15, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.15s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 4: (x=0.20, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.20s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 5: (x=0.25, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.25s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 6: (x=0.30, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.30s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 7: (x=0.35, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.35s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 8: (x=0.40, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.40s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 9: (x=0.45, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.45s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 10: (x=0.50, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.50s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 11: (x=0.55, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.55s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 12: (x=0.60, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.60s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 13: (x=0.65, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.65s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 14: (x=0.70, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.70s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 15: (x=0.75, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.75s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 16: (x=0.80, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.80s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 17: (x=0.85, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.85s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 18: (x=0.90, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.90s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 19: (x=0.95, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=0.95s
+2024-11-16 11:05:23,685 - DEBUG - Straight Line - Point 20: (x=1.00, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.00s
+2024-11-16 11:05:23,686 - DEBUG - Straight Line - Point 21: (x=1.05, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.05s
+2024-11-16 11:05:23,686 - DEBUG - Straight Line - Point 22: (x=1.10, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.10s
+2024-11-16 11:05:23,686 - DEBUG - Straight Line - Point 23: (x=1.15, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.15s
+2024-11-16 11:05:23,686 - DEBUG - Straight Line - Point 24: (x=1.20, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.20s
+2024-11-16 11:05:23,686 - DEBUG - Straight Line - Point 25: (x=1.25, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.25s
+2024-11-16 11:05:23,686 - DEBUG - Straight Line - Point 26: (x=1.30, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.30s
+2024-11-16 11:05:23,686 - DEBUG - Straight Line - Point 27: (x=1.35, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.35s
+2024-11-16 11:05:23,686 - DEBUG - Straight Line - Point 28: (x=1.40, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.40s
+2024-11-16 11:05:23,686 - DEBUG - Straight Line - Point 29: (x=1.45, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.45s
+2024-11-16 11:05:23,695 - DEBUG - Straight Line - Point 30: (x=1.50, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.50s
+2024-11-16 11:05:23,695 - DEBUG - Straight Line - Point 31: (x=1.55, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.55s
+2024-11-16 11:05:23,695 - DEBUG - Straight Line - Point 32: (x=1.60, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.60s
+2024-11-16 11:05:23,695 - DEBUG - Straight Line - Point 33: (x=1.65, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.65s
+2024-11-16 11:05:23,695 - DEBUG - Straight Line - Point 34: (x=1.70, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.70s
+2024-11-16 11:05:23,695 - DEBUG - Straight Line - Point 35: (x=1.75, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.75s
+2024-11-16 11:05:23,695 - DEBUG - Straight Line - Point 36: (x=1.80, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.80s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 37: (x=1.85, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.85s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 38: (x=1.90, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.90s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 39: (x=1.95, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=1.95s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 40: (x=2.00, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.00s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 41: (x=2.05, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.05s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 42: (x=2.10, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.10s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 43: (x=2.15, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.15s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 44: (x=2.20, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.20s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 45: (x=2.25, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.25s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 46: (x=2.30, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.30s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 47: (x=2.35, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.35s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 48: (x=2.40, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.40s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 49: (x=2.45, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.45s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 50: (x=2.50, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.50s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 51: (x=2.55, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.55s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 52: (x=2.60, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.60s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 53: (x=2.65, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.65s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 54: (x=2.70, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.70s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 55: (x=2.75, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.75s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 56: (x=2.80, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.80s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 57: (x=2.85, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.85s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 58: (x=2.90, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.90s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 59: (x=2.95, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=2.95s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 60: (x=3.00, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.00s
+2024-11-16 11:05:23,696 - DEBUG - Straight Line - Point 61: (x=3.05, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.05s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 62: (x=3.10, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.10s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 63: (x=3.15, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.15s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 64: (x=3.20, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.20s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 65: (x=3.25, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.25s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 66: (x=3.30, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.30s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 67: (x=3.35, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.35s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 68: (x=3.40, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.40s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 69: (x=3.45, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.45s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 70: (x=3.50, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.50s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 71: (x=3.55, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.55s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 72: (x=3.60, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.60s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 73: (x=3.65, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.65s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 74: (x=3.70, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.70s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 75: (x=3.75, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.75s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 76: (x=3.80, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.80s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 77: (x=3.85, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.85s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 78: (x=3.90, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.90s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 79: (x=3.95, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=3.95s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 80: (x=4.00, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.00s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 81: (x=4.05, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.05s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 82: (x=4.10, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.10s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 83: (x=4.15, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.15s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 84: (x=4.20, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.20s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 85: (x=4.25, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.25s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 86: (x=4.30, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.30s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 87: (x=4.35, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.35s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 88: (x=4.40, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.40s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 89: (x=4.45, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.45s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 90: (x=4.50, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.50s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 91: (x=4.55, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.55s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 92: (x=4.60, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.60s
+2024-11-16 11:05:23,711 - DEBUG - Straight Line - Point 93: (x=4.65, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.65s
+2024-11-16 11:05:23,726 - DEBUG - Straight Line - Point 94: (x=4.70, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.70s
+2024-11-16 11:05:23,726 - DEBUG - Straight Line - Point 95: (x=4.75, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.75s
+2024-11-16 11:05:23,726 - DEBUG - Straight Line - Point 96: (x=4.80, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.80s
+2024-11-16 11:05:23,726 - DEBUG - Straight Line - Point 97: (x=4.85, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.85s
+2024-11-16 11:05:23,726 - DEBUG - Straight Line - Point 98: (x=4.90, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.90s
+2024-11-16 11:05:23,726 - DEBUG - Straight Line - Point 99: (x=4.95, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=4.95s
+2024-11-16 11:05:23,726 - DEBUG - Straight Line - Point 100: (x=5.00, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s, t=5.00s
+2024-11-16 11:05:23,726 - INFO - Straight line trajectory created with 101 points.
+2024-11-16 11:05:23,726 - DEBUG - Trajectory initialized with 101 points.
+2024-11-16 11:05:23,726 - DEBUG - Circular Arc - Point 0: (x=5.00, y=0.00, theta=-90.00°), v=3.14 m/s, omega=36.00°/s, t=0.00s
+2024-11-16 11:05:23,726 - DEBUG - Circular Arc - Point 1: (x=5.16, y=0.00, theta=-88.20°), v=3.14 m/s, omega=36.00°/s, t=0.05s
+2024-11-16 11:05:23,726 - DEBUG - Circular Arc - Point 2: (x=5.31, y=0.01, theta=-86.40°), v=3.14 m/s, omega=36.00°/s, t=0.10s
+2024-11-16 11:05:23,726 - DEBUG - Circular Arc - Point 3: (x=5.47, y=0.02, theta=-84.60°), v=3.14 m/s, omega=36.00°/s, t=0.15s
+2024-11-16 11:05:23,726 - DEBUG - Circular Arc - Point 4: (x=5.63, y=0.04, theta=-82.80°), v=3.14 m/s, omega=36.00°/s, t=0.20s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 5: (x=5.78, y=0.06, theta=-81.00°), v=3.14 m/s, omega=36.00°/s, t=0.25s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 6: (x=5.94, y=0.09, theta=-79.20°), v=3.14 m/s, omega=36.00°/s, t=0.30s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 7: (x=6.09, y=0.12, theta=-77.40°), v=3.14 m/s, omega=36.00°/s, t=0.35s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 8: (x=6.24, y=0.16, theta=-75.60°), v=3.14 m/s, omega=36.00°/s, t=0.40s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 9: (x=6.39, y=0.20, theta=-73.80°), v=3.14 m/s, omega=36.00°/s, t=0.45s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 10: (x=6.55, y=0.24, theta=-72.00°), v=3.14 m/s, omega=36.00°/s, t=0.50s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 11: (x=6.69, y=0.30, theta=-70.20°), v=3.14 m/s, omega=36.00°/s, t=0.55s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 12: (x=6.84, y=0.35, theta=-68.40°), v=3.14 m/s, omega=36.00°/s, t=0.60s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 13: (x=6.99, y=0.41, theta=-66.60°), v=3.14 m/s, omega=36.00°/s, t=0.65s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 14: (x=7.13, y=0.48, theta=-64.80°), v=3.14 m/s, omega=36.00°/s, t=0.70s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 15: (x=7.27, y=0.54, theta=-63.00°), v=3.14 m/s, omega=36.00°/s, t=0.75s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 16: (x=7.41, y=0.62, theta=-61.20°), v=3.14 m/s, omega=36.00°/s, t=0.80s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 17: (x=7.55, y=0.70, theta=-59.40°), v=3.14 m/s, omega=36.00°/s, t=0.85s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 18: (x=7.68, y=0.78, theta=-57.60°), v=3.14 m/s, omega=36.00°/s, t=0.90s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 19: (x=7.81, y=0.86, theta=-55.80°), v=3.14 m/s, omega=36.00°/s, t=0.95s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 20: (x=7.94, y=0.95, theta=-54.00°), v=3.14 m/s, omega=36.00°/s, t=1.00s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 21: (x=8.06, y=1.05, theta=-52.20°), v=3.14 m/s, omega=36.00°/s, t=1.05s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 22: (x=8.19, y=1.15, theta=-50.40°), v=3.14 m/s, omega=36.00°/s, t=1.10s
+2024-11-16 11:05:23,727 - DEBUG - Circular Arc - Point 23: (x=8.31, y=1.25, theta=-48.60°), v=3.14 m/s, omega=36.00°/s, t=1.15s
+2024-11-16 11:05:23,742 - DEBUG - Circular Arc - Point 24: (x=8.42, y=1.36, theta=-46.80°), v=3.14 m/s, omega=36.00°/s, t=1.20s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 25: (x=8.54, y=1.46, theta=-45.00°), v=3.14 m/s, omega=36.00°/s, t=1.25s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 26: (x=8.64, y=1.58, theta=-43.20°), v=3.14 m/s, omega=36.00°/s, t=1.30s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 27: (x=8.75, y=1.69, theta=-41.40°), v=3.14 m/s, omega=36.00°/s, t=1.35s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 28: (x=8.85, y=1.81, theta=-39.60°), v=3.14 m/s, omega=36.00°/s, t=1.40s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 29: (x=8.95, y=1.94, theta=-37.80°), v=3.14 m/s, omega=36.00°/s, t=1.45s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 30: (x=9.05, y=2.06, theta=-36.00°), v=3.14 m/s, omega=36.00°/s, t=1.50s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 31: (x=9.14, y=2.19, theta=-34.20°), v=3.14 m/s, omega=36.00°/s, t=1.55s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 32: (x=9.22, y=2.32, theta=-32.40°), v=3.14 m/s, omega=36.00°/s, t=1.60s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 33: (x=9.30, y=2.45, theta=-30.60°), v=3.14 m/s, omega=36.00°/s, t=1.65s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 34: (x=9.38, y=2.59, theta=-28.80°), v=3.14 m/s, omega=36.00°/s, t=1.70s
+2024-11-16 11:05:23,743 - DEBUG - Circular Arc - Point 35: (x=9.46, y=2.73, theta=-27.00°), v=3.14 m/s, omega=36.00°/s, t=1.75s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 36: (x=9.52, y=2.87, theta=-25.20°), v=3.14 m/s, omega=36.00°/s, t=1.80s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 37: (x=9.59, y=3.01, theta=-23.40°), v=3.14 m/s, omega=36.00°/s, t=1.85s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 38: (x=9.65, y=3.16, theta=-21.60°), v=3.14 m/s, omega=36.00°/s, t=1.90s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 39: (x=9.70, y=3.31, theta=-19.80°), v=3.14 m/s, omega=36.00°/s, t=1.95s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 40: (x=9.76, y=3.45, theta=-18.00°), v=3.14 m/s, omega=36.00°/s, t=2.00s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 41: (x=9.80, y=3.61, theta=-16.20°), v=3.14 m/s, omega=36.00°/s, t=2.05s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 42: (x=9.84, y=3.76, theta=-14.40°), v=3.14 m/s, omega=36.00°/s, t=2.10s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 43: (x=9.88, y=3.91, theta=-12.60°), v=3.14 m/s, omega=36.00°/s, t=2.15s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 44: (x=9.91, y=4.06, theta=-10.80°), v=3.14 m/s, omega=36.00°/s, t=2.20s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 45: (x=9.94, y=4.22, theta=-9.00°), v=3.14 m/s, omega=36.00°/s, t=2.25s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 46: (x=9.96, y=4.37, theta=-7.20°), v=3.14 m/s, omega=36.00°/s, t=2.30s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 47: (x=9.98, y=4.53, theta=-5.40°), v=3.14 m/s, omega=36.00°/s, t=2.35s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 48: (x=9.99, y=4.69, theta=-3.60°), v=3.14 m/s, omega=36.00°/s, t=2.40s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 49: (x=10.00, y=4.84, theta=-1.80°), v=3.14 m/s, omega=36.00°/s, t=2.45s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 50: (x=10.00, y=5.00, theta=0.00°), v=3.14 m/s, omega=36.00°/s, t=2.50s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 51: (x=10.00, y=5.16, theta=1.80°), v=3.14 m/s, omega=36.00°/s, t=2.55s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 52: (x=9.99, y=5.31, theta=3.60°), v=3.14 m/s, omega=36.00°/s, t=2.60s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 53: (x=9.98, y=5.47, theta=5.40°), v=3.14 m/s, omega=36.00°/s, t=2.65s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 54: (x=9.96, y=5.63, theta=7.20°), v=3.14 m/s, omega=36.00°/s, t=2.70s
+2024-11-16 11:05:23,744 - DEBUG - Circular Arc - Point 55: (x=9.94, y=5.78, theta=9.00°), v=3.14 m/s, omega=36.00°/s, t=2.75s
+2024-11-16 11:05:23,758 - DEBUG - Circular Arc - Point 56: (x=9.91, y=5.94, theta=10.80°), v=3.14 m/s, omega=36.00°/s, t=2.80s
+2024-11-16 11:05:23,758 - DEBUG - Circular Arc - Point 57: (x=9.88, y=6.09, theta=12.60°), v=3.14 m/s, omega=36.00°/s, t=2.85s
+2024-11-16 11:05:23,758 - DEBUG - Circular Arc - Point 58: (x=9.84, y=6.24, theta=14.40°), v=3.14 m/s, omega=36.00°/s, t=2.90s
+2024-11-16 11:05:23,758 - DEBUG - Circular Arc - Point 59: (x=9.80, y=6.39, theta=16.20°), v=3.14 m/s, omega=36.00°/s, t=2.95s
+2024-11-16 11:05:23,758 - DEBUG - Circular Arc - Point 60: (x=9.76, y=6.55, theta=18.00°), v=3.14 m/s, omega=36.00°/s, t=3.00s
+2024-11-16 11:05:23,758 - DEBUG - Circular Arc - Point 61: (x=9.70, y=6.69, theta=19.80°), v=3.14 m/s, omega=36.00°/s, t=3.05s
+2024-11-16 11:05:23,758 - DEBUG - Circular Arc - Point 62: (x=9.65, y=6.84, theta=21.60°), v=3.14 m/s, omega=36.00°/s, t=3.10s
+2024-11-16 11:05:23,758 - DEBUG - Circular Arc - Point 63: (x=9.59, y=6.99, theta=23.40°), v=3.14 m/s, omega=36.00°/s, t=3.15s
+2024-11-16 11:05:23,758 - DEBUG - Circular Arc - Point 64: (x=9.52, y=7.13, theta=25.20°), v=3.14 m/s, omega=36.00°/s, t=3.20s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 65: (x=9.46, y=7.27, theta=27.00°), v=3.14 m/s, omega=36.00°/s, t=3.25s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 66: (x=9.38, y=7.41, theta=28.80°), v=3.14 m/s, omega=36.00°/s, t=3.30s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 67: (x=9.30, y=7.55, theta=30.60°), v=3.14 m/s, omega=36.00°/s, t=3.35s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 68: (x=9.22, y=7.68, theta=32.40°), v=3.14 m/s, omega=36.00°/s, t=3.40s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 69: (x=9.14, y=7.81, theta=34.20°), v=3.14 m/s, omega=36.00°/s, t=3.45s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 70: (x=9.05, y=7.94, theta=36.00°), v=3.14 m/s, omega=36.00°/s, t=3.50s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 71: (x=8.95, y=8.06, theta=37.80°), v=3.14 m/s, omega=36.00°/s, t=3.55s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 72: (x=8.85, y=8.19, theta=39.60°), v=3.14 m/s, omega=36.00°/s, t=3.60s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 73: (x=8.75, y=8.31, theta=41.40°), v=3.14 m/s, omega=36.00°/s, t=3.65s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 74: (x=8.64, y=8.42, theta=43.20°), v=3.14 m/s, omega=36.00°/s, t=3.70s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 75: (x=8.54, y=8.54, theta=45.00°), v=3.14 m/s, omega=36.00°/s, t=3.75s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 76: (x=8.42, y=8.64, theta=46.80°), v=3.14 m/s, omega=36.00°/s, t=3.80s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 77: (x=8.31, y=8.75, theta=48.60°), v=3.14 m/s, omega=36.00°/s, t=3.85s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 78: (x=8.19, y=8.85, theta=50.40°), v=3.14 m/s, omega=36.00°/s, t=3.90s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 79: (x=8.06, y=8.95, theta=52.20°), v=3.14 m/s, omega=36.00°/s, t=3.95s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 80: (x=7.94, y=9.05, theta=54.00°), v=3.14 m/s, omega=36.00°/s, t=4.00s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 81: (x=7.81, y=9.14, theta=55.80°), v=3.14 m/s, omega=36.00°/s, t=4.05s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 82: (x=7.68, y=9.22, theta=57.60°), v=3.14 m/s, omega=36.00°/s, t=4.10s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 83: (x=7.55, y=9.30, theta=59.40°), v=3.14 m/s, omega=36.00°/s, t=4.15s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 84: (x=7.41, y=9.38, theta=61.20°), v=3.14 m/s, omega=36.00°/s, t=4.20s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 85: (x=7.27, y=9.46, theta=63.00°), v=3.14 m/s, omega=36.00°/s, t=4.25s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 86: (x=7.13, y=9.52, theta=64.80°), v=3.14 m/s, omega=36.00°/s, t=4.30s
+2024-11-16 11:05:23,759 - DEBUG - Circular Arc - Point 87: (x=6.99, y=9.59, theta=66.60°), v=3.14 m/s, omega=36.00°/s, t=4.35s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 88: (x=6.84, y=9.65, theta=68.40°), v=3.14 m/s, omega=36.00°/s, t=4.40s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 89: (x=6.69, y=9.70, theta=70.20°), v=3.14 m/s, omega=36.00°/s, t=4.45s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 90: (x=6.55, y=9.76, theta=72.00°), v=3.14 m/s, omega=36.00°/s, t=4.50s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 91: (x=6.39, y=9.80, theta=73.80°), v=3.14 m/s, omega=36.00°/s, t=4.55s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 92: (x=6.24, y=9.84, theta=75.60°), v=3.14 m/s, omega=36.00°/s, t=4.60s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 93: (x=6.09, y=9.88, theta=77.40°), v=3.14 m/s, omega=36.00°/s, t=4.65s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 94: (x=5.94, y=9.91, theta=79.20°), v=3.14 m/s, omega=36.00°/s, t=4.70s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 95: (x=5.78, y=9.94, theta=81.00°), v=3.14 m/s, omega=36.00°/s, t=4.75s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 96: (x=5.63, y=9.96, theta=82.80°), v=3.14 m/s, omega=36.00°/s, t=4.80s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 97: (x=5.47, y=9.98, theta=84.60°), v=3.14 m/s, omega=36.00°/s, t=4.85s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 98: (x=5.31, y=9.99, theta=86.40°), v=3.14 m/s, omega=36.00°/s, t=4.90s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 99: (x=5.16, y=10.00, theta=88.20°), v=3.14 m/s, omega=36.00°/s, t=4.95s
+2024-11-16 11:05:23,773 - DEBUG - Circular Arc - Point 100: (x=5.00, y=10.00, theta=90.00°), v=3.14 m/s, omega=36.00°/s, t=5.00s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 101: (x=4.84, y=10.00, theta=91.80°), v=3.14 m/s, omega=36.00°/s, t=5.05s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 102: (x=4.69, y=9.99, theta=93.60°), v=3.14 m/s, omega=36.00°/s, t=5.10s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 103: (x=4.53, y=9.98, theta=95.40°), v=3.14 m/s, omega=36.00°/s, t=5.15s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 104: (x=4.37, y=9.96, theta=97.20°), v=3.14 m/s, omega=36.00°/s, t=5.20s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 105: (x=4.22, y=9.94, theta=99.00°), v=3.14 m/s, omega=36.00°/s, t=5.25s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 106: (x=4.06, y=9.91, theta=100.80°), v=3.14 m/s, omega=36.00°/s, t=5.30s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 107: (x=3.91, y=9.88, theta=102.60°), v=3.14 m/s, omega=36.00°/s, t=5.35s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 108: (x=3.76, y=9.84, theta=104.40°), v=3.14 m/s, omega=36.00°/s, t=5.40s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 109: (x=3.61, y=9.80, theta=106.20°), v=3.14 m/s, omega=36.00°/s, t=5.45s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 110: (x=3.45, y=9.76, theta=108.00°), v=3.14 m/s, omega=36.00°/s, t=5.50s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 111: (x=3.31, y=9.70, theta=109.80°), v=3.14 m/s, omega=36.00°/s, t=5.55s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 112: (x=3.16, y=9.65, theta=111.60°), v=3.14 m/s, omega=36.00°/s, t=5.60s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 113: (x=3.01, y=9.59, theta=113.40°), v=3.14 m/s, omega=36.00°/s, t=5.65s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 114: (x=2.87, y=9.52, theta=115.20°), v=3.14 m/s, omega=36.00°/s, t=5.70s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 115: (x=2.73, y=9.46, theta=117.00°), v=3.14 m/s, omega=36.00°/s, t=5.75s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 116: (x=2.59, y=9.38, theta=118.80°), v=3.14 m/s, omega=36.00°/s, t=5.80s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 117: (x=2.45, y=9.30, theta=120.60°), v=3.14 m/s, omega=36.00°/s, t=5.85s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 118: (x=2.32, y=9.22, theta=122.40°), v=3.14 m/s, omega=36.00°/s, t=5.90s
+2024-11-16 11:05:23,774 - DEBUG - Circular Arc - Point 119: (x=2.19, y=9.14, theta=124.20°), v=3.14 m/s, omega=36.00°/s, t=5.95s
+2024-11-16 11:05:23,789 - DEBUG - Circular Arc - Point 120: (x=2.06, y=9.05, theta=126.00°), v=3.14 m/s, omega=36.00°/s, t=6.00s
+2024-11-16 11:05:23,789 - DEBUG - Circular Arc - Point 121: (x=1.94, y=8.95, theta=127.80°), v=3.14 m/s, omega=36.00°/s, t=6.05s
+2024-11-16 11:05:23,789 - DEBUG - Circular Arc - Point 122: (x=1.81, y=8.85, theta=129.60°), v=3.14 m/s, omega=36.00°/s, t=6.10s
+2024-11-16 11:05:23,789 - DEBUG - Circular Arc - Point 123: (x=1.69, y=8.75, theta=131.40°), v=3.14 m/s, omega=36.00°/s, t=6.15s
+2024-11-16 11:05:23,789 - DEBUG - Circular Arc - Point 124: (x=1.58, y=8.64, theta=133.20°), v=3.14 m/s, omega=36.00°/s, t=6.20s
+2024-11-16 11:05:23,789 - DEBUG - Circular Arc - Point 125: (x=1.46, y=8.54, theta=135.00°), v=3.14 m/s, omega=36.00°/s, t=6.25s
+2024-11-16 11:05:23,789 - DEBUG - Circular Arc - Point 126: (x=1.36, y=8.42, theta=136.80°), v=3.14 m/s, omega=36.00°/s, t=6.30s
+2024-11-16 11:05:23,789 - DEBUG - Circular Arc - Point 127: (x=1.25, y=8.31, theta=138.60°), v=3.14 m/s, omega=36.00°/s, t=6.35s
+2024-11-16 11:05:23,789 - DEBUG - Circular Arc - Point 128: (x=1.15, y=8.19, theta=140.40°), v=3.14 m/s, omega=36.00°/s, t=6.40s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 129: (x=1.05, y=8.06, theta=142.20°), v=3.14 m/s, omega=36.00°/s, t=6.45s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 130: (x=0.95, y=7.94, theta=144.00°), v=3.14 m/s, omega=36.00°/s, t=6.50s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 131: (x=0.86, y=7.81, theta=145.80°), v=3.14 m/s, omega=36.00°/s, t=6.55s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 132: (x=0.78, y=7.68, theta=147.60°), v=3.14 m/s, omega=36.00°/s, t=6.60s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 133: (x=0.70, y=7.55, theta=149.40°), v=3.14 m/s, omega=36.00°/s, t=6.65s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 134: (x=0.62, y=7.41, theta=151.20°), v=3.14 m/s, omega=36.00°/s, t=6.70s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 135: (x=0.54, y=7.27, theta=153.00°), v=3.14 m/s, omega=36.00°/s, t=6.75s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 136: (x=0.48, y=7.13, theta=154.80°), v=3.14 m/s, omega=36.00°/s, t=6.80s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 137: (x=0.41, y=6.99, theta=156.60°), v=3.14 m/s, omega=36.00°/s, t=6.85s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 138: (x=0.35, y=6.84, theta=158.40°), v=3.14 m/s, omega=36.00°/s, t=6.90s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 139: (x=0.30, y=6.69, theta=160.20°), v=3.14 m/s, omega=36.00°/s, t=6.95s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 140: (x=0.24, y=6.55, theta=162.00°), v=3.14 m/s, omega=36.00°/s, t=7.00s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 141: (x=0.20, y=6.39, theta=163.80°), v=3.14 m/s, omega=36.00°/s, t=7.05s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 142: (x=0.16, y=6.24, theta=165.60°), v=3.14 m/s, omega=36.00°/s, t=7.10s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 143: (x=0.12, y=6.09, theta=167.40°), v=3.14 m/s, omega=36.00°/s, t=7.15s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 144: (x=0.09, y=5.94, theta=169.20°), v=3.14 m/s, omega=36.00°/s, t=7.20s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 145: (x=0.06, y=5.78, theta=171.00°), v=3.14 m/s, omega=36.00°/s, t=7.25s
+2024-11-16 11:05:23,790 - DEBUG - Circular Arc - Point 146: (x=0.04, y=5.63, theta=172.80°), v=3.14 m/s, omega=36.00°/s, t=7.30s
+2024-11-16 11:05:23,791 - DEBUG - Circular Arc - Point 147: (x=0.02, y=5.47, theta=174.60°), v=3.14 m/s, omega=36.00°/s, t=7.35s
+2024-11-16 11:05:23,791 - DEBUG - Circular Arc - Point 148: (x=0.01, y=5.31, theta=176.40°), v=3.14 m/s, omega=36.00°/s, t=7.40s
+2024-11-16 11:05:23,791 - DEBUG - Circular Arc - Point 149: (x=0.00, y=5.16, theta=178.20°), v=3.14 m/s, omega=36.00°/s, t=7.45s
+2024-11-16 11:05:23,791 - DEBUG - Circular Arc - Point 150: (x=0.00, y=5.00, theta=180.00°), v=3.14 m/s, omega=36.00°/s, t=7.50s
+2024-11-16 11:05:23,791 - INFO - Circular arc trajectory created with 151 points.
+2024-11-16 11:05:23,805 - DEBUG - Trajectory initialized with 151 points.
+2024-11-16 11:05:23,805 - DEBUG - Combined Trajectory - Point: (x=5.16, y=0.00, theta=-88.20°), v=3.14 m/s, omega=36.00°/s, t=5.10s
+2024-11-16 11:05:23,805 - DEBUG - Combined Trajectory - Point: (x=5.31, y=0.01, theta=-86.40°), v=3.14 m/s, omega=36.00°/s, t=5.15s
+2024-11-16 11:05:23,805 - DEBUG - Combined Trajectory - Point: (x=5.47, y=0.02, theta=-84.60°), v=3.14 m/s, omega=36.00°/s, t=5.20s
+2024-11-16 11:05:23,805 - DEBUG - Combined Trajectory - Point: (x=5.63, y=0.04, theta=-82.80°), v=3.14 m/s, omega=36.00°/s, t=5.25s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=5.78, y=0.06, theta=-81.00°), v=3.14 m/s, omega=36.00°/s, t=5.30s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=5.94, y=0.09, theta=-79.20°), v=3.14 m/s, omega=36.00°/s, t=5.35s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=6.09, y=0.12, theta=-77.40°), v=3.14 m/s, omega=36.00°/s, t=5.40s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=6.24, y=0.16, theta=-75.60°), v=3.14 m/s, omega=36.00°/s, t=5.45s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=6.39, y=0.20, theta=-73.80°), v=3.14 m/s, omega=36.00°/s, t=5.50s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=6.55, y=0.24, theta=-72.00°), v=3.14 m/s, omega=36.00°/s, t=5.55s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=6.69, y=0.30, theta=-70.20°), v=3.14 m/s, omega=36.00°/s, t=5.60s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=6.84, y=0.35, theta=-68.40°), v=3.14 m/s, omega=36.00°/s, t=5.65s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=6.99, y=0.41, theta=-66.60°), v=3.14 m/s, omega=36.00°/s, t=5.70s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=7.13, y=0.48, theta=-64.80°), v=3.14 m/s, omega=36.00°/s, t=5.75s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=7.27, y=0.54, theta=-63.00°), v=3.14 m/s, omega=36.00°/s, t=5.80s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=7.41, y=0.62, theta=-61.20°), v=3.14 m/s, omega=36.00°/s, t=5.85s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=7.55, y=0.70, theta=-59.40°), v=3.14 m/s, omega=36.00°/s, t=5.90s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=7.68, y=0.78, theta=-57.60°), v=3.14 m/s, omega=36.00°/s, t=5.95s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=7.81, y=0.86, theta=-55.80°), v=3.14 m/s, omega=36.00°/s, t=6.00s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=7.94, y=0.95, theta=-54.00°), v=3.14 m/s, omega=36.00°/s, t=6.05s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=8.06, y=1.05, theta=-52.20°), v=3.14 m/s, omega=36.00°/s, t=6.10s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=8.19, y=1.15, theta=-50.40°), v=3.14 m/s, omega=36.00°/s, t=6.15s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=8.31, y=1.25, theta=-48.60°), v=3.14 m/s, omega=36.00°/s, t=6.20s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=8.42, y=1.36, theta=-46.80°), v=3.14 m/s, omega=36.00°/s, t=6.25s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=8.54, y=1.46, theta=-45.00°), v=3.14 m/s, omega=36.00°/s, t=6.30s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=8.64, y=1.58, theta=-43.20°), v=3.14 m/s, omega=36.00°/s, t=6.35s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=8.75, y=1.69, theta=-41.40°), v=3.14 m/s, omega=36.00°/s, t=6.40s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=8.85, y=1.81, theta=-39.60°), v=3.14 m/s, omega=36.00°/s, t=6.45s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=8.95, y=1.94, theta=-37.80°), v=3.14 m/s, omega=36.00°/s, t=6.50s
+2024-11-16 11:05:23,806 - DEBUG - Combined Trajectory - Point: (x=9.05, y=2.06, theta=-36.00°), v=3.14 m/s, omega=36.00°/s, t=6.55s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.14, y=2.19, theta=-34.20°), v=3.14 m/s, omega=36.00°/s, t=6.60s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.22, y=2.32, theta=-32.40°), v=3.14 m/s, omega=36.00°/s, t=6.65s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.30, y=2.45, theta=-30.60°), v=3.14 m/s, omega=36.00°/s, t=6.70s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.38, y=2.59, theta=-28.80°), v=3.14 m/s, omega=36.00°/s, t=6.75s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.46, y=2.73, theta=-27.00°), v=3.14 m/s, omega=36.00°/s, t=6.80s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.52, y=2.87, theta=-25.20°), v=3.14 m/s, omega=36.00°/s, t=6.85s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.59, y=3.01, theta=-23.40°), v=3.14 m/s, omega=36.00°/s, t=6.90s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.65, y=3.16, theta=-21.60°), v=3.14 m/s, omega=36.00°/s, t=6.95s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.70, y=3.31, theta=-19.80°), v=3.14 m/s, omega=36.00°/s, t=7.00s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.76, y=3.45, theta=-18.00°), v=3.14 m/s, omega=36.00°/s, t=7.05s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.80, y=3.61, theta=-16.20°), v=3.14 m/s, omega=36.00°/s, t=7.10s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.84, y=3.76, theta=-14.40°), v=3.14 m/s, omega=36.00°/s, t=7.15s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.88, y=3.91, theta=-12.60°), v=3.14 m/s, omega=36.00°/s, t=7.20s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.91, y=4.06, theta=-10.80°), v=3.14 m/s, omega=36.00°/s, t=7.25s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.94, y=4.22, theta=-9.00°), v=3.14 m/s, omega=36.00°/s, t=7.30s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.96, y=4.37, theta=-7.20°), v=3.14 m/s, omega=36.00°/s, t=7.35s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.98, y=4.53, theta=-5.40°), v=3.14 m/s, omega=36.00°/s, t=7.40s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=9.99, y=4.69, theta=-3.60°), v=3.14 m/s, omega=36.00°/s, t=7.45s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=10.00, y=4.84, theta=-1.80°), v=3.14 m/s, omega=36.00°/s, t=7.50s
+2024-11-16 11:05:23,821 - DEBUG - Combined Trajectory - Point: (x=10.00, y=5.00, theta=0.00°), v=3.14 m/s, omega=36.00°/s, t=7.55s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=10.00, y=5.16, theta=1.80°), v=3.14 m/s, omega=36.00°/s, t=7.60s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.99, y=5.31, theta=3.60°), v=3.14 m/s, omega=36.00°/s, t=7.65s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.98, y=5.47, theta=5.40°), v=3.14 m/s, omega=36.00°/s, t=7.70s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.96, y=5.63, theta=7.20°), v=3.14 m/s, omega=36.00°/s, t=7.75s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.94, y=5.78, theta=9.00°), v=3.14 m/s, omega=36.00°/s, t=7.80s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.91, y=5.94, theta=10.80°), v=3.14 m/s, omega=36.00°/s, t=7.85s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.88, y=6.09, theta=12.60°), v=3.14 m/s, omega=36.00°/s, t=7.90s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.84, y=6.24, theta=14.40°), v=3.14 m/s, omega=36.00°/s, t=7.95s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.80, y=6.39, theta=16.20°), v=3.14 m/s, omega=36.00°/s, t=8.00s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.76, y=6.55, theta=18.00°), v=3.14 m/s, omega=36.00°/s, t=8.05s
+2024-11-16 11:05:23,822 - DEBUG - Combined Trajectory - Point: (x=9.70, y=6.69, theta=19.80°), v=3.14 m/s, omega=36.00°/s, t=8.10s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=9.65, y=6.84, theta=21.60°), v=3.14 m/s, omega=36.00°/s, t=8.15s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=9.59, y=6.99, theta=23.40°), v=3.14 m/s, omega=36.00°/s, t=8.20s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=9.52, y=7.13, theta=25.20°), v=3.14 m/s, omega=36.00°/s, t=8.25s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=9.46, y=7.27, theta=27.00°), v=3.14 m/s, omega=36.00°/s, t=8.30s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=9.38, y=7.41, theta=28.80°), v=3.14 m/s, omega=36.00°/s, t=8.35s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=9.30, y=7.55, theta=30.60°), v=3.14 m/s, omega=36.00°/s, t=8.40s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=9.22, y=7.68, theta=32.40°), v=3.14 m/s, omega=36.00°/s, t=8.45s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=9.14, y=7.81, theta=34.20°), v=3.14 m/s, omega=36.00°/s, t=8.50s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=9.05, y=7.94, theta=36.00°), v=3.14 m/s, omega=36.00°/s, t=8.55s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=8.95, y=8.06, theta=37.80°), v=3.14 m/s, omega=36.00°/s, t=8.60s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=8.85, y=8.19, theta=39.60°), v=3.14 m/s, omega=36.00°/s, t=8.65s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=8.75, y=8.31, theta=41.40°), v=3.14 m/s, omega=36.00°/s, t=8.70s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=8.64, y=8.42, theta=43.20°), v=3.14 m/s, omega=36.00°/s, t=8.75s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=8.54, y=8.54, theta=45.00°), v=3.14 m/s, omega=36.00°/s, t=8.80s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=8.42, y=8.64, theta=46.80°), v=3.14 m/s, omega=36.00°/s, t=8.85s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=8.31, y=8.75, theta=48.60°), v=3.14 m/s, omega=36.00°/s, t=8.90s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=8.19, y=8.85, theta=50.40°), v=3.14 m/s, omega=36.00°/s, t=8.95s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=8.06, y=8.95, theta=52.20°), v=3.14 m/s, omega=36.00°/s, t=9.00s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=7.94, y=9.05, theta=54.00°), v=3.14 m/s, omega=36.00°/s, t=9.05s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=7.81, y=9.14, theta=55.80°), v=3.14 m/s, omega=36.00°/s, t=9.10s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=7.68, y=9.22, theta=57.60°), v=3.14 m/s, omega=36.00°/s, t=9.15s
+2024-11-16 11:05:23,836 - DEBUG - Combined Trajectory - Point: (x=7.55, y=9.30, theta=59.40°), v=3.14 m/s, omega=36.00°/s, t=9.20s
+2024-11-16 11:05:23,837 - DEBUG - Combined Trajectory - Point: (x=7.41, y=9.38, theta=61.20°), v=3.14 m/s, omega=36.00°/s, t=9.25s
+2024-11-16 11:05:23,837 - DEBUG - Combined Trajectory - Point: (x=7.27, y=9.46, theta=63.00°), v=3.14 m/s, omega=36.00°/s, t=9.30s
+2024-11-16 11:05:23,837 - DEBUG - Combined Trajectory - Point: (x=7.13, y=9.52, theta=64.80°), v=3.14 m/s, omega=36.00°/s, t=9.35s
+2024-11-16 11:05:23,837 - DEBUG - Combined Trajectory - Point: (x=6.99, y=9.59, theta=66.60°), v=3.14 m/s, omega=36.00°/s, t=9.40s
+2024-11-16 11:05:23,837 - DEBUG - Combined Trajectory - Point: (x=6.84, y=9.65, theta=68.40°), v=3.14 m/s, omega=36.00°/s, t=9.45s
+2024-11-16 11:05:23,837 - DEBUG - Combined Trajectory - Point: (x=6.69, y=9.70, theta=70.20°), v=3.14 m/s, omega=36.00°/s, t=9.50s
+2024-11-16 11:05:23,837 - DEBUG - Combined Trajectory - Point: (x=6.55, y=9.76, theta=72.00°), v=3.14 m/s, omega=36.00°/s, t=9.55s
+2024-11-16 11:05:23,837 - DEBUG - Combined Trajectory - Point: (x=6.39, y=9.80, theta=73.80°), v=3.14 m/s, omega=36.00°/s, t=9.60s
+2024-11-16 11:05:23,837 - DEBUG - Combined Trajectory - Point: (x=6.24, y=9.84, theta=75.60°), v=3.14 m/s, omega=36.00°/s, t=9.65s
+2024-11-16 11:05:23,851 - DEBUG - Combined Trajectory - Point: (x=6.09, y=9.88, theta=77.40°), v=3.14 m/s, omega=36.00°/s, t=9.70s
+2024-11-16 11:05:23,851 - DEBUG - Combined Trajectory - Point: (x=5.94, y=9.91, theta=79.20°), v=3.14 m/s, omega=36.00°/s, t=9.75s
+2024-11-16 11:05:23,851 - DEBUG - Combined Trajectory - Point: (x=5.78, y=9.94, theta=81.00°), v=3.14 m/s, omega=36.00°/s, t=9.80s
+2024-11-16 11:05:23,851 - DEBUG - Combined Trajectory - Point: (x=5.63, y=9.96, theta=82.80°), v=3.14 m/s, omega=36.00°/s, t=9.85s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=5.47, y=9.98, theta=84.60°), v=3.14 m/s, omega=36.00°/s, t=9.90s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=5.31, y=9.99, theta=86.40°), v=3.14 m/s, omega=36.00°/s, t=9.95s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=5.16, y=10.00, theta=88.20°), v=3.14 m/s, omega=36.00°/s, t=10.00s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=5.00, y=10.00, theta=90.00°), v=3.14 m/s, omega=36.00°/s, t=10.05s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=4.84, y=10.00, theta=91.80°), v=3.14 m/s, omega=36.00°/s, t=10.10s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=4.69, y=9.99, theta=93.60°), v=3.14 m/s, omega=36.00°/s, t=10.15s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=4.53, y=9.98, theta=95.40°), v=3.14 m/s, omega=36.00°/s, t=10.20s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=4.37, y=9.96, theta=97.20°), v=3.14 m/s, omega=36.00°/s, t=10.25s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=4.22, y=9.94, theta=99.00°), v=3.14 m/s, omega=36.00°/s, t=10.30s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=4.06, y=9.91, theta=100.80°), v=3.14 m/s, omega=36.00°/s, t=10.35s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=3.91, y=9.88, theta=102.60°), v=3.14 m/s, omega=36.00°/s, t=10.40s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=3.76, y=9.84, theta=104.40°), v=3.14 m/s, omega=36.00°/s, t=10.45s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=3.61, y=9.80, theta=106.20°), v=3.14 m/s, omega=36.00°/s, t=10.50s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=3.45, y=9.76, theta=108.00°), v=3.14 m/s, omega=36.00°/s, t=10.55s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=3.31, y=9.70, theta=109.80°), v=3.14 m/s, omega=36.00°/s, t=10.60s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=3.16, y=9.65, theta=111.60°), v=3.14 m/s, omega=36.00°/s, t=10.65s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=3.01, y=9.59, theta=113.40°), v=3.14 m/s, omega=36.00°/s, t=10.70s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=2.87, y=9.52, theta=115.20°), v=3.14 m/s, omega=36.00°/s, t=10.75s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=2.73, y=9.46, theta=117.00°), v=3.14 m/s, omega=36.00°/s, t=10.80s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=2.59, y=9.38, theta=118.80°), v=3.14 m/s, omega=36.00°/s, t=10.85s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=2.45, y=9.30, theta=120.60°), v=3.14 m/s, omega=36.00°/s, t=10.90s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=2.32, y=9.22, theta=122.40°), v=3.14 m/s, omega=36.00°/s, t=10.95s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=2.19, y=9.14, theta=124.20°), v=3.14 m/s, omega=36.00°/s, t=11.00s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=2.06, y=9.05, theta=126.00°), v=3.14 m/s, omega=36.00°/s, t=11.05s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=1.94, y=8.95, theta=127.80°), v=3.14 m/s, omega=36.00°/s, t=11.10s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=1.81, y=8.85, theta=129.60°), v=3.14 m/s, omega=36.00°/s, t=11.15s
+2024-11-16 11:05:23,852 - DEBUG - Combined Trajectory - Point: (x=1.69, y=8.75, theta=131.40°), v=3.14 m/s, omega=36.00°/s, t=11.20s
+2024-11-16 11:05:23,866 - DEBUG - Combined Trajectory - Point: (x=1.58, y=8.64, theta=133.20°), v=3.14 m/s, omega=36.00°/s, t=11.25s
+2024-11-16 11:05:23,866 - DEBUG - Combined Trajectory - Point: (x=1.46, y=8.54, theta=135.00°), v=3.14 m/s, omega=36.00°/s, t=11.30s
+2024-11-16 11:05:23,866 - DEBUG - Combined Trajectory - Point: (x=1.36, y=8.42, theta=136.80°), v=3.14 m/s, omega=36.00°/s, t=11.35s
+2024-11-16 11:05:23,866 - DEBUG - Combined Trajectory - Point: (x=1.25, y=8.31, theta=138.60°), v=3.14 m/s, omega=36.00°/s, t=11.40s
+2024-11-16 11:05:23,866 - DEBUG - Combined Trajectory - Point: (x=1.15, y=8.19, theta=140.40°), v=3.14 m/s, omega=36.00°/s, t=11.45s
+2024-11-16 11:05:23,866 - DEBUG - Combined Trajectory - Point: (x=1.05, y=8.06, theta=142.20°), v=3.14 m/s, omega=36.00°/s, t=11.50s
+2024-11-16 11:05:23,866 - DEBUG - Combined Trajectory - Point: (x=0.95, y=7.94, theta=144.00°), v=3.14 m/s, omega=36.00°/s, t=11.55s
+2024-11-16 11:05:23,866 - DEBUG - Combined Trajectory - Point: (x=0.86, y=7.81, theta=145.80°), v=3.14 m/s, omega=36.00°/s, t=11.60s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.78, y=7.68, theta=147.60°), v=3.14 m/s, omega=36.00°/s, t=11.65s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.70, y=7.55, theta=149.40°), v=3.14 m/s, omega=36.00°/s, t=11.70s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.62, y=7.41, theta=151.20°), v=3.14 m/s, omega=36.00°/s, t=11.75s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.54, y=7.27, theta=153.00°), v=3.14 m/s, omega=36.00°/s, t=11.80s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.48, y=7.13, theta=154.80°), v=3.14 m/s, omega=36.00°/s, t=11.85s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.41, y=6.99, theta=156.60°), v=3.14 m/s, omega=36.00°/s, t=11.90s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.35, y=6.84, theta=158.40°), v=3.14 m/s, omega=36.00°/s, t=11.95s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.30, y=6.69, theta=160.20°), v=3.14 m/s, omega=36.00°/s, t=12.00s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.24, y=6.55, theta=162.00°), v=3.14 m/s, omega=36.00°/s, t=12.05s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.20, y=6.39, theta=163.80°), v=3.14 m/s, omega=36.00°/s, t=12.10s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.16, y=6.24, theta=165.60°), v=3.14 m/s, omega=36.00°/s, t=12.15s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.12, y=6.09, theta=167.40°), v=3.14 m/s, omega=36.00°/s, t=12.20s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.09, y=5.94, theta=169.20°), v=3.14 m/s, omega=36.00°/s, t=12.25s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.06, y=5.78, theta=171.00°), v=3.14 m/s, omega=36.00°/s, t=12.30s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.04, y=5.63, theta=172.80°), v=3.14 m/s, omega=36.00°/s, t=12.35s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.02, y=5.47, theta=174.60°), v=3.14 m/s, omega=36.00°/s, t=12.40s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.01, y=5.31, theta=176.40°), v=3.14 m/s, omega=36.00°/s, t=12.45s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.00, y=5.16, theta=178.20°), v=3.14 m/s, omega=36.00°/s, t=12.50s
+2024-11-16 11:05:23,867 - DEBUG - Combined Trajectory - Point: (x=0.00, y=5.00, theta=180.00°), v=3.14 m/s, omega=36.00°/s, t=12.55s
+2024-11-16 11:05:23,867 - INFO - Combined trajectory created with 251 points.
+2024-11-16 11:05:23,867 - DEBUG - Trajectory initialized with 251 points.
+2024-11-16 11:05:23,867 - INFO - Test trajectory created.
+2024-11-16 11:05:23,867 - INFO - Total Simulation Time: 14.55 seconds
+2024-11-16 11:05:23,867 - INFO - Total Frames: 292
+2024-11-16 11:05:23,870 - DEBUG - Loaded backend module://backend_interagg version unknown.
+2024-11-16 11:05:23,872 - DEBUG - findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0.
+2024-11-16 11:05:23,881 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-BoldItalic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,881 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmss10.ttf', name='cmss10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,881 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneral.ttf', name='STIXGeneral', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,881 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymReg.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,881 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Italic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,881 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+2024-11-16 11:05:23,881 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFiveSymReg.ttf', name='STIXSizeFiveSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,881 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBol.ttf', name='STIXGeneral', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,882 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmex10.ttf', name='cmex10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,882 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,882 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,882 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmsy10.ttf', name='cmsy10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,882 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,882 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymBol.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,896 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmb10.ttf', name='cmb10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,896 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+2024-11-16 11:05:23,896 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymReg.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,896 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmr10.ttf', name='cmr10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,896 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymReg.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,896 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUni.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,896 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymBol.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,897 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+2024-11-16 11:05:23,897 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymBol.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,897 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmmi10.ttf', name='cmmi10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,897 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBolIta.ttf', name='STIXGeneral', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,897 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmtt10.ttf', name='cmtt10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,897 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBol.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,897 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerifDisplay.ttf', name='DejaVu Serif Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymBol.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralItalic.ttf', name='STIXGeneral', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBolIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymReg.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansDisplay.ttf', name='DejaVu Sans Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbel.ttf', name='Corbel', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\webdings.ttf', name='Webdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbi.ttf', name='Times New Roman', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothM.ttc', name='Yu Gothic', style='normal', variant='normal', weight=500, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:23,912 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriab.ttf', name='Cambria', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,913 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothL.ttc', name='Yu Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:23,928 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuiz.ttf', name='Segoe UI', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,928 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\micross.ttf', name='Microsoft Sans Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,928 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaVF.ttf', name='Sitka', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SegoeIcons.ttf', name='Segoe Fluent Icons', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhl.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtextb.ttf', name='Myanmar Text', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariblk.ttf', name='Arial', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 6.888636363636364
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtext.ttf', name='Myanmar Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisli.ttf', name='Segoe UI', style='italic', variant='normal', weight=350, stretch='normal', size='scalable')) = 11.0975
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbd.ttf', name='Courier New', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrima.ttf', name='Ebrima', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Nirmala.ttf', name='Nirmala UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\couri.ttf', name='Courier New', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguihis.ttf', name='Segoe UI Historic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palabi.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriaz.ttf', name='Cambria', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palab.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailu.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbd.ttf', name='Arial', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 6.698636363636363
+2024-11-16 11:05:23,929 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeui.ttf', name='Segoe UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,943 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mingliub.ttc', name='MingLiU-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,943 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunbd.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,943 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\pala.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,943 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Gabriola.ttf', name='Gabriola', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,943 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiaz.ttf', name='Georgia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,943 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahoma.ttf', name='Tahoma', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdana.ttf', name='Verdana', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 3.6863636363636365
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comic.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiai.ttf', name='Georgia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbd.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuib.ttf', name='Segoe UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanz.ttf', name='Constantia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SegUIVar.ttf', name='Segoe UI Variable', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothB.ttc', name='Yu Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhl.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugi.ttf', name='Gadugi', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbd.ttf', name='Times New Roman', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\symbol.ttf', name='Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibli.ttf', name='Segoe UI', style='italic', variant='normal', weight=900, stretch='normal', size='scalable')) = 11.525
+2024-11-16 11:05:23,944 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisym.ttf', name='Segoe UI Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,958 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\sylfaen.ttf', name='Sylfaen', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,958 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuisl.ttf', name='Segoe UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+2024-11-16 11:05:23,958 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsunb.ttf', name='SimSun-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,958 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjh.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,958 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\times.ttf', name='Times New Roman', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,958 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comici.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicz.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\bahnschrift.ttf', name='Bahnschrift', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarali.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\javatext.ttf', name='Javanese Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuil.ttf', name='Segoe UI', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\lucon.ttf', name='Lucida Console', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuii.ttf', name='Segoe UI', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palai.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbi.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanai.ttf', name='Verdana', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 4.6863636363636365
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaVF-Italic.ttf', name='Sitka', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,959 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariali.ttf', name='Arial', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 7.413636363636363
+2024-11-16 11:05:23,960 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrii.ttf', name='Calibri', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,960 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambria.ttc', name='Cambria', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,973 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunsl.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:23,973 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\monbaiti.ttf', name='Mongolian Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,973 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taileb.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,973 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constan.ttf', name='Constantia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,973 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyi.ttf', name='Microsoft Yi Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,973 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbi.ttf', name='Courier New', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SansSerifCollection.ttf', name='Sans Serif Collection', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\CascadiaCode.ttf', name='Cascadia Code', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiab.ttf', name='Georgia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbell.ttf', name='Corbel', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arial.ttf', name='Arial', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 6.413636363636363
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguiemj.ttf', name='Segoe UI Emoji', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesi.ttf', name='Times New Roman', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarai.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothR.ttc', name='Yu Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugib.ttf', name='Gadugi', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhbd.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolai.ttf', name='Consolas', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspa.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,974 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segmdl2.ttf', name='Segoe MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,989 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constani.ttf', name='Constantia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:23,989 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaral.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaB.ttf', name='Nirmala UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanb.ttf', name='Constantia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaraz.ttf', name='Candara', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaS.ttf', name='Nirmala UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cour.ttf', name='Courier New', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgia.ttf', name='Georgia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarab.ttf', name='Candara', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelaUIb.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolaz.ttf', name='Consolas', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consola.ttf', name='Consolas', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelz.ttf', name='Corbel', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candara.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailub.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mvboli.ttf', name='MV Boli', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbi.ttf', name='Arial', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 7.698636363636363
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\wingding.ttf', name='Wingdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\himalaya.ttf', name='Microsoft Himalaya', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:23,990 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrimabd.ttf', name='Ebrima', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,005 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisb.ttf', name='Segoe UI', style='normal', variant='normal', weight=600, stretch='normal', size='scalable')) = 10.24
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibriz.ttf', name='Calibri', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriai.ttf', name='Cambria', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoescb.ttf', name='Segoe Script', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsun.ttc', name='SimSun', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrib.ttf', name='Calibri', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibri.ttf', name='Calibri', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspab.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\l_10646.ttf', name='Lucida Sans Unicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhbd.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\CascadiaMono.ttf', name='Cascadia Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelawUI.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrili.ttf', name='Calibri', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msgothic.ttc', name='MS Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicbd.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\impact.ttf', name='Impact', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanaz.ttf', name='Verdana', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 4.971363636363637
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framdit.ttf', name='Franklin Gothic Medium', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgun.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,006 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolab.ttf', name='Consolas', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,020 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Inkfree.ttf', name='Ink Free', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,020 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbeli.ttf', name='Corbel', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,020 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelUIsl.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+2024-11-16 11:05:24,020 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguili.ttf', name='Segoe UI', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+2024-11-16 11:05:24,020 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoepr.ttf', name='Segoe Print', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,020 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahomabd.ttf', name='Tahoma', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,020 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibril.ttf', name='Calibri', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:24,020 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisbi.ttf', name='Segoe UI', style='italic', variant='normal', weight=600, stretch='normal', size='scalable')) = 11.24
+2024-11-16 11:05:24,020 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoesc.ttf', name='Segoe Script', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\holomdl2.ttf', name='HoloLens MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelli.ttf', name='Corbel', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibl.ttf', name='Segoe UI', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 10.525
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanab.ttf', name='Verdana', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 3.9713636363636367
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelb.ttf', name='Corbel', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taile.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framd.ttf', name='Franklin Gothic Medium', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeprb.ttf', name='Segoe Print', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebuc.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucit.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,021 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyh.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,035 - DEBUG - findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000.
+2024-11-16 11:05:24,051 - INFO - Starting simulation animation.
+2024-11-16 11:05:24,059 - DEBUG - findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0.
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-BoldItalic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmss10.ttf', name='cmss10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneral.ttf', name='STIXGeneral', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymReg.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Italic.ttf', name='DejaVu Serif', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-BoldOblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 1.335
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFiveSymReg.ttf', name='STIXSizeFiveSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBol.ttf', name='STIXGeneral', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmex10.ttf', name='cmex10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif-Bold.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmsy10.ttf', name='cmsy10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-BoldOblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,060 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymBol.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,067 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmb10.ttf', name='cmb10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,067 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Bold.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 0.33499999999999996
+2024-11-16 11:05:24,067 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizFourSymReg.ttf', name='STIXSizeFourSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,067 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmr10.ttf', name='cmr10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,067 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymReg.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,067 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUni.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,067 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizTwoSymBol.ttf', name='STIXSizeTwoSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,067 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf', name='DejaVu Sans', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 0.05
+2024-11-16 11:05:24,067 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymBol.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,068 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmmi10.ttf', name='cmmi10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,068 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralBolIta.ttf', name='STIXGeneral', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,068 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\cmtt10.ttf', name='cmtt10', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,068 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBol.ttf', name='STIXNonUnicode', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,068 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerifDisplay.ttf', name='DejaVu Serif Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,082 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Oblique.ttf', name='DejaVu Sans Mono', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,082 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans-Oblique.ttf', name='DejaVu Sans', style='oblique', variant='normal', weight=400, stretch='normal', size='scalable')) = 1.05
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizOneSymBol.ttf', name='STIXSizeOneSym', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansMono-Bold.ttf', name='DejaVu Sans Mono', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXGeneralItalic.ttf', name='STIXGeneral', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSerif.ttf', name='DejaVu Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXNonUniBolIta.ttf', name='STIXNonUnicode', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\STIXSizThreeSymReg.ttf', name='STIXSizeThreeSym', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSansDisplay.ttf', name='DejaVu Sans Display', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbel.ttf', name='Corbel', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\webdings.ttf', name='Webdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbi.ttf', name='Times New Roman', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothM.ttc', name='Yu Gothic', style='normal', variant='normal', weight=500, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriab.ttf', name='Cambria', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,083 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothL.ttc', name='Yu Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:24,098 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuiz.ttf', name='Segoe UI', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\micross.ttf', name='Microsoft Sans Serif', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaVF.ttf', name='Sitka', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SegoeIcons.ttf', name='Segoe Fluent Icons', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhl.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtextb.ttf', name='Myanmar Text', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariblk.ttf', name='Arial', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 6.888636363636364
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mmrtext.ttf', name='Myanmar Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisli.ttf', name='Segoe UI', style='italic', variant='normal', weight=350, stretch='normal', size='scalable')) = 11.0975
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbd.ttf', name='Courier New', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrima.ttf', name='Ebrima', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Nirmala.ttf', name='Nirmala UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\couri.ttf', name='Courier New', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguihis.ttf', name='Segoe UI Historic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palabi.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriaz.ttf', name='Cambria', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,099 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palab.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,100 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailu.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,100 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbd.ttf', name='Arial', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 6.698636363636363
+2024-11-16 11:05:24,100 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeui.ttf', name='Segoe UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,114 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mingliub.ttc', name='MingLiU-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,114 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunbd.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,114 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\pala.ttf', name='Palatino Linotype', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,114 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Gabriola.ttf', name='Gabriola', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,114 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiaz.ttf', name='Georgia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,114 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahoma.ttf', name='Tahoma', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,114 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdana.ttf', name='Verdana', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 3.6863636363636365
+2024-11-16 11:05:24,114 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comic.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,114 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiai.ttf', name='Georgia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbd.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuib.ttf', name='Segoe UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanz.ttf', name='Constantia', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SegUIVar.ttf', name='Segoe UI Variable', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothB.ttc', name='Yu Gothic', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhl.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=290, stretch='normal', size='scalable')) = 10.1545
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugi.ttf', name='Gadugi', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesbd.ttf', name='Times New Roman', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\symbol.ttf', name='Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibli.ttf', name='Segoe UI', style='italic', variant='normal', weight=900, stretch='normal', size='scalable')) = 11.525
+2024-11-16 11:05:24,115 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisym.ttf', name='Segoe UI Symbol', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,129 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\sylfaen.ttf', name='Sylfaen', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuisl.ttf', name='Segoe UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsunb.ttf', name='SimSun-ExtB', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjh.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\times.ttf', name='Times New Roman', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comici.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicz.ttf', name='Comic Sans MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\bahnschrift.ttf', name='Bahnschrift', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarali.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\javatext.ttf', name='Javanese Text', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,130 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuil.ttf', name='Segoe UI', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:24,131 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\lucon.ttf', name='Lucida Console', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,131 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeuii.ttf', name='Segoe UI', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,131 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\palai.ttf', name='Palatino Linotype', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,131 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucbi.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,131 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanai.ttf', name='Verdana', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 4.6863636363636365
+2024-11-16 11:05:24,131 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SitkaVF-Italic.ttf', name='Sitka', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,131 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ariali.ttf', name='Arial', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 7.413636363636363
+2024-11-16 11:05:24,131 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrii.ttf', name='Calibri', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,131 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambria.ttc', name='Cambria', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,145 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgunsl.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:24,145 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\monbaiti.ttf', name='Mongolian Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,145 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taileb.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,145 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constan.ttf', name='Constantia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,145 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyi.ttf', name='Microsoft Yi Baiti', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,145 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\courbi.ttf', name='Courier New', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\SansSerifCollection.ttf', name='Sans Serif Collection', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\CascadiaCode.ttf', name='Cascadia Code', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgiab.ttf', name='Georgia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbell.ttf', name='Corbel', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arial.ttf', name='Arial', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 6.413636363636363
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguiemj.ttf', name='Segoe UI Emoji', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\timesi.ttf', name='Times New Roman', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarai.ttf', name='Candara', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\YuGothR.ttc', name='Yu Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\gadugib.ttf', name='Gadugi', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyhbd.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolai.ttf', name='Consolas', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspa.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,146 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segmdl2.ttf', name='Segoe MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,161 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constani.ttf', name='Constantia', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaral.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaB.ttf', name='Nirmala UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\constanb.ttf', name='Constantia', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candaraz.ttf', name='Candara', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\NirmalaS.ttf', name='Nirmala UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cour.ttf', name='Courier New', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\georgia.ttf', name='Georgia', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candarab.ttf', name='Candara', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelaUIb.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolaz.ttf', name='Consolas', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consola.ttf', name='Consolas', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelz.ttf', name='Corbel', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Candara.ttf', name='Candara', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ntailub.ttf', name='Microsoft New Tai Lue', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\mvboli.ttf', name='MV Boli', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\arialbi.ttf', name='Arial', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 7.698636363636363
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\wingding.ttf', name='Wingdings', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,162 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\himalaya.ttf', name='Microsoft Himalaya', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,163 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\ebrimabd.ttf', name='Ebrima', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisb.ttf', name='Segoe UI', style='normal', variant='normal', weight=600, stretch='normal', size='scalable')) = 10.24
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibriz.ttf', name='Calibri', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 11.335
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\cambriai.ttf', name='Cambria', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoescb.ttf', name='Segoe Script', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\simsun.ttc', name='SimSun', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrib.ttf', name='Calibri', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibri.ttf', name='Calibri', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\phagspab.ttf', name='Microsoft PhagsPa', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\l_10646.ttf', name='Lucida Sans Unicode', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msjhbd.ttc', name='Microsoft JhengHei', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\CascadiaMono.ttf', name='Cascadia Mono', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelawUI.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibrili.ttf', name='Calibri', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msgothic.ttc', name='MS Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\comicbd.ttf', name='Comic Sans MS', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\impact.ttf', name='Impact', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,177 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanaz.ttf', name='Verdana', style='italic', variant='normal', weight=700, stretch='normal', size='scalable')) = 4.971363636363637
+2024-11-16 11:05:24,178 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framdit.ttf', name='Franklin Gothic Medium', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,178 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\malgun.ttf', name='Malgun Gothic', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,178 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\consolab.ttf', name='Consolas', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\Inkfree.ttf', name='Ink Free', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbeli.ttf', name='Corbel', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\LeelUIsl.ttf', name='Leelawadee UI', style='normal', variant='normal', weight=350, stretch='normal', size='scalable')) = 10.0975
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguili.ttf', name='Segoe UI', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoepr.ttf', name='Segoe Print', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\tahomabd.ttf', name='Tahoma', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\calibril.ttf', name='Calibri', style='normal', variant='normal', weight=300, stretch='normal', size='scalable')) = 10.145
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguisbi.ttf', name='Segoe UI', style='italic', variant='normal', weight=600, stretch='normal', size='scalable')) = 11.24
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoesc.ttf', name='Segoe Script', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\holomdl2.ttf', name='HoloLens MDL2 Assets', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelli.ttf', name='Corbel', style='italic', variant='normal', weight=300, stretch='normal', size='scalable')) = 11.145
+2024-11-16 11:05:24,192 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\seguibl.ttf', name='Segoe UI', style='normal', variant='normal', weight=900, stretch='normal', size='scalable')) = 10.525
+2024-11-16 11:05:24,193 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\verdanab.ttf', name='Verdana', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 3.9713636363636367
+2024-11-16 11:05:24,193 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\corbelb.ttf', name='Corbel', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,193 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\taile.ttf', name='Microsoft Tai Le', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,193 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\framd.ttf', name='Franklin Gothic Medium', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,193 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\segoeprb.ttf', name='Segoe Print', style='normal', variant='normal', weight=700, stretch='normal', size='scalable')) = 10.335
+2024-11-16 11:05:24,193 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebuc.ttf', name='Trebuchet MS', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,193 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\trebucit.ttf', name='Trebuchet MS', style='italic', variant='normal', weight=400, stretch='normal', size='scalable')) = 11.05
+2024-11-16 11:05:24,193 - DEBUG - findfont: score(FontEntry(fname='C:\\Windows\\Fonts\\msyh.ttc', name='Microsoft YaHei', style='normal', variant='normal', weight=400, stretch='normal', size='scalable')) = 10.05
+2024-11-16 11:05:24,208 - DEBUG - findfont: Matching sans\-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0 to DejaVu Sans ('C:\\Users\\angel\\anaconda3\\envs\\rl-gpu\\Lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000.
+2024-11-16 11:05:24,230 - DEBUG - Desired state at time 0.00s: (x=0.00, y=0.00, theta=0.00°), v=1.00 m/s, omega=0.00°/s
+2024-11-16 11:05:24,230 - DEBUG - Pose Error - error_x: 0.0000 m, error_y: 0.0000 m, dtheta: 0.0000°
+2024-11-16 11:05:24,230 - DEBUG - Control Commands - v: 1.0000 m/s, omega: 0.0000°/s
+2024-11-16 11:05:24,230 - DEBUG - Applied Action - v: 1.0000 m/s, omega: 0.0000°/s, New Pose: (x=0.0500, y=0.0000, theta=0.00°)
+2024-11-16 11:05:24,231 - INFO - Time: 0.00s, Position: (0.05, 0.00), Theta: 0.00°
+2024-11-16 11:05:24,231 - DEBUG - Desired Pose: (x=0.00, y=0.00, theta=0.00°), Desired Velocity: v=1.00 m/s, omega=0.00°/s
+2024-11-16 11:05:24,231 - DEBUG - Control Commands - v: 1.00 m/s, omega: 0.00°/s
+2024-11-16 11:05:24,289 - INFO - Simulation completed.
+2024-11-16 11:05:24,289 - INFO - Final Position: (0.05, 0.00), Theta: 0.00°
+2024-11-16 11:05:24,289 - INFO - Trajectory followed with 251 points.

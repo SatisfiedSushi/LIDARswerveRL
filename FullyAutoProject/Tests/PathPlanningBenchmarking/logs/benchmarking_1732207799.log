@@ -1,0 +1,6 @@
+2024-11-21 10:50:03,290 - INFO - Starting simulation with OkayPlan
+2024-11-21 10:50:03,736 - ERROR - Algorithm OkayPlan failed with error: The expanded size of the tensor (8) must match the existing size (0) at non-singleton dimension 0.  Target sizes: [8].  Tensor sizes: [0]
+2024-11-21 10:50:03,736 - ERROR - All algorithms failed to find a path. Closing simulation.
+2024-11-21 10:50:06,515 - INFO - Starting simulation with OkayPlan
+2024-11-21 10:50:06,516 - ERROR - Algorithm OkayPlan failed with error: The expanded size of the tensor (8) must match the existing size (0) at non-singleton dimension 0.  Target sizes: [8].  Tensor sizes: [0]
+2024-11-21 10:50:06,516 - ERROR - All algorithms failed to find a path. Closing simulation.

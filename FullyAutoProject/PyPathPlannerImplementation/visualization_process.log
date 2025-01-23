@@ -1,0 +1,39 @@
+2024-11-20 12:35:21,139 - INFO - Connected to shared memory: robot_shared_memory, size: 12288 bytes
+2024-11-20 12:35:23,756 - INFO - Clicked at canvas (551, 132), world (11.34, 7.57)
+2024-11-20 12:36:27,306 - INFO - Clicked at canvas (572, 90), world (11.77, 8.44)
+2024-11-20 12:36:27,626 - INFO - Clicked at canvas (595, 385), world (12.24, 2.37)
+2024-11-20 12:36:31,177 - INFO - Closed shared memory for robot_shared_memory
+2024-11-20 12:36:31,178 - INFO - Visualization process terminated gracefully.
+2024-11-20 12:37:59,195 - INFO - Connected to shared memory: robot_shared_memory, size: 12288 bytes
+2024-11-20 12:37:59,195 - ERROR - Exception in update_visualization: [WinError 2] The system cannot find the file specified
+2024-11-20 12:39:47,937 - INFO - Connected to shared memory: robot_shared_memory, size: 12288 bytes
+2024-11-20 12:39:58,496 - INFO - Clicked at canvas (660, 204), world (13.58, 6.09)
+2024-11-20 12:40:01,614 - INFO - Closed shared memory for robot_shared_memory
+2024-11-20 12:40:01,614 - INFO - Visualization process terminated gracefully.
+2024-11-20 12:54:37,016 - INFO - Connected to shared memory: robot_shared_memory, size: 12288 bytes
+2024-11-20 12:54:41,363 - INFO - Clicked at canvas (578, 243), world (11.89, 5.29)
+2024-11-20 12:54:43,171 - INFO - Closed shared memory for robot_shared_memory
+2024-11-20 12:54:43,172 - INFO - Visualization process terminated gracefully.
+2024-11-20 12:55:07,690 - INFO - Connected to shared memory: robot_shared_memory, size: 12288 bytes
+2024-11-20 12:55:09,974 - INFO - Clicked at canvas (660, 380), world (13.58, 2.47)
+2024-11-20 12:55:11,065 - INFO - Closed shared memory for robot_shared_memory
+2024-11-20 12:55:11,065 - INFO - Visualization process terminated gracefully.
+2024-11-20 12:55:34,150 - INFO - Connected to shared memory: robot_shared_memory, size: 12288 bytes
+2024-11-20 12:55:41,672 - INFO - Closed shared memory for robot_shared_memory
+2024-11-20 12:55:41,672 - INFO - Visualization process terminated gracefully.
+2024-11-20 12:56:33,153 - INFO - Connected to shared memory: robot_shared_memory, size: 12288 bytes
+2024-11-20 12:56:35,173 - INFO - Clicked at canvas (437, 224), world (8.99, 5.68)
+2024-11-20 12:56:38,399 - INFO - Closed shared memory for robot_shared_memory
+2024-11-20 12:56:38,399 - INFO - Visualization process terminated gracefully.
+2024-11-20 12:58:26,105 - INFO - Connected to shared memory: robot_shared_memory, size: 12288 bytes
+2024-11-20 12:58:28,083 - INFO - Clicked at canvas (352, 284), world (7.24, 4.44)
+2024-11-20 12:58:40,970 - INFO - Clicked at canvas (595, 247), world (12.24, 5.21)
+2024-11-20 12:58:41,385 - INFO - Clicked at canvas (619, 384), world (12.74, 2.39)
+2024-11-20 12:58:41,782 - INFO - Clicked at canvas (392, 415), world (8.07, 1.75)
+2024-11-20 12:58:42,142 - INFO - Clicked at canvas (445, 214), world (9.16, 5.88)
+2024-11-20 13:02:43,534 - INFO - Connected to shared memory: robot_shared_memory, size: 12288 bytes
+2024-11-20 13:05:42,554 - INFO - Closed shared memory for robot_shared_memory
+2024-11-20 13:05:42,554 - INFO - Visualization process terminated gracefully.
+2024-11-20 13:07:34,378 - INFO - Connected to shared memory: my_shared_memory, size: 12288 bytes
+2024-11-20 13:07:36,801 - INFO - Closed shared memory for my_shared_memory
+2024-11-20 13:07:36,801 - INFO - Visualization process terminated gracefully.

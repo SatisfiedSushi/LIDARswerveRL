@@ -1,8 +1,0 @@
-2024-11-15 01:23:57,541 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
-2024-11-15 01:24:43,482 - INFO - Environment process interrupted by user.
-2024-11-15 01:24:43,633 - INFO - Shared memory closed and unlinked.
-2024-11-15 01:24:43,633 - INFO - Environment process terminated gracefully.
-2024-11-15 01:26:12,810 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
-2024-11-15 01:27:43,198 - INFO - Environment process interrupted by user.
-2024-11-15 01:27:43,346 - INFO - Shared memory closed and unlinked.
-2024-11-15 01:27:43,346 - INFO - Environment process terminated gracefully.

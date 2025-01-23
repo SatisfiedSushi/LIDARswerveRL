@@ -1,0 +1,13 @@
+2024-11-19 15:06:48,357 - INFO - Trial 1: Starting simulation.
+2024-11-19 15:06:50,303 - INFO - Trial 1: Simulation ended.
+2024-11-19 15:06:50,303 - INFO - Trial 2: Starting simulation.
+2024-11-19 15:06:51,613 - INFO - Trial 2: Simulation ended.
+2024-11-19 15:06:51,613 - INFO - Trial 3: Starting simulation.
+2024-11-19 15:06:52,783 - INFO - Trial 3: Simulation ended.
+2024-11-19 15:06:52,783 - INFO - Trial 4: Starting simulation.
+2024-11-19 15:06:53,989 - INFO - Trial 4: Simulation ended.
+2024-11-19 15:06:53,989 - INFO - Trial 5: Starting simulation.
+2024-11-19 15:06:55,161 - INFO - Trial 5: Simulation ended.
+2024-11-19 15:06:55,657 - INFO - Benchmark results plot saved to results\benchmark_results.png
+2024-11-19 15:06:55,880 - INFO - Paths plot saved to results\paths_plot.png
+2024-11-19 15:06:55,880 - INFO - Benchmarking completed and results saved.

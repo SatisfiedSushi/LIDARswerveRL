@@ -1,0 +1,5 @@
+Total Trials: 5
+Successes: 5
+Success Rate: 100.00%
+Average Path Length: 47.0
+Average Computation Time: 0.0040 seconds

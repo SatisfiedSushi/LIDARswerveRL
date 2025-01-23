@@ -1,0 +1,4 @@
+2024-11-19 16:36:47,283 - INFO - Starting RRTStar for dynamic simulation.
+2024-11-19 16:36:47,286 - INFO - Collision detected. Replanning...
+2024-11-19 16:36:47,291 - WARNING - No replanned path found.
+2024-11-19 16:36:47,292 - INFO - Completed RRTStar for dynamic simulation.

@@ -1,0 +1,13 @@
+Dynamic Simulation Benchmark Results
+Timestamp: Tue Nov 19 15:40:54 2024
+
+Algorithm: AStar
+ - Computation Time: 0.0162 seconds
+ - Path Length: 220.00 pixels
+ - Accuracy: 100.00%
+
+Algorithm: RRTStar
+ - Computation Time: 0.0020 seconds
+ - Path Length: 639.03 pixels
+ - Accuracy: 90.91%
+

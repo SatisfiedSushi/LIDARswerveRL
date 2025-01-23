@@ -1,0 +1,48 @@
+2024-11-16 12:06:24,296 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
+2024-11-16 12:06:51,317 - INFO - Environment process interrupted by user.
+2024-11-16 12:25:47,335 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
+2024-11-16 12:26:28,807 - INFO - Environment process interrupted by user.
+2024-11-16 12:26:28,980 - INFO - Shared memory closed and unlinked.
+2024-11-16 12:26:28,980 - INFO - Environment process terminated gracefully.
+2024-11-16 12:30:01,818 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
+2024-11-16 12:30:22,714 - INFO - Shared memory closed and unlinked.
+2024-11-16 12:30:22,714 - INFO - Environment process terminated gracefully.
+2024-11-16 12:35:04,828 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
+2024-11-16 12:35:16,994 - INFO - Environment process interrupted by user.
+2024-11-16 12:51:56,633 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
+2024-11-16 12:52:29,765 - INFO - Environment process interrupted by user.
+2024-11-20 12:35:20,943 - INFO - Shared memory created with name: my_shared_memory, size: 9660 bytes
+2024-11-20 12:35:24,002 - INFO - Shared memory closed and unlinked.
+2024-11-20 12:35:24,003 - INFO - Environment process terminated gracefully.
+2024-11-20 12:37:59,125 - INFO - Shared memory created with name: my_shared_memory, size: 9660 bytes
+2024-11-20 12:37:59,814 - ERROR - An unexpected error occurred in environment process: [WinError 2] The system cannot find the file specified
+2024-11-20 12:37:59,958 - INFO - Shared memory closed and unlinked.
+2024-11-20 12:37:59,958 - INFO - Environment process terminated gracefully.
+2024-11-20 12:39:47,867 - INFO - Shared memory created with name: my_shared_memory, size: 9660 bytes
+2024-11-20 12:40:01,555 - INFO - Environment process interrupted by user.
+2024-11-20 12:40:01,689 - INFO - Shared memory closed and unlinked.
+2024-11-20 12:40:01,689 - INFO - Environment process terminated gracefully.
+2024-11-20 12:54:36,944 - INFO - Shared memory created with name: my_shared_memory, size: 9660 bytes
+2024-11-20 12:54:43,146 - INFO - Environment process interrupted by user.
+2024-11-20 12:54:43,285 - INFO - Shared memory closed and unlinked.
+2024-11-20 12:54:43,285 - INFO - Environment process terminated gracefully.
+2024-11-20 12:55:07,615 - INFO - Shared memory created with name: my_shared_memory, size: 9660 bytes
+2024-11-20 12:55:11,057 - INFO - Environment process interrupted by user.
+2024-11-20 12:55:11,206 - INFO - Shared memory closed and unlinked.
+2024-11-20 12:55:11,206 - INFO - Environment process terminated gracefully.
+2024-11-20 12:55:34,080 - INFO - Shared memory created with name: my_shared_memory, size: 9660 bytes
+2024-11-20 12:55:41,640 - INFO - Environment process interrupted by user.
+2024-11-20 12:55:41,782 - INFO - Shared memory closed and unlinked.
+2024-11-20 12:55:41,782 - INFO - Environment process terminated gracefully.
+2024-11-20 12:56:33,081 - INFO - Shared memory created with name: my_shared_memory, size: 9660 bytes
+2024-11-20 12:56:38,399 - INFO - Environment process interrupted by user.
+2024-11-20 12:58:26,031 - INFO - Shared memory created with name: my_shared_memory, size: 9660 bytes
+2024-11-20 12:58:28,322 - INFO - Shared memory closed and unlinked.
+2024-11-20 12:58:28,323 - INFO - Environment process terminated gracefully.
+2024-11-20 13:02:43,465 - INFO - Shared memory created with name: my_shared_memory, size: 9660 bytes
+2024-11-20 13:05:42,538 - INFO - Environment process interrupted by user.
+2024-11-20 13:05:42,687 - INFO - Shared memory closed and unlinked.
+2024-11-20 13:05:42,688 - INFO - Environment process terminated gracefully.
+2024-11-20 13:07:34,309 - INFO - Shared memory connected with name: my_shared_memory, size: 9660 bytes
+2024-11-20 13:07:35,116 - INFO - Shared memory closed and unlinked.
+2024-11-20 13:07:35,116 - INFO - Environment process terminated gracefully.
