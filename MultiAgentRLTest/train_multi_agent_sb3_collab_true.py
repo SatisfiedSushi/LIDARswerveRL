@@ -1,4 +1,4 @@
-# train_multi_agent_ctde.py
+# train_multi_agent_sb3_collab_true.py
 
 import os
 import numpy as np
@@ -6,96 +6,22 @@ import torch
 import torch.nn as nn
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import CheckpointCallback
-from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
 from stable_baselines3.common.policies import ActorCriticPolicy
-from stable_baselines3.common.env_util import make_vec_env
 from multi_agent_env_sb3_collab_true import MultiRobotEnvSB3CollabTrue  # Ensure correct import path
-import gym
+import gymnasium as gym
+from stable_baselines3.common.env_checker import check_env
+import traceback
+
 
 # ==========================
-# Custom Policy for CTDE
+# Debug Flag
 # ==========================
+DEBUG = False
 
-class CTDEPolicy(ActorCriticPolicy):
-    """
-    Custom Policy class implementing Centralized Training with Decentralized Execution (CTDE).
-    
-    In this setup:
-    - **Actor (Policy Network):** Each agent has its own policy network that takes only its local observations.
-    - **Critic (Value Network):** A centralized critic that takes the global state (joint observations) to estimate the value function.
-    
-    This policy ensures that during training, the critic has access to the global state for better coordination,
-    while during execution, each agent relies solely on its local observations.
-    """
-
-    def __init__(self, *args, **kwargs):
-        """
-        Initialize the CTDEPolicy.
-        """
-        super(CTDEPolicy, self).__init__(*args, **kwargs)
-        
-        # Define the critic network to take the global state as input
-        # Assuming that the environment provides the global state as a separate observation component
-        # Modify the input dimension accordingly
-        global_observation_dim = kwargs['features_extractor_kwargs']['global_observation_dim']
-        self.critic_network = nn.Sequential(
-            nn.Linear(global_observation_dim, 256),
-            nn.ReLU(),
-            nn.Linear(256, 256),
-            nn.ReLU(),
-            nn.Linear(256, 1)
-        )
-        
-    def forward(self, obs, deterministic=False):
-        """
-        Forward pass for the actor (policy network).
-        """
-        # 'obs' contains only the local observation for the agent
-        return self._build_action(obs, deterministic=deterministic)
-    
-    def _predict_values(self, obs, actions=None):
-        """
-        Predict value estimates using the centralized critic.
-        
-        Parameters:
-        - obs: Dictionary containing local observations and global state.
-        - actions: Actions taken by agents (optional).
-        
-        Returns:
-        - value: Value estimates from the centralized critic.
-        """
-        # Extract the global state from the observation
-        global_state = obs['global_state']
-        global_state = torch.as_tensor(global_state).float().to(self.device)
-        
-        # Pass the global state through the critic network
-        value = self.critic_network(global_state)
-        return value
-
-    def evaluate_actions(self, obs, actions):
-        """
-        Evaluate actions by computing the log probabilities and entropy.
-        Also compute the value estimates using the centralized critic.
-        
-        Parameters:
-        - obs: Dictionary containing local observations and global state.
-        - actions: Actions taken by agents.
-        
-        Returns:
-        - values: Value estimates from the centralized critic.
-        - log_prob: Log probabilities of the actions.
-        - entropy: Entropy of the action distribution.
-        """
-        # Forward pass through the actor to get distribution
-        distribution = self._get_action_dist_from_latent(self._build_latent(obs))
-        log_prob = distribution.log_prob(actions)
-        entropy = distribution.entropy()
-        
-        # Compute the value using the centralized critic
-        values = self._predict_values(obs, actions)
-        
-        return values, log_prob, entropy
+def debug_print(*args, **kwargs):
+    if DEBUG:
+        print(*args, **kwargs)
 
 # ==========================
 # Custom Feature Extractor
@@ -103,12 +29,9 @@ class CTDEPolicy(ActorCriticPolicy):
 
 class CTDEFeatureExtractor(BaseFeaturesExtractor):
     """
-    Custom Feature Extractor that separates local and global observations.
-    
-    Assumes that the observation is a dictionary with 'local' and 'global' keys.
+    Custom Feature Extractor that processes the flattened global observation.
     """
-
-    def __init__(self, observation_space: gym.spaces.Dict, global_observation_dim: int):
+    def __init__(self, observation_space: gym.spaces.Box, global_observation_dim: int):
         """
         Initialize the feature extractor.
         
@@ -118,44 +41,123 @@ class CTDEFeatureExtractor(BaseFeaturesExtractor):
         """
         super(CTDEFeatureExtractor, self).__init__(observation_space, features_dim=256)
         
-        # Extract the local observation space
-        self.local_observation_space = observation_space.spaces['local']
-        
-        # Define the feature extractor for the local observation
-        self.local_net = nn.Sequential(
-            nn.Linear(self.local_observation_space.shape[0], 128),
-            nn.ReLU(),
-            nn.Linear(128, 256),
-            nn.ReLU()
-        )
-        
         # Define the feature extractor for the global observation
-        self.global_net = nn.Sequential(
-            nn.Linear(global_observation_dim, 128),
+        self.net = nn.Sequential(
+            nn.Linear(global_observation_dim, 512),
             nn.ReLU(),
-            nn.Linear(128, 256),
+            nn.Linear(512, 256),
             nn.ReLU()
         )
         
     def forward(self, observations):
         """
         Forward pass to extract features from observations.
+        """
+        debug_print(f"FeatureExtractor input shape: {observations.shape}")  # Debugging
+        features = self.net(observations)
+        debug_print(f"FeatureExtractor output shape: {features.shape}")  # Debugging
+        return features
+
+# ==========================
+# Custom ValueNet with Debugging
+# ==========================
+
+class DebugValueNet(nn.Module):
+    def __init__(self, input_dim):
+        super(DebugValueNet, self).__init__()
+        self.net = nn.Sequential(
+            nn.Linear(input_dim, 256),
+            nn.ReLU(),
+            nn.Linear(256, 256),
+            nn.ReLU(),
+            nn.Linear(256, 1)
+        )
+    
+    def forward(self, x):
+        debug_print(f"ValueNet input shape: {x.shape}")  # Debugging
+        x = self.net(x)
+        debug_print(f"ValueNet output shape: {x.shape}")  # Debugging
+        return x
+
+# ==========================
+# Custom Policy for CTDE with Debugging
+# ==========================
+class CTDEPolicy(ActorCriticPolicy):
+    """
+    Custom Policy class implementing Centralized Training with Decentralized Execution (CTDE).
+    
+    In this setup:
+    - **Actor (Policy Network):** Treats the entire action space as a single action.
+    - **Critic (Value Network):** Uses the entire observation (global state) to estimate the value function.
+    
+    Note: SB3 is inherently single-agent, so this is a workaround for multi-agent settings.
+    """
+    def __init__(self, observation_space, action_space, lr_schedule, *args, **kwargs):
+        """
+        Initialize the CTDEPolicy.
+        """
+        # Safely retrieve 'features_extractor_kwargs' from kwargs
+        features_extractor_kwargs = kwargs.get('features_extractor_kwargs', {})
+        global_observation_dim = features_extractor_kwargs.get('global_observation_dim', None)
+        
+        if global_observation_dim is None:
+            raise ValueError("`global_observation_dim` must be provided in `features_extractor_kwargs`.")
+        
+        # Initialize the parent class first
+        super(CTDEPolicy, self).__init__(observation_space, action_space, lr_schedule, *args, **kwargs)
+        
+        # The features extractor has already processed the observation
+        # Get the features dimension from the features extractor
+        features_dim = self.features_extractor.features_dim
+        debug_print(f"CTDEPolicy initialized with features_dim: {features_dim}")  # Debugging
+        
+        # Define the custom value_net to take the features as input
+        self.value_net = DebugValueNet(features_dim).to(self.device)
+        debug_print(f"Custom value_net initialized.")  # Debugging
+
+    def _predict_values(self, obs: torch.Tensor, actions: torch.Tensor = None) -> torch.Tensor:
+        """
+        Predict value estimates using the centralized critic.
         
         Parameters:
-        - observations: A dictionary containing 'local' and 'global' observations.
+        - obs: Observation tensor.
+        - actions: (Unused) Actions tensor.
         
         Returns:
-        - features: Concatenated features from local and global observations.
+        - value: Value estimates tensor.
         """
-        local_obs = observations['local']
-        global_obs = observations['global']
+        debug_print(f"_predict_values called with obs shape: {obs.shape}")  # Debugging
+        value = self.value_net(obs)
+        return value
+
+    def evaluate_actions(self, obs: torch.Tensor, actions: torch.Tensor):
+        """
+        Evaluate actions by computing the log probabilities and entropy.
+        Also compute the value estimates using the centralized critic.
         
-        local_features = self.local_net(local_obs)
-        global_features = self.global_net(global_obs)
+        Parameters:
+        - obs: Observation tensor.
+        - actions: Actions tensor.
         
-        # Concatenate local and global features
-        features = torch.cat((local_features, global_features), dim=1)
-        return features
+        Returns:
+        - values: Value estimates tensor.
+        - log_prob: Log probabilities of the actions.
+        - entropy: Entropy of the action distribution.
+        """
+        debug_print(f"evaluate_actions called with obs shape: {obs.shape} and actions shape: {actions.shape}")  # Debugging
+        # Forward pass through the actor to get distribution
+        try:
+            distribution = self._get_action_dist_from_latent(self._build_latent(obs))
+        except AttributeError as e:
+            debug_print(f"Error during _get_action_dist_from_latent: {e}")
+            raise e
+        log_prob = distribution.log_prob(actions)
+        entropy = distribution.entropy()
+        
+        # Compute the value using the centralized critic
+        values = self._predict_values(obs, actions)
+        
+        return values, log_prob, entropy
 
 # ==========================
 # Multi-Agent Trainer with CTDE
@@ -164,10 +166,7 @@ class CTDEFeatureExtractor(BaseFeaturesExtractor):
 class MultiAgentCTDETrainer:
     """
     Trainer class implementing Centralized Training with Decentralized Execution (CTDE).
-    
-    Uses a shared PPO model with a centralized critic for homogeneous agents.
     """
-
     def __init__(self, env, model_kwargs=None, device='cpu'):
         """
         Initialize the MultiAgentCTDETrainer.
@@ -181,20 +180,9 @@ class MultiAgentCTDETrainer:
         self.device = device
         
         # Determine the global observation dimension
-        # Assuming the environment provides a separate 'global_state' observation
-        # Modify accordingly based on your environment's actual observation structure
-        sample_obs = env.reset()
-        if 'global_state' in sample_obs:
-            global_observation = sample_obs['global_state']
-            global_observation_dim = global_observation.shape[0]
-        else:
-            raise ValueError("Environment must provide 'global_state' in observations for centralized critic.")
-        
-        # Define the observation space as a Dict with 'local' and 'global'
-        # This requires modifying the environment to provide observations in this format
-        # 'local' is a list of local observations for each agent
-        # 'global' is the global state
-        # For training, we need to reshape the observations accordingly
+        sample_obs, _ = self.env.reset()
+        global_observation_dim = self.env.observation_space.shape[0]
+        debug_print(f"Global observation dimension: {global_observation_dim}")  # Debugging
         
         # Define the shared PPO model
         self.model = PPO(
@@ -207,36 +195,13 @@ class MultiAgentCTDETrainer:
                 'features_extractor_class': CTDEFeatureExtractor,
                 'features_extractor_kwargs': {
                     'global_observation_dim': global_observation_dim
-                }
+                },
+                'net_arch': dict(pi=[64, 64], vf=[256, 256])  # pi has hidden layers; vf matches DebugValueNet
             },
             **(model_kwargs if model_kwargs else {})
         )
-    
-    def prepare_observations(self, observations):
-        """
-        Preprocess observations to include both local and global states.
-        
-        Parameters:
-        - observations: Raw observations from the environment (dict).
-        
-        Returns:
-        - processed_obs: Dictionary with 'local' and 'global' keys.
-        """
-        # Extract global state
-        global_state = self.env.get_global_state()  # Implement this method in your environment
-        # Extract local observations and stack them
-        local_observations = []
-        for agent_id in sorted(observations.keys()):
-            local_observations.append(observations[agent_id])
-        local_observations = np.stack(local_observations, axis=0)  # Shape: (num_agents, obs_dim)
-        
-        # Prepare the processed observation
-        processed_obs = {
-            'local': torch.from_numpy(local_observations).float(),
-            'global': torch.from_numpy(global_state).float()
-        }
-        return processed_obs
-    
+        debug_print(f"PPO model initialized.")  # Debugging
+
     def train(self, total_timesteps=1_000_000, checkpoint_freq=100_000):
         """
         Train the PPO model with centralized critic.
@@ -253,16 +218,22 @@ class MultiAgentCTDETrainer:
             verbose=1
         )
         
+        debug_print(f"Starting training for {total_timesteps} timesteps.")  # Debugging
+        
         # Start training
-        self.model.learn(
-            total_timesteps=total_timesteps,
-            callback=checkpoint_callback
-        )
+        try:
+            self.model.learn(
+                total_timesteps=total_timesteps,
+                callback=checkpoint_callback
+            )
+        except Exception as e:
+            debug_print(f"Error during training: {e}")
+            raise e
         
         # Save the final model
         self.model.save("ppo_ctde_multi_agent_final")
-        print("Training completed and model saved.")
-    
+        debug_print("Training completed and model saved.")  # Debugging
+
     def evaluate(self, episodes=5, render=True):
         """
         Evaluate the trained PPO model with decentralized execution.
@@ -272,49 +243,41 @@ class MultiAgentCTDETrainer:
         - render: Whether to render the environment.
         """
         for episode in range(1, episodes + 1):
-            observations = self.env.reset()
+            observation, _ = self.env.reset()
             done = False
             step = 0
-            total_rewards = {agent_id: 0.0 for agent_id in observations.keys()}
+            total_reward = 0.0
             tasks_completed = 0
             
+            debug_print(f"Starting evaluation episode {episode}.")  # Debugging
+            
             while not done:
-                # Prepare the observation in the required format
-                processed_obs = {
-                    'local': torch.from_numpy(np.array([observations[agent] for agent in sorted(observations.keys())])).float(),
-                    'global': torch.from_numpy(self.env.get_global_state()).float()
-                }
+                # Predict action using the model
+                try:
+                    action, _states = self.model.predict(observation, deterministic=True)
+                except Exception as e:
+                    debug_print(f"Error during action prediction: {e}")
+                    raise e
                 
-                # Get actions from the model
-                # Assuming the model outputs actions for all agents jointly
-                actions, _states = self.model.predict(processed_obs, deterministic=True)
-                
-                # Split the actions for each agent
-                # Assuming actions are concatenated for all agents
-                num_agents = self.env.num_robots
-                action_dim = self.env.action_spaces['robot_0'].shape[0]
-                actions_dict = {}
-                for i, agent_id in enumerate(sorted(observations.keys())):
-                    actions_dict[agent_id] = actions[i * action_dim : (i + 1) * action_dim]
-                
-                # Step the environment
-                observations, rewards, dones, infos = self.env.step(actions_dict)
+                # Step the environment with the predicted action
+                try:
+                    observation, reward, done, info = self.env.step(action)
+                except Exception as e:
+                    debug_print(f"Error during environment step: {e}")
+                    raise e
                 
                 # Accumulate rewards
-                for agent_id, reward in rewards.items():
-                    total_rewards[agent_id] += reward
+                total_reward += reward
                 
                 if render:
                     self.env.render()
                 
-                done = dones["__all__"]
                 step += 1
-                tasks_completed = infos.get("tasks_completed", 0)
+                tasks_completed = info.get("tasks_completed", 0)
             
             # Logging after each episode
             print(f"Episode {episode} finished after {step} steps.")
-            for agent_id, reward in total_rewards.items():
-                print(f"  {agent_id} Total Reward: {reward:.2f}")
+            print(f"  Total Reward: {total_reward:.2f}")
             print(f"  Tasks Completed: {tasks_completed} out of {self.env.num_tasks}")
             print("-" * 50)
 
@@ -341,52 +304,129 @@ def main():
     # Create the multi-agent environment
     env = MultiRobotEnvSB3CollabTrue(**env_config)
     
-    # Ensure the environment has a method to get the global state
-    # You need to implement this method in your environment
-    # Example:
-    # def get_global_state(self):
-    #     # Concatenate all robots' positions, orientations, velocities, and task states
-    #     global_state = np.concatenate([
-    #         self.robot_positions.flatten(),
-    #         self.robot_orientations,
-    #         self.robot_velocities.flatten(),
-    #         self.task_positions.flatten(),
-    #         self.task_active.astype(float)
-    #     ])
-    #     return global_state
-    if not hasattr(env, 'get_global_state'):
-        raise AttributeError("The environment must implement a 'get_global_state' method for CTDE.")
+    # Validate the environment
+    try:
+        check_env(env, warn=True)
+        print("Environment validation successful.")
+    except AssertionError as e:
+        print(f"Environment validation failed: {e}")
+        traceback.print_exc()
+        return
+    except Exception as e:
+        print(f"An error occurred during environment validation: {e}")
+        traceback.print_exc()
+        return
 
-    # Initialize the MultiAgentCTDETrainer
-    trainer = MultiAgentCTDETrainer(
-        env=env,
-        model_kwargs={
-            "learning_rate": 1e-4,
-            "n_steps": 1024,
-            "batch_size": 256,
-            "n_epochs": 15,
-            "gamma": 0.99,
-            "gae_lambda": 0.95,
-            "clip_range": 0.15,
-            "ent_coef": 0.005, 
-        },
+    # Initialize the PPO model with the standard MlpPolicy
+    model = PPO(
+        "MlpPolicy",
+        env,
+        verbose=1,
+        tensorboard_log="./tensorboard_logs/ctde_multi_agent",
+        learning_rate=1e-4,
+        n_steps=1024,
+        batch_size=256,
+        n_epochs=15,
+        gamma=0.99,
+        gae_lambda=0.95,
+        clip_range=0.15,
+        ent_coef=0.005,
         device='cuda' if torch.cuda.is_available() else 'cpu'
     )
-    
+    print("PPO model initialized.")
+
+    # Define checkpoint callback
+    checkpoint_callback = CheckpointCallback(
+        save_freq=100_000,
+        save_path="./checkpoints_ctde_multi_agent/",
+        name_prefix="ppo_ctde_multi_agent",
+        verbose=1
+    )
+    print("Checkpoint callback created.")
+
     # Start training
-    trainer.train(
-        total_timesteps=10_000_000,
-        checkpoint_freq=100_000      # Save checkpoint every n steps
-    )
-    
+    try:
+        print("Starting training...")
+        model.learn(
+            total_timesteps=10_000_000,  # Total timesteps for training
+            callback=checkpoint_callback
+        )
+    except Exception as e:
+        print(f"Error during training: {e}")
+        traceback.print_exc()
+        return
+    print("Training completed and model saved.")
+
+    # Save the final model
+    model.save("ppo_ctde_multi_agent_final")
+    print("Final model saved as 'ppo_ctde_multi_agent_final.zip'.")
+
+    # Evaluation parameters
+    num_evaluation_episodes = 5
+    render_env = True  # Set to False to disable rendering
+
     # Evaluate the trained model
-    trainer.evaluate(
-        episodes=5,
-        render=True
-    )
-    
+    for episode in range(1, num_evaluation_episodes + 1):
+        try:
+            observation, _ = env.reset()
+        except Exception as e:
+            print(f"Error during environment reset: {e}")
+            traceback.print_exc()
+            break
+
+        done = False
+        step = 0
+        total_reward = 0.0
+        tasks_completed = 0
+        
+        print(f"\nStarting evaluation episode {episode}.")
+
+        while not done:
+            # Predict action using the trained model
+            try:
+                action, _states = model.predict(observation, deterministic=True)
+            except Exception as e:
+                print(f"Error during action prediction: {e}")
+                traceback.print_exc()
+                break
+
+            # Step the environment with the predicted action
+            try:
+                observation, reward, terminated, truncated, info = env.step(action)
+                done = terminated or truncated
+            except Exception as e:
+                print(f"Error during environment step: {e}")
+                traceback.print_exc()
+                break
+
+            # Accumulate rewards
+            total_reward += reward
+
+            # Render the environment
+            if render_env:
+                try:
+                    env.render()
+                except Exception as e:
+                    print(f"Error during rendering: {e}")
+                    traceback.print_exc()
+                    break
+
+            step += 1
+            tasks_completed = info.get("tasks_completed", 0)
+        
+        # Logging after each episode
+        print(f"Episode {episode} finished after {step} steps.")
+        print(f"  Total Reward: {total_reward:.2f}")
+        print(f"  Tasks Completed: {tasks_completed} out of {env.num_tasks}")
+        print("-" * 50)
+
     # Close the environment
-    env.close()
+    try:
+        env.close()
+        print("Environment closed.")
+    except Exception as e:
+        print(f"Error during environment closure: {e}")
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()

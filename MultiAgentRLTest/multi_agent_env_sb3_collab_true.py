@@ -1,15 +1,15 @@
 # multi_agent_env_sb3_collab_true.py
 
-import gym
-from gym import spaces
+import gymnasium as gym
+from gymnasium import spaces
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 class MultiRobotEnvSB3CollabTrue(gym.Env):
     """
-    A Gym-compatible environment for true multi-robot collaboration.
-    Each robot acts independently with its own policy.
+    A Gymnasium-compatible environment for true multi-robot collaboration.
+    Implements Centralized Training with Decentralized Execution (CTDE).
     """
     metadata = {'render.modes': ['human']}
     
@@ -40,19 +40,34 @@ class MultiRobotEnvSB3CollabTrue(gym.Env):
         self.max_velocity = max_velocity
         self.max_angular_velocity = max_angular_velocity
 
-        # Define action and observation spaces for each agent
-        # Actions: [velocity_x, velocity_y, angular_velocity]
-        self.action_spaces = {
-            f"robot_{i}": spaces.Box(low=-1.0, high=1.0, shape=(3,), dtype=np.float32)
-            for i in range(self.num_robots)
-        }
+        # Define a single, flattened action space for all agents
+        # Each agent has 3 actions: [velocity_x, velocity_y, angular_velocity]
+        self.action_space = spaces.Box(
+            low=-1.0,
+            high=1.0,
+            shape=(self.num_robots * 3,),
+            dtype=np.float32
+        )
 
-        # Observations: [position_x, position_y, orientation, velocity_x, velocity_y, angular_velocity] + task info
-        single_obs_dim = 6 + 3 * self.num_tasks
-        self.observation_spaces = {
-            f"robot_{i}": spaces.Box(low=-np.inf, high=np.inf, shape=(single_obs_dim,), dtype=np.float32)
-            for i in range(self.num_robots)
-        }
+        # Define the global observation space
+        # For each robot: position (2), orientation (1), velocity (2), angular velocity (1)
+        # For each task: position (2), active flag (1)
+        global_observation_dim = (
+            self.num_robots * 2 +    # robot_positions (x, y) for each robot
+            self.num_robots +        # robot_orientations for each robot
+            self.num_robots * 2 +    # robot_velocities (vx, vy) for each robot
+            self.num_robots +        # robot_angular_vel for each robot
+            self.num_tasks * 2 +     # task_positions (x, y) for each task
+            self.num_tasks           # task_active flags for each task
+        )
+
+        # Flattened observation space
+        self.observation_space = spaces.Box(
+            low=-np.inf,
+            high=np.inf,
+            shape=(global_observation_dim,),
+            dtype=np.float32
+        )
 
         # Initialize state variables
         self.reset()
@@ -65,7 +80,10 @@ class MultiRobotEnvSB3CollabTrue(gym.Env):
         self.active_tasks_patches = []
         self.inactive_tasks_patches = []
 
-    def reset(self):
+    def reset(self, seed=None, options=None):
+        if seed is not None:
+            np.random.seed(seed)
+        
         self.steps = 0
         # Initialize robot states
         self.robot_positions = np.random.uniform(0, self.field_size, (self.num_robots, 2)).astype(np.float32)
@@ -78,26 +96,30 @@ class MultiRobotEnvSB3CollabTrue(gym.Env):
         self.task_active = np.ones(self.num_tasks, dtype=bool)
         self.task_assignments = {t: [] for t in range(self.num_tasks)}  # Track assigned robots
 
-        # Return observations for each agent
-        observations = {
-            f"robot_{i}": self._get_obs(i)
-            for i in range(self.num_robots)
-        }
+        obs = self.get_global_state()
+        info = {}  # Additional info can be added here if needed
+        return obs, info
 
-        return observations
-
-    def step(self, actions):
+    def step(self, action):
         self.steps += 1
         rewards = {f"robot_{i}": 0.0 for i in range(self.num_robots)}
         dones = {f"robot_{i}": False for i in range(self.num_robots)}
         infos = {f"robot_{i}": {} for i in range(self.num_robots)}
 
+        # Split the flattened action array into per-agent actions
+        actions_dict = {}
+        for i in range(self.num_robots):
+            start = i * 3
+            end = (i + 1) * 3
+            agent_id = f"robot_{i}"
+            actions_dict[agent_id] = action[start:end]
+
         # Update robot velocities based on actions
-        for i, agent in enumerate(actions.keys()):
-            action = actions[agent]
-            desired_vx = np.clip(action[0], -1.0, 1.0) * self.max_velocity
-            desired_vy = np.clip(action[1], -1.0, 1.0) * self.max_velocity
-            desired_w  = np.clip(action[2], -1.0, 1.0)  * self.max_angular_velocity
+        for i, agent_id in enumerate(sorted(actions_dict.keys())):
+            agent_action = actions_dict[agent_id]
+            desired_vx = np.clip(agent_action[0], -1.0, 1.0) * self.max_velocity
+            desired_vy = np.clip(agent_action[1], -1.0, 1.0) * self.max_velocity
+            desired_w  = np.clip(agent_action[2], -1.0, 1.0) * self.max_angular_velocity
 
             self.robot_velocities[i] = [desired_vx, desired_vy]
             self.robot_angular_vel[i] = desired_w
@@ -127,49 +149,70 @@ class MultiRobotEnvSB3CollabTrue(gym.Env):
             if self.task_active[t] and len(self.task_assignments[t]) >= self.robots_per_task:
                 # Reward all robots assigned to this task
                 for robot_id in self.task_assignments[t]:
-                    rewards[f"robot_{robot_id}"] += 10.0
+                    rewards[f"robot_{robot_id}"] += 10.0  # Corrected KeyError by using string key
                 self.task_active[t] = False
 
         # Apply time penalty
         for agent in rewards.keys():
             rewards[agent] += self.time_penalty
 
+        # Apply collision penalties if enabled
+        if self.collision_penalty:
+            # Simple collision detection based on overlapping positions
+            for i in range(self.num_robots):
+                for j in range(i + 1, self.num_robots):
+                    dist = np.linalg.norm(self.robot_positions[i] - self.robot_positions[j])
+                    if dist < 2 * self.robot_radius:
+                        rewards[f"robot_{i}"] -= 5.0
+                        rewards[f"robot_{j}"] -= 5.0
+
         # Check termination conditions
         all_tasks_done = not np.any(self.task_active)
-        done = self.steps >= self.max_episode_steps or all_tasks_done
-        dones = {agent: done for agent in dones.keys()}
-        dones["__all__"] = done
+        terminated = all_tasks_done
+        truncated = self.steps >= self.max_episode_steps
+        done = terminated or truncated
 
-        # Generate observations
-        observations = {
-            f"robot_{i}": self._get_obs(i)
-            for i in range(self.num_robots)
+        # Generate observation
+        obs = self.get_global_state()
+
+        # Compute total tasks completed
+        tasks_completed = sum(not active for active in self.task_active)
+
+        # Compute sum of rewards
+        sum_rewards = sum(rewards.values())
+
+        # Info dict can contain per-agent rewards if needed
+        info = {
+            "per_agent_rewards": rewards,
+            "tasks_completed": tasks_completed
         }
+        
+        # Return observation, reward, terminated, truncated, info
+        return obs, sum_rewards, terminated, truncated, info
 
-        return observations, rewards, dones, infos
-
-    def _get_obs(self, agent_i):
+    def get_global_state(self):
         """
-        Returns the observation for a specific agent.
+        Concatenates and returns the global state, including all robots' positions, orientations,
+        velocities, and task states.
         """
-        obs = []
-        # Robot's own state
-        obs.extend([
-            float(self.robot_positions[agent_i, 0]),
-            float(self.robot_positions[agent_i, 1]),
-            float(self.robot_orientations[agent_i]),
-            float(self.robot_velocities[agent_i, 0]),
-            float(self.robot_velocities[agent_i, 1]),
-            float(self.robot_angular_vel[agent_i]),
-        ])
-        # Task states
-        for t in range(self.num_tasks):
-            obs.extend([
-                float(self.task_positions[t, 0]),
-                float(self.task_positions[t, 1]),
-                1.0 if self.task_active[t] else 0.0
-            ])
-        return np.array(obs, dtype=np.float32)
+        # Flatten robot positions and velocities
+        robots_flat = (
+            self.robot_positions.flatten().tolist() +
+            self.robot_orientations.tolist() +
+            self.robot_velocities.flatten().tolist() +
+            self.robot_angular_vel.tolist()
+        )
+        
+        # Flatten task positions and states
+        tasks_flat = (
+            self.task_positions.flatten().tolist() +
+            self.task_active.astype(float).tolist()
+        )
+        
+        # Combine robots and tasks into a single global state list
+        global_state = robots_flat + tasks_flat
+        
+        return np.array(global_state, dtype=np.float32)
 
     def render(self, mode='human'):
         """
@@ -241,12 +284,10 @@ class MultiRobotEnvSB3CollabTrue(gym.Env):
                 self.ax.add_patch(task_inactive)
 
         # Update text elements
-        # For visualization purposes, assume a global reward and step counter
-        # Modify as needed to pass these from the main loop
-        # Here, they are placeholders
-        # self.reward_text.set_text(f'Total Reward: {total_reward:.2f}')
-        # self.steps_text.set_text(f'Steps: {self.steps}')
-        # self.tasks_text.set_text(f'Tasks Completed: {info.get("tasks_completed", 0)}/{self.num_tasks}')
+        self.reward_text.set_text(f'Total Reward: Not Implemented')
+        self.steps_text.set_text(f'Steps: {self.steps}')
+        # tasks_completed is part of infos, not available here
+        # self.tasks_text.set_text(f'Tasks Completed: {info.get("tasks_completed", 0)} out of {self.num_tasks}')
 
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
