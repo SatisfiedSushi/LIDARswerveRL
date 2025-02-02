@@ -1,11 +1,11 @@
 # DStarLite.py
 import logging
 
-from FullyAutoProject.PathPlanningAlgorithms.DStarLiteUtils.PriorityQueue import PriorityQueue, Priority
-from FullyAutoProject.PathPlanningAlgorithms.DStarLiteUtils.OccupancyGridMap import OccupancyGridMap
+from PathPlanningAlgorithms.DStarLiteUtils.PriorityQueue import PriorityQueue, Priority
+from PathPlanningAlgorithms.DStarLiteUtils.OccupancyGridMap import OccupancyGridMap
 import numpy as np
 
-from FullyAutoProject.PathPlanningAlgorithms.DStarLiteUtils.utils import heuristic, Vertices
+from PathPlanningAlgorithms.DStarLiteUtils.utils import heuristic, Vertices
 
 OBSTACLE = 255
 UNOCCUPIED = 0

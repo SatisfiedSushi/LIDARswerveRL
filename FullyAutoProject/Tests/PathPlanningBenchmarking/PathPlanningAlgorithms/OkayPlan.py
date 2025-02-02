@@ -5,8 +5,8 @@ import numpy as np
 import torch
 import logging
 
-from FullyAutoProject.PathPlanningAlgorithms.DStarLiteUtils.OccupancyGridMap import OccupancyGridMap
-from FullyAutoProject.Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
+from PathPlanningAlgorithms.DStarLiteUtils.OccupancyGridMap import OccupancyGridMap
+from Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
 
 
 class OkayPlan:

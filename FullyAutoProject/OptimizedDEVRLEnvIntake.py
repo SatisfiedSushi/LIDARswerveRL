@@ -33,8 +33,8 @@ from Box2D import (
 import zmq
 import msgpack
 
-from FullyAutoProject.CoordConverter import CoordConverter
-from FullyAutoProject.LIDAR import LIDAR
+from CoordConverter import CoordConverter
+from LIDAR import LIDAR
 from SwerveDrive import SwerveDrive
 
 

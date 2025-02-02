@@ -10,10 +10,10 @@ import torch
 from wpimath.geometry import Pose2d, Translation2d, Rotation2d
 from wpimath.controller import PIDController
 
-from FullyAutoProject.OptimizedDEVRLEnvIntake import env
-from FullyAutoProject.PyPathPlannerImplementation.config import PIDConstants
-from FullyAutoProject.PyPathPlannerImplementation.path import PathConstraints, GoalEndState
-from FullyAutoProject.RectangleFittingReceiver import visualization_main, get_robot_state_from_shared_memory
+from OptimizedDEVRLEnvIntake import env
+from PyPathPlannerImplementation.config import PIDConstants
+from PyPathPlannerImplementation.path import PathConstraints, GoalEndState
+from RectangleFittingReceiver import visualization_main, get_robot_state_from_shared_memory
 from pathfinding import Pathfinding
 from controller import PPHolonomicDriveController  # Advanced path following
 from telemetry import PPLibTelemetry

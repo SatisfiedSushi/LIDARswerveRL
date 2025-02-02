@@ -15,8 +15,8 @@ import warnings
 import traceback
 from scipy.interpolate import CubicSpline  # Optional: For spline-based trajectories
 
-from FullyAutoProject.PathFollowingAlgorithms.RamseteController import RamseteController
-from FullyAutoProject.PathFollowingAlgorithms.RamseteUtils.Trajectory import Trajectory
+from PathFollowingAlgorithms.RamseteController import RamseteController
+from PathFollowingAlgorithms.RamseteUtils.Trajectory import Trajectory
 from RectangleFittingReceiver import visualization_main  # Ensure correct spelling and existence
 from OptimizedDEVRLEnvIntake import env  # Ensure this is your environment class/module
 from PathPlanningAlgorithms.DStarLite import DStarLite  # Import your DStarLite implementation

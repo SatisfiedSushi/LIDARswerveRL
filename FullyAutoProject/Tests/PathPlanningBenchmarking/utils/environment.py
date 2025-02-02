@@ -1,6 +1,6 @@
 # utils/environment.py
-from FullyAutoProject.Tests.PathPlanningBenchmarking.Simulations.dynamic_simulation import DynamicSimulation
-from FullyAutoProject.Tests.PathPlanningBenchmarking.Simulations.static_simulation import StaticSimulation
+from Tests.PathPlanningBenchmarking.Simulations.dynamic_simulation import DynamicSimulation
+from Tests.PathPlanningBenchmarking.Simulations.static_simulation import StaticSimulation
 
 
 class Environment:

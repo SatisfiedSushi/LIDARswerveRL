@@ -1,4 +1,4 @@
-import logging
+import logging  # Added import
 import tkinter as tk
 import struct
 import math
@@ -8,7 +8,7 @@ import numpy as np
 from sklearn.cluster import DBSCAN
 import warnings
 
-from FullyAutoProject.LShapeFitting import LShapeFitting
+from LShapeFitting import LShapeFitting
 
 warnings.filterwarnings("ignore", category=UserWarning)
 

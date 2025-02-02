@@ -4,8 +4,8 @@ from wpimath.controller import PIDController, LTVUnicycleController
 from typing import Callable, Union
 import math
 
-from FullyAutoProject.PyPathPlannerImplementation.config import PIDConstants
-from FullyAutoProject.PyPathPlannerImplementation.trajectory import PathPlannerTrajectoryState
+from PyPathPlannerImplementation.config import PIDConstants
+from PyPathPlannerImplementation.trajectory import PathPlannerTrajectoryState
 
 
 class PathFollowingController:

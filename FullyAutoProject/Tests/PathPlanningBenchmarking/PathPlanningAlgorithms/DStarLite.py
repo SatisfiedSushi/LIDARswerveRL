@@ -3,12 +3,12 @@
 import logging
 import numpy as np
 
-from FullyAutoProject.Tests.PathPlanningBenchmarking.PathPlanningAlgorithms.DStarLiteUtils.OccupancyGridMap import \
+from Tests.PathPlanningBenchmarking.PathPlanningAlgorithms.DStarLiteUtils.OccupancyGridMap import \
     OccupancyGridMap
-from FullyAutoProject.Tests.PathPlanningBenchmarking.PathPlanningAlgorithms.DStarLiteUtils.Priority import Priority
-from FullyAutoProject.Tests.PathPlanningBenchmarking.PathPlanningAlgorithms.DStarLiteUtils.PriorityQueue import \
+from Tests.PathPlanningBenchmarking.PathPlanningAlgorithms.DStarLiteUtils.Priority import Priority
+from Tests.PathPlanningBenchmarking.PathPlanningAlgorithms.DStarLiteUtils.PriorityQueue import \
     PriorityQueue
-from FullyAutoProject.Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
+from Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
 
 
 class DStarLite:

@@ -3,7 +3,7 @@
 import torch
 import torch_tensorrt
 from stable_baselines3 import PPO
-from multi_agent_env_sb3_collab_true import MultiRobotEnvSB3CollabTrue, SingleAgentWrapper
+from MultiAgent.MultiAgentRLTest.multi_robot_env_sb3_collab_true import MultiRobotEnvSB3CollabTrue, SingleAgentWrapper
 
 def export_model_to_tensorrt(model_path, agent_id, export_path):
     """

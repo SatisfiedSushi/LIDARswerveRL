@@ -1,7 +1,7 @@
 # infer_with_tensorrt.py
 
 import torch
-from multi_agent_env_sb3_collab_true import MultiRobotEnvSB3CollabTrue  # Ensure correct import path
+from MultiAgent.MultiAgentRLTest.multi_robot_env_sb3_collab_true import MultiRobotEnvSB3CollabTrue  # Ensure correct import path
 import matplotlib.pyplot as plt
 import numpy as np
 

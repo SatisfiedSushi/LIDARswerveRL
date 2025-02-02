@@ -11,7 +11,7 @@ import os
 from wpilib import getDeployDirectory
 import json
 
-from FullyAutoProject.PyPathPlannerImplementation.path import PathConstraints, PathPlannerPath, GoalEndState, Waypoint
+from PyPathPlannerImplementation.path import PathConstraints, PathPlannerPath, GoalEndState, Waypoint
 
 
 class Pathfinder:

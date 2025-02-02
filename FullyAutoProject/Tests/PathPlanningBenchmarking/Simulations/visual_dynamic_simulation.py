@@ -7,7 +7,7 @@ import logging
 import numpy as np
 from tkinter import messagebox
 
-from FullyAutoProject.Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
+from Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
 
 
 class VisualDynamicSimulation(tk.Toplevel):

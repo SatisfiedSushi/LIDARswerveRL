@@ -7,15 +7,15 @@ from commands2 import Command, Subsystem, SequentialCommandGroup
 from typing import Callable, List, Union
 from hal import report, tResourceType
 
-from FullyAutoProject.PyPathPlannerImplementation.config import RobotConfig
-from FullyAutoProject.PyPathPlannerImplementation.controller import PathFollowingController
-from FullyAutoProject.PyPathPlannerImplementation.events import EventScheduler
-from FullyAutoProject.PyPathPlannerImplementation.logging import PathPlannerLogging
-from FullyAutoProject.PyPathPlannerImplementation.path import PathPlannerPath, GoalEndState, PathConstraints
-from FullyAutoProject.PyPathPlannerImplementation.pathfinding import Pathfinding
-from FullyAutoProject.PyPathPlannerImplementation.telemetry import PPLibTelemetry
-from FullyAutoProject.PyPathPlannerImplementation.trajectory import PathPlannerTrajectory
-from FullyAutoProject.PyPathPlannerImplementation.util import DriveFeedforwards, FlippingUtil, floatLerp
+from PyPathPlannerImplementation.config import RobotConfig
+from PyPathPlannerImplementation.controller import PathFollowingController
+from PyPathPlannerImplementation.events import EventScheduler
+from PyPathPlannerImplementation.logging import PathPlannerLogging
+from PyPathPlannerImplementation.path import PathPlannerPath, GoalEndState, PathConstraints
+from PyPathPlannerImplementation.pathfinding import Pathfinding
+from PyPathPlannerImplementation.telemetry import PPLibTelemetry
+from PyPathPlannerImplementation.trajectory import PathPlannerTrajectory
+from PyPathPlannerImplementation.util import DriveFeedforwards, FlippingUtil, floatLerp
 
 
 class FollowPathCommand(Command):

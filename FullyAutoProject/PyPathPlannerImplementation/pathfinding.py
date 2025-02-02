@@ -2,8 +2,8 @@ from __future__ import annotations
 from wpimath.geometry import Translation2d
 from typing import List, Tuple
 
-from FullyAutoProject.PyPathPlannerImplementation.path import PathConstraints, GoalEndState, PathPlannerPath
-from FullyAutoProject.PyPathPlannerImplementation.pathfinders import Pathfinder, LocalADStar
+from PyPathPlannerImplementation.path import PathConstraints, GoalEndState, PathPlannerPath
+from PyPathPlannerImplementation.pathfinders import Pathfinder, LocalADStar
 
 
 class Pathfinding:

@@ -2,7 +2,7 @@
 
 import heapq
 
-from FullyAutoProject.Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
+from Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
 
 
 class AStar:

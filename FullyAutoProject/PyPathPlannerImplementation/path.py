@@ -14,10 +14,10 @@ from hal import report, tResourceType
 import os
 import json
 
-from FullyAutoProject.PyPathPlannerImplementation.config import RobotConfig
-from FullyAutoProject.PyPathPlannerImplementation.events import Event, OneShotTriggerEvent, ScheduleCommandEvent
-from FullyAutoProject.PyPathPlannerImplementation.trajectory import PathPlannerTrajectory, PathPlannerTrajectoryState
-from FullyAutoProject.PyPathPlannerImplementation.util import FlippingUtil, translation2dFromJson, DriveFeedforwards, \
+from PyPathPlannerImplementation.config import RobotConfig
+from PyPathPlannerImplementation.events import Event, OneShotTriggerEvent, ScheduleCommandEvent
+from PyPathPlannerImplementation.trajectory import PathPlannerTrajectory, PathPlannerTrajectoryState
+from PyPathPlannerImplementation.util import FlippingUtil, translation2dFromJson, DriveFeedforwards, \
     cubicLerp, calculateRadius, floatLerp
 
 targetIncrement: Final[float] = 0.05

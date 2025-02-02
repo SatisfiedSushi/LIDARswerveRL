@@ -12,13 +12,13 @@ from commands2.subsystem import Subsystem
 from commands2.button import Trigger
 from hal import report, tResourceType
 
-from FullyAutoProject.PyPathPlannerImplementation.commands import FollowPathCommand, PathfindThenFollowPath, \
+from PyPathPlannerImplementation.commands import FollowPathCommand, PathfindThenFollowPath, \
     PathfindingCommand
-from FullyAutoProject.PyPathPlannerImplementation.config import RobotConfig
-from FullyAutoProject.PyPathPlannerImplementation.controller import PathFollowingController
-from FullyAutoProject.PyPathPlannerImplementation.events import PointTowardsZoneTrigger, EventTrigger
-from FullyAutoProject.PyPathPlannerImplementation.path import PathPlannerPath, PathConstraints
-from FullyAutoProject.PyPathPlannerImplementation.util import FlippingUtil, DriveFeedforwards
+from PyPathPlannerImplementation.config import RobotConfig
+from PyPathPlannerImplementation.controller import PathFollowingController
+from PyPathPlannerImplementation.events import PointTowardsZoneTrigger, EventTrigger
+from PyPathPlannerImplementation.path import PathPlannerPath, PathConstraints
+from PyPathPlannerImplementation.util import FlippingUtil, DriveFeedforwards
 
 
 class NamedCommands:

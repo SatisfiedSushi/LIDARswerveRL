@@ -1,3 +1,5 @@
+# main_with_okay_plan.py
+
 import argparse
 import logging
 from multiprocessing import Process, Manager, shared_memory
@@ -7,13 +9,10 @@ import math
 import numpy as np
 import torch
 
-# Removed pygame imports as per user instruction
-# import pygame
-
 # Corrected import spelling
-from FullyAutoProject.PathPlanningAlgorithms.OkayPlan import OkayPlan  # Ensure OkayPlan.py is in the same directory
-from FullyAutoProject.OptimizedDEVRLEnvIntake import env  # Ensure this is your environment class/module
-from FullyAutoProject.RectangleFittingReceiver import visualization_main
+from PathPlanningAlgorithms.OkayPlan import OkayPlan  # Ensure OkayPlan.py is in the same directory
+from OptimizedDEVRLEnvIntake import env  # Ensure this is your environment class/module
+from RectangleFittingReceiver import visualization_main
 
 def extract_edges_from_inflated_obstacles(inflated_obstacles):
     """
@@ -243,10 +242,14 @@ def get_robot_state_from_shared_memory(shm, shm_size):
     """
     buffer = shm.buf[:shm_size]
     offset = 0
-    robot_x, robot_y = struct.unpack_from('ff', buffer, offset)
-    offset += struct.calcsize('ff')
-    robot_theta_rad, = struct.unpack_from('f', buffer, offset)
-    return robot_x, robot_y, robot_theta_rad
+    try:
+        robot_x, robot_y = struct.unpack_from('ff', buffer, offset)
+        offset += struct.calcsize('ff')
+        robot_theta_rad, = struct.unpack_from('f', buffer, offset)
+        return robot_x, robot_y, robot_theta_rad
+    except struct.error as e:
+        logging.error(f"Struct unpacking error: {e}")
+        return 0.0, 0.0, 0.0  # Default values
 
 
 def str2bool(v):
@@ -345,7 +348,7 @@ def run_main():
 
     # Load OkayPlan parameters
     try:
-        params = torch.load('../Relax0.4_S0_2023-09-23_21_38.pt', map_location=opt.dvc)
+        params = torch.load('MultiAgent/FullyAutoProject/Relax0.4_S0_2023-09-23_21_38.pt', map_location=opt.dvc)
         if isinstance(params, list):
             params = params[-1]
     except FileNotFoundError:
@@ -355,6 +358,13 @@ def run_main():
         logging.error(f"Error loading parameters: {e}")
         exit(1)
 
+    # Flatten params to ensure it's a 1D tensor
+    if params.dim() > 1:
+        params = params.flatten()
+        logging.info(f"Params flattened to shape: {params.shape}")
+    else:
+        logging.info(f"Params is already 1D with shape: {params.shape}")
+
     # Adjust parameters based on KP flag
     if not opt.KP:
         if len(params) > 50:
@@ -363,8 +373,8 @@ def run_main():
         else:
             logging.warning("Parameter index 50 out of range. Skipping KP adjustment.")
 
-    # Initialize OkayPlan
-    okayplan = None  # Initialize OkayPlan later once we have a destination
+    # Initialize OkayPlan as None; will initialize once destination is set
+    okayplan = None
 
     # Start the Environment process
     env_process = Process(target=run_environment, args=(lock, action_queue, env_info_queue, termination_event))
@@ -383,7 +393,7 @@ def run_main():
             shm_size,
             lock,
             destination_queue,
-            obstacle_queue,
+            obstacle_queue_main_to_visual,
             path_queue,
             termination_event,
             detected_obstacle_queue_visual_to_main  # Pass the detected obstacle queue
@@ -427,25 +437,16 @@ def run_main():
 
                     # Load params and validate structure
                     try:
-                        params = torch.load('../Relax0.4_S0_2023-09-23_21_38.pt', map_location=opt.dvc)
-                        logging.info(f"Params loaded successfully. Type: {type(params)}")
-
-                        # If params is a list, use the last tensor
-                        if isinstance(params, list):
-                            params = params[-1]
-                            logging.info("Params is a list. Using the last element.")
-
-                        # Ensure params is a tensor
-                        if not isinstance(params, torch.Tensor):
-                            logging.error(f"Params is not a tensor. Type: {type(params)}")
-                            raise ValueError("Params must be a torch.Tensor.")
-
-                        # Move to device
-                        params = params.to(opt.dvc)
-                        logging.info(f"Params shape: {params.shape}, device: {params.device}")
+                        # Reuse the already flattened params
+                        logging.info(f"Using pre-flattened params with shape: {params.shape}")
+                        # Ensure params has enough elements
+                        expected_params_size = 6 * okayplan.G if okayplan else 48
+                        if params.numel() < expected_params_size:
+                            logging.error(f"Params tensor has insufficient elements: expected at least {expected_params_size}, got {params.numel()}.")
+                            raise ValueError(f"Params tensor has insufficient elements: expected at least {expected_params_size}, got {params.numel()}.")
 
                     except Exception as e:
-                        logging.error(f"Error loading params: {e}")
+                        logging.error(f"Error validating params: {e}")
                         raise
 
                     # Create OkayPlan with validated inputs

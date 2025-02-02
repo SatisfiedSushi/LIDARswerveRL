@@ -1,6 +1,6 @@
 # Simulations/dynamic_simulation.py
-from FullyAutoProject.Tests.PathPlanningBenchmarking.Simulations.static_simulation import StaticSimulation
-from FullyAutoProject.Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
+from Tests.PathPlanningBenchmarking.Simulations.static_simulation import StaticSimulation
+from Tests.PathPlanningBenchmarking.utils.heuristic import heuristic
 
 
 class DynamicSimulation:

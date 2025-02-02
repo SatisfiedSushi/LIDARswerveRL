@@ -1,7 +1,7 @@
 from ntcore import DoubleArrayPublisher, DoublePublisher, NetworkTableInstance, StructPublisher, StructArrayPublisher
 from wpimath.geometry import Pose2d
 
-from FullyAutoProject.PyPathPlannerImplementation.path import PathPlannerPath
+from PyPathPlannerImplementation.path import PathPlannerPath
 
 
 class PPLibTelemetry:

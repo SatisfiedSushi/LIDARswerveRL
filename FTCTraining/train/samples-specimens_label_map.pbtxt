@@ -1,0 +1,15 @@
+item {
+    name: "blue-specimen",
+    id: 1,
+    display_name: "blue-specimen"
+}
+item {
+    name: "red-specimen",
+    id: 2,
+    display_name: "red-specimen"
+}
+item {
+    name: "yellow-specimen",
+    id: 3,
+    display_name: "yellow-specimen"
+}
